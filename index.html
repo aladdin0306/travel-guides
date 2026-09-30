@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>行程库</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div>
+      <p class="kicker">旅行攻略</p>
+      <h1>行程库</h1>
+    </div>
+    <div class="top-actions">
+      <button type="button" id="export-btn">导出</button>
+      <button type="button" id="import-btn">导入</button>
+      <input id="import-file" type="file" accept="application/json" hidden />
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="rail">
+      <div class="rail-head">
+        <h2>我的行程</h2>
+        <button type="button" id="new-trip" class="text-btn">新建</button>
+      </div>
+      <div id="trip-list"></div>
+      <p class="rail-note">改动存在这台浏览器里。换电脑或发给别人，用右上角导出。</p>
+    </aside>
+
+    <main id="main"></main>
+
+    <aside class="map-panel">
+      <div class="map-bar">
+        <h2 id="map-title">地图</h2>
+        <button type="button" id="fit-all" class="text-btn">全程</button>
+      </div>
+      <div id="map"></div>
+      <div id="map-legend">
+        <span><i class="dot required"></i>必须预约</span>
+        <span><i class="dot recommended"></i>建议预约</span>
+        <span><i class="dot none"></i>不用预约</span>
+      </div>
+    </aside>
+  </div>
+
+  <dialog id="editor">
+    <form id="editor-form" method="dialog">
+      <h3 id="editor-title">添加地点</h3>
+      <label>时间 <input name="time" placeholder="10:30" /></label>
+      <label>名称 <input name="name" required placeholder="餐厅或景点" /></label>
+      <label>类型
+        <select name="kind">
+          <option value="sight">景点</option>
+          <option value="food">餐厅</option>
+          <option value="transport">交通</option>
+          <option value="stay">住宿</option>
+        </select>
+      </label>
+      <label>地址 <input name="address" placeholder="用来在谷歌上搜索" /></label>
+      <div class="pair">
+        <label>纬度 <input name="lat" inputmode="decimal" /></label>
+        <label>经度 <input name="lng" inputmode="decimal" /></label>
+      </div>
+      <button type="button" id="geocode-btn" class="ghost">按名称查找坐标并打点</button>
+      <label>要不要提前订
+        <select name="reservation">
+          <option value="none">不用预约</option>
+          <option value="recommended">建议预约</option>
+          <option value="required">必须预约</option>
+        </select>
+      </label>
+      <label>预约说明 <input name="reservationNote" placeholder="为什么要订，订晚了会怎样" /></label>
+      <label>预约链接 <input name="bookingUrl" placeholder="https://" /></label>
+      <label>怎么走 <textarea name="note" rows="4"></textarea></label>
+      <div class="dialog-actions">
+        <button type="button" id="editor-cancel" class="ghost">取消</button>
+        <button type="submit" class="solid">保存</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
