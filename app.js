@@ -115,11 +115,20 @@ function pending(current = trip()) {
   return rows;
 }
 
-function coverOf(current, day) {
-  const covers = current.covers || {};
-  const pick = (day && covers[day.city]) || Object.values(covers)[0];
-  if (!pick || !/^(covers\/[\w-]+\.jpg|https:\/\/[^'"()\s]+)$/.test(pick.src || "")) return null;
-  return pick;
+function safePhoto(item) {
+  const pic = item && item.photo;
+  if (!pic || !/^(photos\/[\w-]+\.jpg|https:\/\/[^'"()\s]+)$/.test(pic.src || "")) return null;
+  return pic;
+}
+
+function firstPhoto(current) {
+  for (const day of current.days) {
+    for (const item of day.items) {
+      const pic = safePhoto(item);
+      if (pic) return pic;
+    }
+  }
+  return null;
 }
 
 function monthDay(date) {
@@ -137,7 +146,7 @@ function tripRange(current) {
 function renderTrips() {
   tripList.innerHTML = state.trips.map((item) => {
     const left = pending(item).filter((row) => row.item.reservation === "required").length;
-    const cover = coverOf(item, item.days[0]);
+    const cover = firstPhoto(item);
     return `<button type="button" class="trip-card${item.id === trip().id ? " active" : ""}" data-trip="${esc(item.id)}">
       <span class="trip-thumb"${cover ? ` style="background-image:url('${esc(cover.src)}')"` : ""}>${cover ? "" : icon("compass")}</span>
       <span class="trip-meta">
@@ -156,25 +165,21 @@ function renderMain() {
   const required = todo.filter((row) => row.item.reservation === "required");
   const suggested = todo.length - required.length;
   const days = dayFilter === "all" ? current.days : current.days.filter((day) => day.id === (chosen && chosen.id));
-  const cover = coverOf(current, chosen);
   const route = cityRun(current.days)
     .map((run) => `<span class="hop">${esc(run.city)}<small>${run.n} 天</small></span>`)
     .join(`<span class="hop-sep">${icon("plane")}</span>`);
 
   main.innerHTML = `
-    <section class="hero${cover ? "" : " no-cover"}"${cover ? ` style="background-image:url('${esc(cover.src)}')"` : ""}>
-      <div class="hero-shade">
-        <div class="hero-tools">
-          <button type="button" class="btn btn-glass btn-sm" id="rename-trip">${icon("pencil")}改名</button>
-          <button type="button" class="btn btn-glass btn-sm" id="add-day">${icon("plus")}加一天</button>
-          ${state.trips.length > 1 ? `<button type="button" class="btn btn-glass btn-sm" id="delete-trip">${icon("trash")}删除</button>` : ""}
-        </div>
-        <div class="hero-text">
-          <p class="hero-dates">${esc(tripRange(current))}</p>
-          <h2>${esc(current.title)}</h2>
-          <div class="hero-route">${route}</div>
-        </div>
-        ${cover ? `<a class="credit" href="${esc(safeUrl(cover.link))}" target="_blank" rel="noopener">照片 ${esc(cover.credit)}</a>` : ""}
+    <section class="trip-head">
+      <div class="trip-head-text">
+        <p class="hero-dates">${esc(tripRange(current))}</p>
+        <h2>${esc(current.title)}</h2>
+        <div class="hero-route">${route}</div>
+      </div>
+      <div class="hero-tools">
+        <button type="button" class="btn btn-sm" id="rename-trip">${icon("pencil")}改名</button>
+        <button type="button" class="btn btn-sm" id="add-day">${icon("plus")}加一天</button>
+        ${state.trips.length > 1 ? `<button type="button" class="btn btn-sm" id="delete-trip">${icon("trash")}删除</button>` : ""}
       </div>
     </section>
 
@@ -246,14 +251,15 @@ function renderDay(day, number) {
 }
 
 function isOptional(item) {
-  return /可不去|想进去|再订/.test(item.time || "");
+  return /可不去|想进去|再订|二选一|下雨/.test(item.time || "");
 }
 
 function renderGlance(item, index) {
+  const pic = safePhoto(item);
   return `<li class="plan-row kind-${esc(item.kind)}${isOptional(item) ? " optional" : ""}">
     <span class="plan-num">${index + 1}</span>
     <time>${esc(item.time || "—")}</time>
-    <a href="#item-${esc(item.id)}">${esc(item.name)}</a>
+    <a href="#item-${esc(item.id)}">${pic ? `<img class="plan-thumb" src="${esc(pic.src)}" alt="" loading="lazy" />` : ""}<span>${esc(item.name)}</span></a>
     ${item.reservation !== "none" ? `<span class="flag ${esc(item.reservation)}">${FLAG[item.reservation]}</span>` : ""}
   </li>`;
 }
@@ -263,9 +269,15 @@ function renderItem(day, item, index) {
   const booked = !!state.booked[item.id];
   const parts = splitNote(item.note);
   const needs = item.reservation !== "none";
+  const pic = safePhoto(item);
   return `<li class="stop kind-${esc(item.kind)}${isOptional(item) ? " optional" : ""}" id="item-${esc(item.id)}">
     <div class="stop-rail"><span class="stop-num">${index + 1}</span></div>
-    <article class="stop-card">
+    <article class="stop-card${pic ? " has-photo" : ""}">
+      ${pic ? `<figure class="stop-photo">
+        <img src="${esc(pic.src)}" alt="${esc(item.name)}" loading="lazy" />
+        <a class="credit" href="${esc(safeUrl(pic.link))}" target="_blank" rel="noopener">${esc(pic.credit)}</a>
+      </figure>` : ""}
+      <div class="stop-main">
       <header class="stop-head">
         <div>
           <p class="stop-meta"><span class="kind-chip">${icon(KIND_ICON[item.kind] || "pin")}${KIND[item.kind] || "地点"}</span><time>${esc(item.time || "")}</time></p>
@@ -276,6 +288,7 @@ function renderItem(day, item, index) {
           <button type="button" class="icon-btn danger" data-del="${esc(day.id)}:${esc(item.id)}" title="删除这一站" aria-label="删除这一站">${icon("trash")}</button>
         </div>
       </header>
+      ${item.why ? `<p class="why"><b>为什么去</b>${esc(item.why)}</p>` : ""}
       ${parts.lead ? `<p class="how">${icon("navigation")}<span>${esc(parts.lead)}</span></p>` : ""}
       ${parts.rest ? `<p class="extra">${esc(parts.rest)}</p>` : ""}
       ${needs ? `<div class="book-box ${esc(item.reservation)}${booked ? " is-booked" : ""}"><b>${booked ? "已订好" : FLAG[item.reservation]}</b><span>${esc(item.reservationNote || "")}</span></div>` : ""}
@@ -283,6 +296,7 @@ function renderItem(day, item, index) {
         <a class="btn btn-sm" href="${esc(googleUrl(item))}" target="_blank" rel="noopener">${icon("pin")}谷歌地图</a>
         ${book && needs ? `<a class="btn btn-sm btn-book ${esc(item.reservation)}" href="${esc(book)}" target="_blank" rel="noopener">${icon("calendar")}去预约</a>` : ""}
         ${needs ? `<label class="booked-toggle${booked ? " on" : ""}"><input type="checkbox" data-booked="${esc(item.id)}" ${booked ? "checked" : ""} />${booked ? `${icon("check")}已订好` : "标记已订"}</label>` : ""}
+      </div>
       </div>
     </article>
   </li>`;
@@ -354,7 +368,7 @@ function drawMap() {
         })
       });
       marker.bindPopup(group.items.map((item) =>
-        `<b>${esc(item.name)}</b><span>${esc(item.time || "")}</span><a href="${esc(googleUrl(item))}" target="_blank" rel="noopener">在谷歌地图打开</a>`
+        `${safePhoto(item) ? `<img class="popup-photo" src="${esc(safePhoto(item).src)}" alt="" />` : ""}<b>${esc(item.name)}</b><span>${esc(item.time || "")}</span><a href="${esc(googleUrl(item))}" target="_blank" rel="noopener">在谷歌地图打开</a>`
       ).join("<hr>"));
       marker.addTo(map);
       markers.push(marker);
