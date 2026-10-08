@@ -30,6 +30,17 @@ window.SEED_TRIPS = [
     start: "2027-04-28",
     end: "2027-05-05",
     summary: "按开口程排：4月28日进悉尼，5月1日飞圣灵群岛，5月4日飞墨尔本，5月5日从墨尔本离开。这几天三个州都在上学，没有学校假期。要注意的是5月3日是昆士兰劳动节，5月1日到3日是艾尔利的长周末，酒店和船先订。景点挑的是本地人推荐、人比经典打卡点少的地方：悉尼不走邦迪到库吉，改走海港东岸；墨尔本不去 Hosier Lane 和圣基尔达，改去 Carlton、Fitzroy 和 Abbotsford。",
+    budget: {
+      basis: "每人，两人同住一间。价格是 2026年10月查的，机票和酒店按淡季中间价估。",
+      cnyRate: 4.68,
+      rateDate: "2026-10-08",
+      extras: [
+        { label: "澳洲旅游签证（600 类）", cat: "other", aud: 250, note: "中国护照在国外递交，2026年7月起每人 A$250。" },
+        { label: "其余三餐和咖啡", cat: "food", aud: 520, note: "上面没单列的早饭和午饭，每天大约 A$65，8 天。" },
+        { label: "手机流量卡", cat: "other", aud: 30, note: "落地在机场或超市买预付卡。" },
+        { label: "国际往返机票", cat: "flight", aud: null, note: "出发城市还没定，没算进去。" }
+      ]
+    },
     days: [
       {
         id: "au-d1",
@@ -48,6 +59,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不用订票。刷银行卡或 Opal 卡即可。",
             bookingUrl: "",
+            cost: { aud: 21.64, note: "机场站通行费 A$18.61 加火车票，下午不是高峰，合计 A$21.64。" },
             note: "国际航站楼和国内航站楼是两个火车站。坐 T8，方向进城，经过中央车站、市政厅、温亚德，到环形码头下。机场站另收一笔通行费，比普通地铁贵。行李多、很累就打车，大约三四十分钟到环形码头。"
           },
           {
@@ -61,6 +73,7 @@ window.SEED_TRIPS = [
             reservation: "required",
             reservationNote: "港边酒店位置好的先满，三晚一起订。",
             bookingUrl: "https://www.booking.com/searchresults.html?ss=Circular+Quay%2C+Sydney&checkin=2027-04-28&checkout=2027-05-01",
+            cost: { aud: 495, note: "港边四星大约每晚 A$300–350 一间。三晚按 A$990，两人分。" },
             note: "住这儿，歌剧院、岩石区和渡轮码头都能走路到。后两天都从环形码头坐渡轮出发。5月1日早上再去机场。"
           },
           {
@@ -74,6 +87,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "只在室外走，不用票。",
             bookingUrl: "",
+            cost: { aud: 0, note: "室外免费。" },
             why: "第一天有时差，这里走路就到，不用转车。外面看不要票。",
             photo: photo("au-d1-opera"),
             note: "从环形码头沿着海走过去。先看壳，再绕到海岬一侧。刚下飞机不要排室内导览。"
@@ -89,6 +103,7 @@ window.SEED_TRIPS = [
             reservation: "recommended",
             reservationNote: "官网写明建议提前买。每场大约35人，迟到超过5分钟票作废。",
             bookingUrl: "https://www.sydneyoperahouse.com/tours/sydney-opera-house-tour",
+            cost: { aud: 52, note: "提前订每人 A$50，2027年4月起预计 A$52；当天买再贵 A$5。" },
             why: "只有想看音乐厅内部才去。每场限人数，里面不挤。",
             photo: photo("au-d1-tour"),
             note: "到了再决定。订的话选下午场，提前15分钟到下层的 Welcome Centre。不订也不影响这天。"
@@ -104,6 +119,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "植物园免费，不用订。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。" },
             why: "歌剧院和大桥同框的位置，傍晚比环形码头人少。",
             photo: photo("au-d1-chair"),
             note: "从歌剧院继续往东走进植物园，顺着海走到尽头，就是看歌剧院和港湾的那个石头椅子。原路走回岩石区。"
@@ -119,6 +135,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "歌剧院下层的酒吧餐厅，现场坐，不接受预订。",
             bookingUrl: "",
+            cost: { aud: 60, note: "一份主菜加一杯饮料，每人大约 A$50–70。" },
             note: "就在歌剧院脚下。要靠窗的位置就早点去。这天别再跑别的区。"
           }
         ]
@@ -140,6 +157,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "刷 Opal 或银行卡，不用提前买。",
             bookingUrl: "",
+            cost: { aud: 7.35, note: "Opal 或银行卡刷卡，9 公里以内的渡轮 A$7.35。" },
             note: "环形码头 2 号码头，看牌子 F9 Watsons Bay。坐到 Rose Bay 下，大约 12 分钟。"
           },
           {
@@ -153,6 +171,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "国家公园步道，不用票。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。" },
             why: "本地人推荐的海港步道，平路，回头就是大桥和歌剧院。比邦迪到库吉人少很多。",
             photo: photo("au-d2-nielsen"),
             note: "下船沿 New South Head Road 往北走，左转 Tivoli Avenue，再左转 Bay View Hill Road，看牌子 Hermitage Foreshore 进步道。从码头到尼尔森公园大约一个半小时，路上经过几个小沙湾。终点的沙滩叫 Shark Beach，有防鲨网，可以下水。"
@@ -168,6 +187,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "公园里的咖啡馆，现场点。",
             bookingUrl: "",
+            cost: { aud: 35, note: "咖啡馆简餐加咖啡，每人大约 A$30–40。" },
             note: "就在 Shark Beach 后面。吃完可以在草地上坐一会儿再走。"
           },
           {
@@ -181,6 +201,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "公共公园，不用票。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。" },
             why: "顺路的小吊桥和雨林小沟，走过去只多十分钟。",
             photo: photo("au-d2-parsley"),
             note: "从尼尔森公园沿 Coolong Road 走到 Wentworth Road，右转 Fitzwilliam Road，在 43a 号旁边的小路进去就是吊桥。过桥后顺 The Crescent 往下走，一直到沃森斯湾。尼尔森公园到沃森斯湾不进 Vaucluse House 的话，大约一个半小时。"
@@ -196,6 +217,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不用票。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。" },
             why: "港湾这边是小渔村，翻过小坡就是外海悬崖。终点有渡轮直接回城，不用坐车。",
             photo: photo("au-d2-gap"),
             note: "到了沃森斯湾先穿过码头对面的草地，走上 Gap Park，看外海那一侧的悬崖，来回二十分钟。天还亮、腿还有劲，可以再走去 Hornby 灯塔，来回多 3 公里左右。傍晚五点多天黑，四点半前往回走。"
@@ -211,6 +233,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不用订。",
             bookingUrl: "",
+            cost: { aud: 7.35, note: "同样 A$7.35。周四全天封顶 A$19.30，今天到不了封顶。" },
             note: "还是 F9，不到 20 分钟回到环形码头。这条船有时一小时才一班，到码头先看下一班时间，在旁边的海边草地等。"
           }
         ]
@@ -232,6 +255,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "刷 Opal 或银行卡，不用提前买。",
             bookingUrl: "",
+            cost: { aud: 9.65, note: "周五全天交通封顶 A$9.65，渡轮来回加 161 路都在里面。" },
             note: "环形码头看牌子 F1 Manly，一般在 3 号码头。船大约 30 分钟。坐船头或上层的外侧，这段是最好看的海港风景。风大，外套带着。"
           },
           {
@@ -245,6 +269,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不用票。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。午饭算在每天的餐费里。" },
             why: "曼利主滩人多，不停留。Shelly Beach 是朝北的小湾，水平静。",
             photo: photo("au-d3-manly"),
             note: "下船穿过 The Corso 商业街，在这条街上买好午饭和水带走，北角上面没有店。到海滩右转，沿海边步道走大约 1 公里到 Shelly Beach。"
@@ -260,6 +285,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "国家公园，不用票。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。" },
             why: "站在悬崖上看整个悉尼港口和外海，5月开始有机会看到鲸鱼。来的人比曼利海滩少得多。",
             photo: photo("au-d3-northhead"),
             note: "从 Shelly Beach 停车场后面的步道往上爬，大约 80 米高，这是唯一累的一段。上去以后看牌子 Fairfax Lookout，在观景台附近吃带上来的午饭。从曼利码头算起单程大约 5 公里，两到三小时。出发前看一眼国家公园网站有没有封路通知。南边没有厕所，在曼利海滩上厕所、装水。"
@@ -275,6 +301,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "公交车，刷卡上车。",
             bookingUrl: "",
+            cost: { aud: 0, note: "已含在当天封顶里。" },
             note: "North Fort 停车场坐 161 回曼利码头，工作日大约半小时一班，以 Transport NSW 的时刻为准。不想等车就原路走回去，下坡为主，大约 3 公里。"
           },
           {
@@ -288,6 +315,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不用订。",
             bookingUrl: "",
+            cost: { aud: 0, note: "已含在当天封顶里。" },
             note: "原船回去。今天不再加景点，晚上收拾行李，明天早上飞。"
           }
         ]
@@ -309,6 +337,7 @@ window.SEED_TRIPS = [
             reservation: "required",
             reservationNote: "这天是昆士兰长周末的第一天，飞机会比平时满。目标是中午前后落地，不要订下午太晚的。",
             bookingUrl: "https://www.google.com/travel/flights?hl=zh-CN&q=One%20way%20flights%20from%20Sydney%20to%20Proserpine%20on%20May%201%202027",
+            cost: { aud: 260, note: "捷星直飞，长周末大约 A$190–280，再加一件托运行李约 A$30。" },
             note: "机场代码 PPP，也叫 Whitsunday Coast。飞行大约两个半小时。汉密尔顿岛机场（HTI）更靠近海岛，但怀特黑文的船大多从艾尔利海滩开，所以飞 PPP。悉尼国内航站楼出发。"
           },
           {
@@ -322,6 +351,7 @@ window.SEED_TRIPS = [
             reservation: "recommended",
             reservationNote: "班车按航班接，提前订座位更稳。不订就在到达厅找柜台，可能要等下一班。",
             bookingUrl: "https://www.whitsundaytransit.com.au/",
+            cost: { aud: 22, note: "单程 A$22。按售出顺序浮动，A$14–25，早订便宜。" },
             note: "路程大约 35 到 40 分钟。告诉司机酒店名字。打车也可以，几个人一起分摊更合适。"
           },
           {
@@ -335,6 +365,7 @@ window.SEED_TRIPS = [
             reservation: "required",
             reservationNote: "5月3日是昆士兰劳动节，这三晚正好是长周末，码头附近会先订满。",
             bookingUrl: "https://www.booking.com/searchresults.html?ss=Airlie+Beach&checkin=2027-05-01&checkout=2027-05-04",
+            cost: { aud: 420, note: "长周末每晚大约 A$250–300 一间。三晚按 A$840，两人分。" },
             note: "优先住 Coral Sea Marina 或主街，第二天早上走去码头。不要住到普罗瑟派恩镇上。"
           },
           {
@@ -348,6 +379,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "免费公共泻湖。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。" },
             why: "5月还是水母季，这是镇上不用穿防刺服就能下水的地方。",
             photo: photo("au-d4-lagoon"),
             note: "主街走到海边就看见。泻湖有防护，可以直接游。外海游泳要穿防刺服。晚饭在主街吃，长周末热门的馆子早点去。"
@@ -371,8 +403,9 @@ window.SEED_TRIPS = [
             reservation: "required",
             reservationNote: "这是这趟最该先订的一项，而且这天是长周末的周日。只订「南端白沙滩半天」会看不到希尔因莱特观景台。",
             bookingUrl: "https://www.oceanrafting.com.au/",
+            cost: { aud: 249, note: "官网 15 岁以上 A$249，含午饭、防刺服和酒店接送。5月2日是周日，不是公共假日，不加钱。" },
             why: "小快艇，人少，跑得快。怀特黑文上午十点到下午两点是大船集中靠岸的时候，越早出发越清静。",
-            note: "订 Northern Exposure：怀特黑文沙滩、希尔因莱特观景台，加浮潜。有两个出发时间就选早的那个。集合点以确认邮件为准，常见是 Coral Sea Marina，不要走到另一头的 Port of Airlie。提前半小时到。防刺服船上有。带泳衣、毛巾、一双能上岸的鞋。晕船药在开船前吃。大风他们会改期或换沙滩，看短信。"
+            note: "订 Northern Exposure：怀特黑文沙滩、希尔因莱特观景台，加浮潜。这条 8:45 出发、15:30 左右回来，比 10 点出发的 Southern Lights 早到怀特黑文。集合点以确认邮件为准，常见是 Coral Sea Marina，不要走到另一头的 Port of Airlie。提前半小时到。防刺服船上有。带泳衣、毛巾、一双能上岸的鞋。晕船药在开船前吃。大风他们会改期或换沙滩，看短信。"
           },
           {
             id: "au-d5-enid",
@@ -385,6 +418,7 @@ window.SEED_TRIPS = [
             reservation: "recommended",
             reservationNote: "不坐快艇就订这条。最多24人，只收成人。",
             bookingUrl: "https://www.australiancruisegroup.com.au/whitsundays/whitehaven-beach-cruises/10hr-lady-enid-whitehaven-beach-sail-snorkel-cruise",
+            cost: { aud: 295, note: "每人 A$295，只收 18 岁以上。换成这条比快艇多 A$46。" },
             why: "1962 年的老木帆船，最多 24 人，比快艇慢但安静，也去希尔因莱特和怀特黑文。",
             note: "早上 8 点从艾尔利出发，全天大约九个半小时，含吃的和浮潜。怕颠、想慢慢玩选这条；想早回来休息选上面的快艇。两个只订一个。"
           },
@@ -399,6 +433,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "含在船票里。确认你订的那条船会上这个观景台。",
             bookingUrl: "",
+            cost: { aud: 0, note: "含在船票里。" },
             why: "白沙和蓝水搅在一起的那张照片就是从这里拍的，只能从高处看。",
             photo: photo("au-d5-hill"),
             note: "大多数船停在 Tongue Bay，上岸走一段林间路和台阶到观景台。花纹好不好看取决于潮水，订船时问一句他们当天几点上观景台。穿船方要求的鞋。"
@@ -414,6 +449,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不能自己去，已经含在船票里。",
             bookingUrl: "",
+            cost: { aud: 0, note: "含在船票里。" },
             why: "7 公里长的白沙滩，大船都停在南端，往北走一段人就少了。",
             photo: photo("au-d5-sand"),
             note: "岛上没有路，也没有店。沙子细，会粘鞋。不要把沙子带走，公园在管。回程晚饭回艾尔利主街，今天不要再加别的活动。"
@@ -437,6 +473,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不用订。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。" },
             why: "前一天出海很累，这天又是昆士兰公共假日，不再排远的。",
             photo: photo("au-d6-town"),
             note: "睡够再出门。泻湖、主街、码头走一圈。今天是公共假日，有的馆子会加收假日附加费，营业时间也可能变短。晚饭早点吃，行李收好，第二天要去机场。"
@@ -452,6 +489,7 @@ window.SEED_TRIPS = [
             reservation: "recommended",
             reservationNote: "只有还想下海才订。订半天，不要再订一整天。",
             bookingUrl: "https://www.oceanrafting.com.au/",
+            cost: { aud: 200, note: "半天团大约 A$150–180，劳动节每人加收 A$20。订前看官网价格。" },
             note: "如果昨天的船因为天气取消，用这一天补。补的话仍然订含希尔因莱特的那条，并且把5月4日的飞机改到下午。"
           }
         ]
@@ -471,8 +509,9 @@ window.SEED_TRIPS = [
             lat: -37.669,
             lng: 144.841,
             reservation: "required",
-            reservationNote: "这条线经常要在布里斯班或悉尼转机，全程可能要五六个小时。先看时刻再订酒店。",
+            reservationNote: "只有捷星直飞，每天一班 JQ833，大约三小时，上午十一点左右起飞。卖完就只能转机，先订这班。",
             bookingUrl: "https://www.google.com/travel/flights?hl=zh-CN&q=One%20way%20flights%20from%20Proserpine%20to%20Melbourne%20on%20May%204%202027",
+            cost: { aud: 322, note: "捷星直飞大约 A$250–350，含一件托运行李按 A$300 算；去机场的班车 A$22 也算在这里。" },
             note: "早上从艾尔利返回 PPP，班车大约 40 分钟，再加安检，按飞机起飞前两小时到机场倒推。落地是墨尔本国内航站楼。"
           },
           {
@@ -486,6 +525,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "车上或官网都能买，不用提前锁位。",
             bookingUrl: "https://www.skybus.com.au/",
+            cost: { aud: 43.4, note: "直接买往返 A$43.40，比两张单程便宜 A$8.40。回程那张也在里面。" },
             note: "墨尔本机场没有火车站。跟随 SkyBus 牌子，在航站楼外上车，终点南十字车站，大约 30 到 40 分钟，堵车会更久。市区交通刷 Myki 卡，机场大巴本身不是 Myki。"
           },
           {
@@ -499,6 +539,7 @@ window.SEED_TRIPS = [
             reservation: "required",
             reservationNote: "只住两晚，城中心方便坐电车。",
             bookingUrl: "https://www.booking.com/searchresults.html?ss=Flinders+Street+Melbourne&checkin=2027-05-04&checkout=2027-05-06",
+            cost: { aud: 240, note: "城中心四星大约每晚 A$200–260 一间。两晚按 A$480，两人分。" },
             note: "如果 5 日晚上的国际航班，6 日清晨再退房也行。住这儿，明天坐电车和火车都方便。"
           },
           {
@@ -512,6 +553,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "巷子免费。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。" },
             why: "本地人说 Hosier Lane 这几年又挤又乱。旁边这几条巷子一样有涂鸦和小店，傍晚人少一些。",
             photo: photo("au-d7-lanes"),
             note: "从弗林德斯街车站对面开始，先走 Degraves Street 和 Centre Place，再沿 Flinders Lane 往东走到 AC/DC Lane。整段走路二十分钟，最后正好到下面的晚饭。"
@@ -527,6 +569,7 @@ window.SEED_TRIPS = [
             reservation: "recommended",
             reservationNote: "弗林德斯巷的小馆子，晚餐建议订。",
             bookingUrl: "https://www.opentable.com/r/coda-melbourne",
+            cost: { aud: 100, note: "分着点几道菜加一杯酒，每人大约 A$90–110。" },
             note: "亚洲口味、分着吃。订 19:00 左右。如果飞机晚点，取消预订，在巷子口随便吃。"
           }
         ]
@@ -548,6 +591,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "花园和建筑外面免费。旁边的墨尔本博物馆要票，想进再买。",
             bookingUrl: "",
+            cost: { aud: 17.4, note: "电车、公交、火车全天封顶 A$11.40（维州半价优惠到 2027年1月1日结束）。第一次买 myki 卡另付 A$6。", cat: "transport" },
             why: "世界遗产建筑，周三上午人很少。从这里走路就进 Fitzroy。",
             photo: photo("au-d8-reb"),
             note: "走到 Bourke Street 坐 86 或 96 路电车往东，到 11 号站 Melbourne Museum 下，走五分钟。绕建筑和喷泉走一圈就够。"
@@ -563,6 +607,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "街区，不用票。午饭在这条街上现场找。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。午饭算在每天的餐费里。" },
             why: "本地人推荐的老街区。主街后面的 Rose Street、Kerr Street 一带是老排屋、小画廊和涂鸦，游客少。",
             photo: photo("au-d8-fitzroy"),
             note: "从花园东边过 Nicholson Street 就是 Gertrude Street。顺着往东走，看到喜欢的就拐进北边的小街。午饭在 Gertrude Street 或 Smith Street 吃，不用订。"
@@ -578,6 +623,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "园区免费进。",
             bookingUrl: "",
+            cost: { aud: 0, note: "免费。来回的公交和火车已含在当天封顶里。" },
             why: "旧修道院改成的艺术园区，有草地、咖啡馆和亚拉河边步道，几乎没有旅行团。",
             photo: photo("au-d8-convent"),
             note: "从 Fitzroy 往北走到 Johnston Street，坐 200 或 207 路公交往东，Clarke Street 站下，走三到五分钟。不想等车就打车，十分钟左右。回城走 10 到 15 分钟到 Victoria Park 火车站，坐 Mernda 或 Hurstbridge 线进城。如果国际航班在下午，这一站取消，吃完午饭直接回城。"
@@ -593,6 +639,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "常设展免费，直接进。特展才要票。",
             bookingUrl: "https://www.ngv.vic.gov.au/whats-on/",
+            cost: { aud: 0, note: "常设展免费。" },
             why: "下雨的备选。周三白天人不多，常设展免费。",
             photo: photo("au-d8-ngv"),
             note: "下雨就把 Fitzroy 和修道院换成这里。从弗林德斯街沿圣基尔达路往南坐电车，有 Arts Precinct 或 NGV 字样的站下。"
@@ -608,6 +655,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "当天买票即可。",
             bookingUrl: "https://www.skybus.com.au/",
+            cost: { aud: 0, note: "已含在往返票里。" },
             note: "车站里跟着 SkyBus 牌子走。国际航班留三小时。大巴大约 30 到 40 分钟，傍晚可能堵。"
           }
         ]
