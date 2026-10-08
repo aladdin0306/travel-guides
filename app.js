@@ -2,7 +2,7 @@ const STORAGE_KEY = "travel-guides-v2";
 const KIND = { sight: "景点", food: "餐厅", transport: "交通", stay: "住宿" };
 const FLAG = { required: "必须预约", recommended: "建议预约", none: "不用预约" };
 const KIND_ICON = { sight: "camera", food: "food", transport: "bus", stay: "bed" };
-const COST_CAT = { stay: "住宿", transport: "交通", sight: "门票和出海", food: "吃饭", other: "签证和其他" };
+const COST_CAT = { flight: "国际机票", stay: "住宿", transport: "交通", sight: "门票和出海", food: "吃饭", other: "签证和其他" };
 
 // Lucide icons (ISC), https://lucide.dev
 const ICONS = {
@@ -51,24 +51,27 @@ function load() {
   const seed = structuredClone(window.SEED_TRIPS);
   let booked = {};
   let tripId = seed[0].id;
+  let origin = "";
   let extras = [];
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
     if (saved) {
       booked = saved.booked || {};
       tripId = saved.tripId || tripId;
+      origin = saved.origin || "";
       const seedIds = new Set(seed.map((item) => item.id));
       extras = (saved.trips || []).filter((item) => !seedIds.has(item.id));
     }
   } catch (_) { /* keep the seed trip */ }
-  return { trips: [...seed, ...extras], booked, tripId };
+  return { trips: [...seed, ...extras], booked, tripId, origin };
 }
 
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({
     trips: state.trips,
     booked: state.booked,
-    tripId: state.tripId
+    tripId: state.tripId,
+    origin: state.origin
   }));
 }
 
@@ -128,8 +131,24 @@ function costCat(entry) {
 }
 
 function aud(amount, exact) {
-  const value = exact ? amount : Math.round(amount);
-  return `A$${value.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
+  const value = Math.abs(exact ? amount : Math.round(amount));
+  return `${amount < 0 ? "−" : ""}A$${value.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
+}
+
+function pickOrigin(current) {
+  const list = (current.budget && current.budget.origins) || [];
+  return list.find((item) => item.id === state.origin) || list[0] || null;
+}
+
+function originLines(current) {
+  const origin = pickOrigin(current);
+  if (!origin) return [];
+  const rate = Number(current.budget.cnyRate);
+  const lines = [];
+  if (Number.isFinite(origin.cny) && rate) {
+    lines.push({ label: `${origin.label}往返机票`, cat: "flight", aud: Math.round(origin.cny / rate), note: `约 ¥${origin.cny.toLocaleString("en-US")}。${origin.note || ""}` });
+  }
+  return lines.concat(origin.adjust || []);
 }
 
 function dayCost(day) {
@@ -153,7 +172,7 @@ function budgetOf(current) {
     total += sum;
     return { day, sum };
   });
-  const extras = (current.budget && current.budget.extras) || [];
+  const extras = [...originLines(current), ...((current.budget && current.budget.extras) || [])];
   for (const extra of extras) {
     if (!Number.isFinite(extra.aud)) continue;
     cats[costCat(extra)] = (cats[costCat(extra)] || 0) + extra.aud;
@@ -276,6 +295,8 @@ function renderBudget(current) {
   const info = current.budget || {};
   const rate = Number(info.cnyRate);
   const left = plan.extras.filter((extra) => !Number.isFinite(extra.aud));
+  const origins = info.origins || [];
+  const origin = pickOrigin(current);
   const cats = Object.keys(COST_CAT).filter((cat) => plan.cats[cat] > 0);
   const top = Math.max(...plan.days.map((row) => row.sum), 1);
   return `<section class="budget">
@@ -283,10 +304,15 @@ function renderBudget(current) {
       <span class="banner-icon">${icon("wallet")}</span>
       <span class="banner-text">
         <b>预算：每人约 ${aud(plan.total)}${rate ? `<span class="cny">约 ¥${(Math.round(plan.total * rate / 10) * 10).toLocaleString("en-US")}</span>` : ""}</b>
-        <small>两人同住一间${left.length ? `，不含${esc(left.map((extra) => extra.label).join("、"))}` : ""}</small>
+        <small>两人同住一间${origin ? `，${esc(origin.label)}出发，含国际机票` : ""}${left.length ? `，不含${esc(left.map((extra) => extra.label).join("、"))}` : ""}</small>
       </span>
       <span class="banner-cta">${budgetOpen ? "收起" : "看明细"}<span class="chev${budgetOpen ? " up" : ""}">${icon("chevron")}</span></span>
     </button>
+    ${origins.length ? `<div class="origin-pick" role="group" aria-label="从哪里出发">
+      <span>从哪里出发</span>
+      ${origins.map((item) => `<button type="button" class="origin-btn${origin && item.id === origin.id ? " active" : ""}" data-origin="${esc(item.id)}" aria-pressed="${origin && item.id === origin.id}">${icon("plane")}${esc(item.label)}</button>`).join("")}
+    </div>
+    ${origin && origin.brief ? `<p class="origin-brief">${esc(origin.brief)}</p>` : ""}` : ""}
     <div class="budget-bar" aria-hidden="true">
       ${cats.map((cat) => `<span class="cat-${cat}" style="width:${(plan.cats[cat] / plan.total * 100).toFixed(1)}%"></span>`).join("")}
     </div>
@@ -664,6 +690,11 @@ main.addEventListener("click", (event) => {
   if (dayButton) {
     dayFilter = dayButton.dataset.day;
     main.scrollTop = 0;
+    return render();
+  }
+  const pick = event.target.closest("[data-origin]");
+  if (pick) {
+    state.origin = pick.dataset.origin;
     return render();
   }
   if (event.target.closest("#toggle-budget")) {

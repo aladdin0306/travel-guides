@@ -360,6 +360,7 @@ main { overflow: auto; min-height: 0; padding-bottom: 8px; }
 
 /* Budget */
 
+.cat-flight { --c: #17313a; }
 .cat-stay { --c: #7a5ad1; }
 .cat-transport { --c: #3a69d1; }
 .cat-sight { --c: #0e7c86; }
@@ -390,6 +391,37 @@ main { overflow: auto; min-height: 0; padding-bottom: 8px; }
 .budget-head:hover .banner-cta { border-color: var(--ink); }
 .budget-head:focus-visible { outline: 3px solid rgba(14, 124, 134, 0.35); outline-offset: 4px; border-radius: 10px; }
 .cny { margin-left: 8px; color: var(--muted); font-size: 13px; font-weight: 600; }
+
+.origin-pick {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.origin-pick > span { margin-right: 4px; font-weight: 600; }
+.origin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--edge);
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(23, 49, 58, 0.08);
+}
+.origin-btn .icon { width: 14px; height: 14px; }
+.origin-btn:hover { border-color: var(--ink); }
+.origin-btn.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.origin-btn:focus-visible { outline: 3px solid rgba(14, 124, 134, 0.35); outline-offset: 2px; }
+.origin-brief { margin: 8px 0 0; font-size: 13px; line-height: 1.6; }
 
 .budget-bar {
   display: flex;

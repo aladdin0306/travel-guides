@@ -37,8 +37,27 @@ window.SEED_TRIPS = [
       extras: [
         { label: "澳洲旅游签证（600 类）", cat: "other", aud: 250, note: "中国护照在国外递交，2026年7月起每人 A$250。" },
         { label: "其余三餐和咖啡", cat: "food", aud: 520, note: "上面没单列的早饭和午饭，每天大约 A$65，8 天。" },
-        { label: "手机流量卡", cat: "other", aud: 30, note: "落地在机场或超市买预付卡。" },
-        { label: "国际往返机票", cat: "flight", aud: null, note: "出发城市还没定，没算进去。" }
+        { label: "手机流量卡", cat: "other", aud: 30, note: "落地在机场或超市买预付卡。" }
+      ],
+      origins: [
+        {
+          id: "beijing",
+          label: "北京",
+          cny: 7000,
+          brief: "去：4月27日经上海转东航 MU561，28日 09:00 到悉尼。回：5月5日 19:40 国航 CA166 墨尔本直飞北京首都，6日 05:45 到。",
+          note: "经济舱含税开口程，估 ¥6,000–8,000，按 ¥7,000 算。国航北京直飞悉尼 CA173 按 2026 年班期只有周二、四、六、日，4月28日周三没有，要坐就得提前一天走。回程 CA166 周三有班。5月5日下午三点前从修道院回酒店拿行李，四点前上 SkyBus。",
+          adjust: [
+            { label: "墨尔本少住一晚", cat: "stay", aud: -120, note: "5月5日晚上就飞，酒店只订 5月4日一晚。" }
+          ]
+        },
+        {
+          id: "shanghai",
+          label: "上海",
+          cny: 6000,
+          brief: "去：4月27日 20:20 东航 MU561 浦东直飞悉尼，28日 09:00 到。回：5月6日 11:00 东航 MU738 墨尔本直飞浦东，19:50 到。",
+          note: "经济舱含税开口程，估 ¥5,000–7,000，按 ¥6,000 算。MU738 上午 11 点起飞，5月5日走就看不了那天的景点，所以改 5月6日回，墨尔本住两晚。6日早上 8 点前上 SkyBus。",
+          adjust: []
+        }
       ]
     },
     days: [
@@ -537,10 +556,10 @@ window.SEED_TRIPS = [
             lat: -37.8183,
             lng: 144.9671,
             reservation: "required",
-            reservationNote: "只住两晚，城中心方便坐电车。",
+            reservationNote: "上海出发住两晚（5月4日、5日）；北京出发 5日晚上就飞，只住 5月4日一晚。",
             bookingUrl: "https://www.booking.com/searchresults.html?ss=Flinders+Street+Melbourne&checkin=2027-05-04&checkout=2027-05-06",
             cost: { aud: 240, note: "城中心四星大约每晚 A$200–260 一间。两晚按 A$480，两人分。" },
-            note: "如果 5 日晚上的国际航班，6 日清晨再退房也行。住这儿，明天坐电车和火车都方便。"
+            note: "住这儿，明天坐电车和火车都方便。北京出发的话 5日上午退房，把行李寄存在前台。"
           },
           {
             id: "au-d7-lanes",
@@ -656,7 +675,7 @@ window.SEED_TRIPS = [
             reservationNote: "当天买票即可。",
             bookingUrl: "https://www.skybus.com.au/",
             cost: { aud: 0, note: "已含在往返票里。" },
-            note: "车站里跟着 SkyBus 牌子走。国际航班留三小时。大巴大约 30 到 40 分钟，傍晚可能堵。"
+            note: "车站里跟着 SkyBus 牌子走。国际航班留三小时。大巴大约 30 到 40 分钟，傍晚可能堵。北京出发是 5日 19:40 的国航，下午四点前上车；上海出发是 6日 11:00 的东航，6日早上八点前上车。"
           }
         ]
       }
