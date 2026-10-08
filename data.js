@@ -1,9 +1,6 @@
 const PHOTOS = {
   "au-d1-opera": ["Bernard Spragg · CC0", "Sydney_Australia._(21339175489).jpg"],
   "au-d1-tour": ["Nick-D · CC BY-SA 3.0", "Sydney_Opera_House_concert_hall_October_2018.jpg"],
-  "au-d1-chair": ["Mitch Ames · CC BY-SA 3.0", "Mrs_Macquarie%27s_Chair_2013.jpg"],
-  "au-d2-nielsen": ["Peter Woodard · CC0", "Nielsen_Park_Port_Jackson.JPG"],
-  "au-d2-parsley": ["-wuppertaler · CC BY 4.0", "AUS_Sydney,_Woollahra,_Parsley_Bay_Bridge_005.jpg"],
   "au-d2-gap": ["Dietmar Rabich · CC BY-SA 4.0", "Sydney_(AU),_Watsons_Bay_--_2019_--_2295.jpg"],
   "au-d3-manly": ["J Bar · CC BY-SA 3.0", "Shelly_Beach_Manly.JPG"],
   "au-d3-northhead": ["ColonelLight · CC0", "Burragula_Lookout_North_Head_02.jpg"],
@@ -27,16 +24,16 @@ window.SEED_TRIPS = [
   {
     id: "australia-2027",
     title: "澳洲",
-    start: "2027-04-28",
+    start: "2027-04-29",
     end: "2027-05-05",
-    summary: "按开口程排：4月28日进悉尼，5月1日飞圣灵群岛，5月4日飞墨尔本，5月5日从墨尔本离开。这几天三个州都在上学，没有学校假期。要注意的是5月3日是昆士兰劳动节，5月1日到3日是艾尔利的长周末，酒店和船先订。景点挑的是本地人推荐、人比经典打卡点少的地方：悉尼不走邦迪到库吉，改走海港东岸；墨尔本不去 Hosier Lane 和圣基尔达，改去 Carlton、Fitzroy 和 Abbotsford。",
+    summary: "按开口程排：4月28日晚上从国内出发，29日到悉尼，5月1日飞圣灵群岛，5月4日飞墨尔本，5月5日从墨尔本回国。这几天三个州都在上学，没有学校假期。要注意的是5月3日是昆士兰劳动节，5月1日到3日是艾尔利的长周末，酒店和船先订。景点挑的是本地人推荐、人比经典打卡点少的地方：悉尼不走邦迪到库吉，改去沃森斯湾和曼利北角；墨尔本不去 Hosier Lane 和圣基尔达，改去 Carlton、Fitzroy 和 Abbotsford。",
     budget: {
       basis: "每人，两人同住一间。价格是 2026年10月查的，机票和酒店按淡季中间价估。",
       cnyRate: 4.68,
       rateDate: "2026-10-08",
       extras: [
         { label: "澳洲旅游签证（600 类）", cat: "other", aud: 250, note: "中国护照在国外递交，2026年7月起每人 A$250。" },
-        { label: "其余三餐和咖啡", cat: "food", aud: 520, note: "上面没单列的早饭和午饭，每天大约 A$65，8 天。" },
+        { label: "其余三餐和咖啡", cat: "food", aud: 455, note: "上面没单列的早饭和午饭，每天大约 A$65，7 天。" },
         { label: "手机流量卡", cat: "other", aud: 30, note: "落地在机场或超市买预付卡。" }
       ],
       origins: [
@@ -44,18 +41,16 @@ window.SEED_TRIPS = [
           id: "beijing",
           label: "北京",
           cny: 7000,
-          brief: "去：4月27日经上海转东航 MU561，28日 09:00 到悉尼。回：5月5日 19:40 国航 CA166 墨尔本直飞北京首都，6日 05:45 到。",
-          note: "经济舱含税开口程，估 ¥6,000–8,000，按 ¥7,000 算。国航北京直飞悉尼 CA173 按 2026 年班期只有周二、四、六、日，4月28日周三没有，要坐就得提前一天走。回程 CA166 周三有班。5月5日下午三点前从修道院回酒店拿行李，四点前上 SkyBus。",
-          adjust: [
-            { label: "墨尔本少住一晚", cat: "stay", aud: -120, note: "5月5日晚上就飞，酒店只订 5月4日一晚。" }
-          ]
+          brief: "去：4月28日深夜到首都机场，29日 01:40 国航 CA173 直飞悉尼，14:50 到。回：5月5日 19:40 国航 CA166 墨尔本直飞北京首都，6日 05:45 到。",
+          note: "经济舱含税开口程，估 ¥6,000–8,000，按 ¥7,000 算。CA173 按 2026 年班期是周二、四、六、日，4月29日周四有班。想上午就到悉尼，可以 28日先飞上海转 20:20 的东航 MU561，29日 09:00 到。5月5日下午三点前从修道院回酒店拿行李，四点前上 SkyBus。",
+          adjust: []
         },
         {
           id: "shanghai",
           label: "上海",
           cny: 6000,
-          brief: "去：4月27日 20:20 东航 MU561 浦东直飞悉尼，28日 09:00 到。回：5月6日 11:00 东航 MU738 墨尔本直飞浦东，19:50 到。",
-          note: "经济舱含税开口程，估 ¥5,000–7,000，按 ¥6,000 算。MU738 上午 11 点起飞，5月5日走就看不了那天的景点，所以改 5月6日回，墨尔本住两晚。6日早上 8 点前上 SkyBus。",
+          brief: "去：4月28日 20:20 东航 MU561 浦东直飞悉尼，29日 09:00 到。回：5月5日 11:00 东航 MU738 墨尔本直飞浦东，19:50 到。",
+          note: "经济舱含税开口程，估 ¥5,000–7,000，按 ¥6,000 算。MU738 上午 11 点起飞，5月5日早上八点前就要上 SkyBus，那天的 Carlton、Fitzroy 和修道院都去不了，墨尔本只剩 4日傍晚的小巷。",
           adjust: []
         }
       ]
@@ -63,9 +58,9 @@ window.SEED_TRIPS = [
     days: [
       {
         id: "au-d1",
-        date: "2027-04-28",
+        date: "2027-04-29",
         city: "悉尼",
-        title: "下飞机，只在港边走",
+        title: "落地，沃森斯湾和歌剧院",
         items: [
           {
             id: "au-d1-opal",
@@ -78,7 +73,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不用订票。刷银行卡或 Opal 卡即可。",
             bookingUrl: "",
-            cost: { aud: 21.64, note: "机场站通行费 A$18.61 加火车票，下午不是高峰，合计 A$21.64。" },
+            cost: { aud: 22.94, note: "机场站通行费 A$18.61 加火车票。上海航班上午到，非高峰 A$21.64；北京航班下午到，赶上下午高峰是 A$22.94，按高的算。" },
             note: "国际航站楼和国内航站楼是两个火车站。坐 T8，方向进城，经过中央车站、市政厅、温亚德，到环形码头下。机场站另收一笔通行费，比普通地铁贵。行李多、很累就打车，大约三四十分钟到环形码头。"
           },
           {
@@ -90,14 +85,30 @@ window.SEED_TRIPS = [
             lat: -33.8612,
             lng: 151.2108,
             reservation: "required",
-            reservationNote: "港边酒店位置好的先满，三晚一起订。",
-            bookingUrl: "https://www.booking.com/searchresults.html?ss=Circular+Quay%2C+Sydney&checkin=2027-04-28&checkout=2027-05-01",
-            cost: { aud: 495, note: "港边四星大约每晚 A$300–350 一间。三晚按 A$990，两人分。" },
-            note: "住这儿，歌剧院、岩石区和渡轮码头都能走路到。后两天都从环形码头坐渡轮出发。5月1日早上再去机场。"
+            reservationNote: "港边酒店位置好的先满，两晚一起订。上午到的话问酒店能不能先寄存行李。",
+            bookingUrl: "https://www.booking.com/searchresults.html?ss=Circular+Quay%2C+Sydney&checkin=2027-04-29&checkout=2027-05-01",
+            cost: { aud: 330, note: "港边四星大约每晚 A$300–350 一间。两晚按 A$660，两人分。" },
+            note: "住这儿，歌剧院、岩石区和渡轮码头都能走路到。下午和第二天都从环形码头坐渡轮出发。5月1日早上去机场。"
+          },
+          {
+            id: "au-d1-watsons",
+            time: "早到再去",
+            kind: "sight",
+            name: "渡轮去沃森斯湾和 The Gap 悬崖",
+            address: "Gap Park, Watsons Bay",
+            lat: -33.8452,
+            lng: 151.287,
+            reservation: "none",
+            reservationNote: "渡轮刷卡，悬崖公园免费。",
+            bookingUrl: "",
+            cost: { aud: 14.7, note: "来回渡轮各 A$7.35。" },
+            why: "港湾这边是小渔村，翻过小坡就是外海悬崖。来回都是渡轮，不用走长路，适合落地第一天。",
+            photo: photo("au-d2-gap"),
+            note: "放下行李后到环形码头 2 号码头，坐 F9 到 Watsons Bay，大约 25 分钟。下船穿过码头对面的草地，走上 Gap Park，看外海那一侧的悬崖，来回二十分钟。F9 有时一小时才一班，到码头先看回程时间，16:30 前往回坐。上海航班上午到才排这一站；北京航班下午三点到，直接去下面的歌剧院。"
           },
           {
             id: "au-d1-opera",
-            time: "下午",
+            time: "傍晚",
             kind: "sight",
             name: "悉尼歌剧院外面",
             address: "Bennelong Point, Sydney NSW",
@@ -107,9 +118,9 @@ window.SEED_TRIPS = [
             reservationNote: "只在室外走，不用票。",
             bookingUrl: "",
             cost: { aud: 0, note: "室外免费。" },
-            why: "第一天有时差，这里走路就到，不用转车。外面看不要票。",
+            why: "坐了一夜飞机，这里走路就到，不用转车。外面看不要票。",
             photo: photo("au-d1-opera"),
-            note: "从环形码头沿着海走过去。先看壳，再绕到海岬一侧。刚下飞机不要排室内导览。"
+            note: "从环形码头沿着海走过去。先看壳，再绕到海岬一侧。还有力气就继续往东走进皇家植物园，大约 20 分钟到麦考利夫人椅子，那里能把歌剧院和大桥拍在一起。"
           },
           {
             id: "au-d1-tour",
@@ -125,23 +136,7 @@ window.SEED_TRIPS = [
             cost: { aud: 52, note: "提前订每人 A$50，2027年4月起预计 A$52；当天买再贵 A$5。" },
             why: "只有想看音乐厅内部才去。每场限人数，里面不挤。",
             photo: photo("au-d1-tour"),
-            note: "到了再决定。订的话选下午场，提前15分钟到下层的 Welcome Centre。不订也不影响这天。"
-          },
-          {
-            id: "au-d1-chair",
-            time: "傍晚",
-            kind: "sight",
-            name: "皇家植物园到麦考利夫人椅子",
-            address: "Mrs Macquaries Point, Sydney",
-            lat: -33.8599,
-            lng: 151.2226,
-            reservation: "none",
-            reservationNote: "植物园免费，不用订。",
-            bookingUrl: "",
-            cost: { aud: 0, note: "免费。" },
-            why: "歌剧院和大桥同框的位置，傍晚比环形码头人少。",
-            photo: photo("au-d1-chair"),
-            note: "从歌剧院继续往东走进植物园，顺着海走到尽头，就是看歌剧院和港湾的那个石头椅子。原路走回岩石区。"
+            note: "到了再决定。订的话选傍晚前的最后一场，提前15分钟到下层的 Welcome Centre。不订也不影响这天。"
           },
           {
             id: "au-d1-bar",
@@ -156,104 +151,6 @@ window.SEED_TRIPS = [
             bookingUrl: "",
             cost: { aud: 60, note: "一份主菜加一杯饮料，每人大约 A$50–70。" },
             note: "就在歌剧院脚下。要靠窗的位置就早点去。这天别再跑别的区。"
-          }
-        ]
-      },
-      {
-        id: "au-d2",
-        date: "2027-04-29",
-        city: "悉尼",
-        title: "海港东岸：玫瑰湾走到沃森斯湾",
-        items: [
-          {
-            id: "au-d2-ferry",
-            time: "10:00",
-            kind: "transport",
-            name: "F9 渡轮到玫瑰湾",
-            address: "Circular Quay Wharf 2",
-            lat: -33.8612,
-            lng: 151.2108,
-            reservation: "none",
-            reservationNote: "刷 Opal 或银行卡，不用提前买。",
-            bookingUrl: "",
-            cost: { aud: 7.35, note: "Opal 或银行卡刷卡，9 公里以内的渡轮 A$7.35。" },
-            note: "环形码头 2 号码头，看牌子 F9 Watsons Bay。坐到 Rose Bay 下，大约 12 分钟。"
-          },
-          {
-            id: "au-d2-nielsen",
-            time: "10:30",
-            kind: "sight",
-            name: "隐士步道到尼尔森公园",
-            address: "Hermitage Foreshore Track, Vaucluse",
-            lat: -33.8505,
-            lng: 151.268,
-            reservation: "none",
-            reservationNote: "国家公园步道，不用票。",
-            bookingUrl: "",
-            cost: { aud: 0, note: "免费。" },
-            why: "本地人推荐的海港步道，平路，回头就是大桥和歌剧院。比邦迪到库吉人少很多。",
-            photo: photo("au-d2-nielsen"),
-            note: "下船沿 New South Head Road 往北走，左转 Tivoli Avenue，再左转 Bay View Hill Road，看牌子 Hermitage Foreshore 进步道。从码头到尼尔森公园大约一个半小时，路上经过几个小沙湾。终点的沙滩叫 Shark Beach，有防鲨网，可以下水。"
-          },
-          {
-            id: "au-d2-lunch",
-            time: "12:30",
-            kind: "food",
-            name: "The Nielsen",
-            address: "Nielsen Park, Greycliffe Avenue, Vaucluse",
-            lat: -33.8508,
-            lng: 151.2683,
-            reservation: "none",
-            reservationNote: "公园里的咖啡馆，现场点。",
-            bookingUrl: "",
-            cost: { aud: 35, note: "咖啡馆简餐加咖啡，每人大约 A$30–40。" },
-            note: "就在 Shark Beach 后面。吃完可以在草地上坐一会儿再走。"
-          },
-          {
-            id: "au-d2-parsley",
-            time: "13:30",
-            kind: "sight",
-            name: "帕斯利湾吊桥",
-            address: "Parsley Bay Reserve, Vaucluse",
-            lat: -33.8496,
-            lng: 151.2777,
-            reservation: "none",
-            reservationNote: "公共公园，不用票。",
-            bookingUrl: "",
-            cost: { aud: 0, note: "免费。" },
-            why: "顺路的小吊桥和雨林小沟，走过去只多十分钟。",
-            photo: photo("au-d2-parsley"),
-            note: "从尼尔森公园沿 Coolong Road 走到 Wentworth Road，右转 Fitzwilliam Road，在 43a 号旁边的小路进去就是吊桥。过桥后顺 The Crescent 往下走，一直到沃森斯湾。尼尔森公园到沃森斯湾不进 Vaucluse House 的话，大约一个半小时。"
-          },
-          {
-            id: "au-d2-gap",
-            time: "15:00",
-            kind: "sight",
-            name: "沃森斯湾和 The Gap 悬崖",
-            address: "Gap Park, Watsons Bay",
-            lat: -33.8452,
-            lng: 151.287,
-            reservation: "none",
-            reservationNote: "不用票。",
-            bookingUrl: "",
-            cost: { aud: 0, note: "免费。" },
-            why: "港湾这边是小渔村，翻过小坡就是外海悬崖。终点有渡轮直接回城，不用坐车。",
-            photo: photo("au-d2-gap"),
-            note: "到了沃森斯湾先穿过码头对面的草地，走上 Gap Park，看外海那一侧的悬崖，来回二十分钟。天还亮、腿还有劲，可以再走去 Hornby 灯塔，来回多 3 公里左右。傍晚五点多天黑，四点半前往回走。"
-          },
-          {
-            id: "au-d2-back",
-            time: "16:30",
-            kind: "transport",
-            name: "沃森斯湾坐渡轮回环形码头",
-            address: "Watsons Bay Wharf",
-            lat: -33.8443,
-            lng: 151.2817,
-            reservation: "none",
-            reservationNote: "不用订。",
-            bookingUrl: "",
-            cost: { aud: 7.35, note: "同样 A$7.35。周四全天封顶 A$19.30，今天到不了封顶。" },
-            note: "还是 F9，不到 20 分钟回到环形码头。这条船有时一小时才一班，到码头先看下一班时间，在旁边的海边草地等。"
           }
         ]
       },
@@ -556,10 +453,10 @@ window.SEED_TRIPS = [
             lat: -37.8183,
             lng: 144.9671,
             reservation: "required",
-            reservationNote: "上海出发住两晚（5月4日、5日）；北京出发 5日晚上就飞，只住 5月4日一晚。",
-            bookingUrl: "https://www.booking.com/searchresults.html?ss=Flinders+Street+Melbourne&checkin=2027-05-04&checkout=2027-05-06",
-            cost: { aud: 240, note: "城中心四星大约每晚 A$200–260 一间。两晚按 A$480，两人分。" },
-            note: "住这儿，明天坐电车和火车都方便。北京出发的话 5日上午退房，把行李寄存在前台。"
+            reservationNote: "只住 5月4日一晚，城中心方便坐电车。",
+            bookingUrl: "https://www.booking.com/searchresults.html?ss=Flinders+Street+Melbourne&checkin=2027-05-04&checkout=2027-05-05",
+            cost: { aud: 120, note: "城中心四星大约每晚 A$200–260 一间。一晚按 A$240，两人分。" },
+            note: "住这儿，明天坐电车和火车都方便。5日早上退房，北京出发的把行李寄存在前台，下午回来拿。"
           },
           {
             id: "au-d7-lanes",
@@ -597,7 +494,7 @@ window.SEED_TRIPS = [
         id: "au-d8",
         date: "2027-05-05",
         city: "墨尔本",
-        title: "Carlton、Fitzroy 和老修道院",
+        title: "Carlton、Fitzroy 和老修道院（北京出发）",
         items: [
           {
             id: "au-d8-reb",
@@ -675,7 +572,7 @@ window.SEED_TRIPS = [
             reservationNote: "当天买票即可。",
             bookingUrl: "https://www.skybus.com.au/",
             cost: { aud: 0, note: "已含在往返票里。" },
-            note: "车站里跟着 SkyBus 牌子走。国际航班留三小时。大巴大约 30 到 40 分钟，傍晚可能堵。北京出发是 5日 19:40 的国航，下午四点前上车；上海出发是 6日 11:00 的东航，6日早上八点前上车。"
+            note: "车站里跟着 SkyBus 牌子走。国际航班留三小时。大巴大约 30 到 40 分钟，傍晚可能堵。北京出发是 19:40 的国航，下午四点前上车，白天的几站都能去。上海出发是 11:00 的东航，早上八点前上车，这天的景点都去不了。"
           }
         ]
       }
