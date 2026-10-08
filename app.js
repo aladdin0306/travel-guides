@@ -2,6 +2,7 @@ const STORAGE_KEY = "travel-guides-v2";
 const KIND = { sight: "景点", food: "餐厅", transport: "交通", stay: "住宿" };
 const FLAG = { required: "必须预约", recommended: "建议预约", none: "不用预约" };
 const KIND_ICON = { sight: "camera", food: "food", transport: "bus", stay: "bed" };
+const COST_CAT = { stay: "住宿", transport: "交通", sight: "门票和出海", food: "吃饭", other: "签证和其他" };
 
 // Lucide icons (ISC), https://lucide.dev
 const ICONS = {
@@ -21,7 +22,8 @@ const ICONS = {
   camera: '<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>',
   food: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
   bus: '<path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/>',
-  bed: '<path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>'
+  bed: '<path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>',
+  wallet: '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>'
 };
 
 function icon(name) {
@@ -37,6 +39,7 @@ let map;
 let markers = [];
 let dayFilter = "";
 let bookingsOpen = false;
+let budgetOpen = false;
 let editing = null;
 
 const main = document.querySelector("#main");
@@ -113,6 +116,50 @@ function pending(current = trip()) {
   }
   rows.sort((a, b) => (a.item.reservation === "required" ? -1 : 1) - (b.item.reservation === "required" ? -1 : 1));
   return rows;
+}
+
+function hasCost(item) {
+  return !!(item && item.cost && Number.isFinite(item.cost.aud));
+}
+
+function costCat(entry) {
+  const cat = (entry.cost && entry.cost.cat) || entry.cat || entry.kind;
+  return COST_CAT[cat] ? cat : "other";
+}
+
+function aud(amount, exact) {
+  const value = exact ? amount : Math.round(amount);
+  return `A$${value.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
+}
+
+function dayCost(day) {
+  return day.items.reduce((sum, item) => sum + (hasCost(item) && !isOptional(item) ? item.cost.aud : 0), 0);
+}
+
+function budgetOf(current) {
+  const cats = {};
+  const optional = [];
+  let total = 0;
+  const days = current.days.map((day) => {
+    for (const item of day.items) {
+      if (!hasCost(item)) continue;
+      if (isOptional(item)) {
+        if (item.cost.aud > 0) optional.push({ day, item });
+        continue;
+      }
+      cats[costCat(item)] = (cats[costCat(item)] || 0) + item.cost.aud;
+    }
+    const sum = dayCost(day);
+    total += sum;
+    return { day, sum };
+  });
+  const extras = (current.budget && current.budget.extras) || [];
+  for (const extra of extras) {
+    if (!Number.isFinite(extra.aud)) continue;
+    cats[costCat(extra)] = (cats[costCat(extra)] || 0) + extra.aud;
+    total += extra.aud;
+  }
+  return { total, cats, days, extras, optional };
 }
 
 function safePhoto(item) {
@@ -200,6 +247,8 @@ function renderMain() {
         </div>`).join("") : `<p class="muted">这趟没有还要处理的预约。</p>`}
     </section>` : ""}
 
+    ${renderBudget(current)}
+
     <nav class="day-tabs" aria-label="选择哪一天">
       ${current.days.map((day, index) => {
         const [, m, d] = (day.date || "--").split("-");
@@ -221,12 +270,64 @@ function renderMain() {
   document.querySelector("#map-title").textContent = dayFilter === "all" ? "全程" : (chosen ? `${monthDay(chosen.date)} ${chosen.city}` : "这一天");
 }
 
+function renderBudget(current) {
+  const plan = budgetOf(current);
+  if (!plan.total) return "";
+  const info = current.budget || {};
+  const rate = Number(info.cnyRate);
+  const left = plan.extras.filter((extra) => !Number.isFinite(extra.aud));
+  const cats = Object.keys(COST_CAT).filter((cat) => plan.cats[cat] > 0);
+  const top = Math.max(...plan.days.map((row) => row.sum), 1);
+  return `<section class="budget">
+    <button type="button" class="budget-head" id="toggle-budget" aria-expanded="${budgetOpen}">
+      <span class="banner-icon">${icon("wallet")}</span>
+      <span class="banner-text">
+        <b>预算：每人约 ${aud(plan.total)}${rate ? `<span class="cny">约 ¥${(Math.round(plan.total * rate / 10) * 10).toLocaleString("en-US")}</span>` : ""}</b>
+        <small>两人同住一间${left.length ? `，不含${esc(left.map((extra) => extra.label).join("、"))}` : ""}</small>
+      </span>
+      <span class="banner-cta">${budgetOpen ? "收起" : "看明细"}<span class="chev${budgetOpen ? " up" : ""}">${icon("chevron")}</span></span>
+    </button>
+    <div class="budget-bar" aria-hidden="true">
+      ${cats.map((cat) => `<span class="cat-${cat}" style="width:${(plan.cats[cat] / plan.total * 100).toFixed(1)}%"></span>`).join("")}
+    </div>
+    <div class="budget-legend">
+      ${cats.map((cat) => `<span class="cat-${cat}"><i></i>${COST_CAT[cat]}<b>${aud(plan.cats[cat])}</b></span>`).join("")}
+    </div>
+    ${budgetOpen ? `<div class="budget-detail">
+      <h3 class="section-title">按天（住宿算在入住那天），点一天跳过去</h3>
+      <ol class="budget-days">
+        ${plan.days.map(({ day, sum }) => `<li><button type="button" data-day="${esc(day.id)}">
+          <span class="bd-date">${esc(monthDay(day.date) || "未定")} ${esc(day.city || "")}</span>
+          <span class="bd-bar"><i style="width:${(sum / top * 100).toFixed(1)}%"></i></span>
+          <b>${aud(sum)}</b>
+        </button></li>`).join("")}
+      </ol>
+      ${plan.extras.length ? `<h3 class="section-title">不跟某一站走的开销</h3>
+      <ul class="budget-rows">
+        ${plan.extras.map((extra) => `<li><span><b>${esc(extra.label)}</b><small>${esc(extra.note || "")}</small></span><em class="${Number.isFinite(extra.aud) ? "" : "none"}">${Number.isFinite(extra.aud) ? aud(extra.aud, true) : "没算"}</em></li>`).join("")}
+      </ul>` : ""}
+      ${plan.optional.length ? `<h3 class="section-title">可选的，没算进总数</h3>
+      <ul class="budget-rows">
+        ${plan.optional.map(({ day, item }) => `<li><span><b>${esc(item.name)}</b><small>${esc(monthDay(day.date))} · ${esc(item.cost.note || "")}</small></span><em>${aud(item.cost.aud, true)}</em></li>`).join("")}
+      </ul>` : ""}
+      ${info.basis || rate ? `<p class="budget-note">${esc(info.basis || "")}${rate ? ` 人民币按 1 澳元 ≈ ${esc(rate)} 元${info.rateDate ? `（${esc(info.rateDate)}）` : ""}。` : ""}</p>` : ""}
+    </div>` : ""}
+  </section>`;
+}
+
+function priceChip(item) {
+  if (!hasCost(item)) return "";
+  if (item.cost.aud > 0) return `<span class="price">${aud(item.cost.aud, true)}<small>/人</small></span>`;
+  return `<span class="price free">${/含/.test(item.cost.note || "") ? "已含" : "免费"}</span>`;
+}
+
 function renderDay(day, number) {
   const link = googleDayUrl(day.items);
+  const spend = dayCost(day);
   return `<section class="day" id="${esc(day.id)}">
     <header class="day-head">
       <div>
-        <p class="eyebrow">第 ${number} 天 · ${esc(monthDay(day.date) || "日期未定")}${day.date ? ` 周${weekday(day.date)}` : ""} · ${esc(day.city || "未定")}</p>
+        <p class="eyebrow">第 ${number} 天 · ${esc(monthDay(day.date) || "日期未定")}${day.date ? ` 周${weekday(day.date)}` : ""} · ${esc(day.city || "未定")}${spend ? ` · 每人约 ${aud(spend)}` : ""}</p>
         <h2>${esc(day.title || day.city)}</h2>
       </div>
       <div class="day-tools">
@@ -260,7 +361,7 @@ function renderGlance(item, index) {
     <span class="plan-num">${index + 1}</span>
     <time>${esc(item.time || "—")}</time>
     <a href="#item-${esc(item.id)}">${pic ? `<img class="plan-thumb" src="${esc(pic.src)}" alt="" loading="lazy" />` : ""}<span>${esc(item.name)}</span></a>
-    ${item.reservation !== "none" ? `<span class="flag ${esc(item.reservation)}">${FLAG[item.reservation]}</span>` : ""}
+    <span class="plan-end">${priceChip(item)}${item.reservation !== "none" ? `<span class="flag ${esc(item.reservation)}">${FLAG[item.reservation]}</span>` : ""}</span>
   </li>`;
 }
 
@@ -280,7 +381,7 @@ function renderItem(day, item, index) {
       <div class="stop-main">
       <header class="stop-head">
         <div>
-          <p class="stop-meta"><span class="kind-chip">${icon(KIND_ICON[item.kind] || "pin")}${KIND[item.kind] || "地点"}</span><time>${esc(item.time || "")}</time></p>
+          <p class="stop-meta"><span class="kind-chip">${icon(KIND_ICON[item.kind] || "pin")}${KIND[item.kind] || "地点"}</span><time>${esc(item.time || "")}</time>${priceChip(item)}</p>
           <h4>${esc(item.name)}</h4>
         </div>
         <div class="stop-edit">
@@ -291,6 +392,7 @@ function renderItem(day, item, index) {
       ${item.why ? `<p class="why"><b>为什么去</b>${esc(item.why)}</p>` : ""}
       ${parts.lead ? `<p class="how">${icon("navigation")}<span>${esc(parts.lead)}</span></p>` : ""}
       ${parts.rest ? `<p class="extra">${esc(parts.rest)}</p>` : ""}
+      ${hasCost(item) && item.cost.aud > 0 && item.cost.note ? `<p class="cost-line">${icon("wallet")}<span>${esc(item.cost.note)}</span></p>` : ""}
       ${needs ? `<div class="book-box ${esc(item.reservation)}${booked ? " is-booked" : ""}"><b>${booked ? "已订好" : FLAG[item.reservation]}</b><span>${esc(item.reservationNote || "")}</span></div>` : ""}
       <div class="stop-actions">
         <a class="btn btn-sm" href="${esc(googleUrl(item))}" target="_blank" rel="noopener">${icon("pin")}谷歌地图</a>
@@ -402,6 +504,8 @@ function openEditor(dayId, item) {
     }
     form.elements.lat.value = Number.isFinite(item.lat) ? item.lat : "";
     form.elements.lng.value = Number.isFinite(item.lng) ? item.lng : "";
+    form.elements.costAud.value = hasCost(item) ? item.cost.aud : "";
+    form.elements.costNote.value = (item.cost && item.cost.note) || "";
   }
   editor.showModal();
 }
@@ -410,6 +514,7 @@ function readForm() {
   const data = Object.fromEntries(new FormData(form));
   const lat = parseFloat(data.lat);
   const lng = parseFloat(data.lng);
+  const spend = parseFloat(data.costAud);
   return {
     time: data.time.trim(),
     name: data.name.trim(),
@@ -420,6 +525,7 @@ function readForm() {
     reservation: data.reservation,
     reservationNote: data.reservationNote.trim(),
     bookingUrl: data.bookingUrl.trim(),
+    cost: Number.isFinite(spend) ? { aud: spend, note: data.costNote.trim() } : null,
     note: data.note.trim()
   };
 }
@@ -518,6 +624,8 @@ form.addEventListener("submit", (event) => {
   if (!data.name) return;
   if (editing.id) {
     const index = day.items.findIndex((item) => item.id === editing.id);
+    const before = day.items[index].cost;
+    if (data.cost && before && before.cat) data.cost.cat = before.cat;
     day.items[index] = { ...day.items[index], ...data };
   } else {
     day.items.push({ id: `p-${Date.now()}`, ...data });
@@ -556,6 +664,10 @@ main.addEventListener("click", (event) => {
   if (dayButton) {
     dayFilter = dayButton.dataset.day;
     main.scrollTop = 0;
+    return render();
+  }
+  if (event.target.closest("#toggle-budget")) {
+    budgetOpen = !budgetOpen;
     return render();
   }
   if (event.target.closest("#toggle-books")) {
