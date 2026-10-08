@@ -145,22 +145,42 @@ function renderMain() {
 
 function renderDay(day) {
   const link = googleDayUrl(day.items);
-  const chain = day.items.map((item) => esc(item.name)).join('<span>→</span>');
   return `<section class="day" id="${esc(day.id)}">
     <div class="day-head">
-      <h2>${esc((day.date || "").slice(5) || "未定日期")} 周${weekday(day.date)} ${esc(day.city)}
-        <small>${esc(day.title)}</small>
-      </h2>
+      <div>
+        <p class="eyebrow">${esc((day.date || "").slice(5) || "未定日期")} 周${weekday(day.date)} · ${esc(day.city)}</p>
+        <h2>${esc(day.title || day.city)}</h2>
+      </div>
       <span class="day-tools">
         ${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">这一天的地图</a>` : ""}
         <button type="button" class="btn btn-quiet" data-add="${esc(day.id)}">加一站</button>
       </span>
     </div>
-    <p class="chain">${chain}</p>
-    <ol class="stops">
-      ${day.items.map((item, index) => renderItem(day, item, index)).join("") || `<p class="empty">这一天还没有地点。</p>`}
-    </ol>
+    <div class="glance">
+      <p class="layer-label">总结</p>
+      <ol class="glance-list">
+        ${day.items.map((item) => renderGlance(item)).join("") || `<li class="empty">这一天还没有地点。</li>`}
+      </ol>
+    </div>
+    ${day.items.length ? `<div class="detail">
+      <p class="layer-label">详情</p>
+      <ol class="stops">
+        ${day.items.map((item, index) => renderItem(day, item, index)).join("")}
+      </ol>
+    </div>` : ""}
   </section>`;
+}
+
+function renderGlance(item) {
+  const optional = /可不去|想进去|再订/.test(item.time || "");
+  const flag = item.reservation !== "none"
+    ? `<span class="flag ${esc(item.reservation)}">${FLAG[item.reservation]}</span>`
+    : "";
+  return `<li class="glance-row${optional ? " optional" : ""}">
+    <time>${esc(item.time || "—")}</time>
+    <a href="#item-${esc(item.id)}">${esc(item.name)}</a>
+    ${flag}
+  </li>`;
 }
 
 function renderItem(day, item, index) {
@@ -171,13 +191,13 @@ function renderItem(day, item, index) {
   return `<li class="stop${optional ? " optional" : ""}" id="item-${esc(item.id)}">
     <div class="stop-rail"><span class="stop-num">${index + 1}</span></div>
     <div class="stop-body">
-      <time>${esc(item.time || "—")}</time>
       <div class="stop-top">
-        <h3>${esc(item.name)}<span class="kind">${KIND[item.kind] || ""}</span></h3>
+        <h3>${esc(item.name)}</h3>
+        <time>${esc(item.time || "—")}</time>
       </div>
       ${parts.lead ? `<p class="lead">${esc(parts.lead)}</p>` : ""}
       ${parts.rest ? `<p class="extra">${esc(parts.rest)}</p>` : ""}
-      ${item.reservation !== "none" ? `<p class="extra"><span class="flag ${esc(item.reservation)}">${FLAG[item.reservation]}</span>${esc(item.reservationNote || "")}</p>` : ""}
+      ${item.reservation !== "none" && item.reservationNote ? `<p class="extra">${esc(item.reservationNote)}</p>` : ""}
       <div class="stop-actions">
         <a class="btn" href="${esc(googleUrl(item))}" target="_blank" rel="noopener">地图</a>
         ${book && item.reservation !== "none" ? `<a class="btn ${item.reservation === "required" ? "btn-primary" : "btn-primary warn"}" href="${esc(book)}" target="_blank" rel="noopener">预约</a>` : ""}
@@ -423,6 +443,13 @@ main.addEventListener("click", (event) => {
     day.items = day.items.filter((item) => item.id !== itemId);
     delete state.booked[itemId];
     return render();
+  }
+  const jump = event.target.closest(".glance-row a");
+  if (jump) {
+    event.preventDefault();
+    const target = document.querySelector(jump.getAttribute("href"));
+    if (target) target.scrollIntoView({ block: "nearest" });
+    return;
   }
   const dayButton = event.target.closest("[data-day]");
   if (dayButton) {
