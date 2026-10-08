@@ -341,7 +341,7 @@ function renderBudget(current) {
       <span class="banner-icon">${icon("wallet")}</span>
       <span class="banner-text">
         <b>预算：每人${unit.lead}${local(plan.total)}${rate ? `，人民币约 ${cny(plan.total)}` : ""}</b>
-        <small>两人同住一间${origin ? `，${esc(origin.label)}出发，含国际机票` : ""}${left.length ? `，不含${esc(left.map((extra) => extra.label).join("、"))}` : ""}</small>
+        <small>${esc(info.party || "两人同住一间")}${origin ? `，${esc(origin.label)}出发，含国际机票` : ""}${left.length ? `，不含${esc(left.map((extra) => extra.label).join("、"))}` : ""}</small>
       </span>
       <span class="banner-cta">${budgetOpen ? "收起" : "看明细"}<span class="chev${budgetOpen ? " up" : ""}">${icon("chevron")}</span></span>
     </button>
