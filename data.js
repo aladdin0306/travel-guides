@@ -1,27 +1,35 @@
+const PHOTOS = {
+  "au-d1-opera": ["Bernard Spragg · CC0", "Sydney_Australia._(21339175489).jpg"],
+  "au-d1-tour": ["Nick-D · CC BY-SA 3.0", "Sydney_Opera_House_concert_hall_October_2018.jpg"],
+  "au-d1-chair": ["Mitch Ames · CC BY-SA 3.0", "Mrs_Macquarie%27s_Chair_2013.jpg"],
+  "au-d2-nielsen": ["Peter Woodard · CC0", "Nielsen_Park_Port_Jackson.JPG"],
+  "au-d2-parsley": ["-wuppertaler · CC BY 4.0", "AUS_Sydney,_Woollahra,_Parsley_Bay_Bridge_005.jpg"],
+  "au-d2-gap": ["Dietmar Rabich · CC BY-SA 4.0", "Sydney_(AU),_Watsons_Bay_--_2019_--_2295.jpg"],
+  "au-d3-manly": ["J Bar · CC BY-SA 3.0", "Shelly_Beach_Manly.JPG"],
+  "au-d3-northhead": ["ColonelLight · CC0", "Burragula_Lookout_North_Head_02.jpg"],
+  "au-d4-lagoon": ["Niki Gango · CC BY-SA 3.0", "Airlie_Beach_Lagoon.JPG"],
+  "au-d5-sand": ["Slug69 · CC BY-SA 2.0", "Whitehaven_Beach,_Whitsunday_Island,_Queensland.jpg"],
+  "au-d5-hill": ["Isderion · CC BY-SA 3.0 DE", "Hill_Inlet_at_the_end_of_Whitehaven_Beach_in_the_Whitsundays.JPG"],
+  "au-d6-town": ["Richard N Horne · CC BY 4.0", "Airlie_Beach_is_a_departure_point_for_the_Great_Barrier_Reef.jpg"],
+  "au-d7-lanes": ["Ashton 29 · CC BY-SA 4.0", "Melbourne_laneway.jpg"],
+  "au-d8-reb": ["Diliff, Ian Fieggen · CC BY 2.5", "Royal_exhibition_building_tulips_straight.jpg"],
+  "au-d8-fitzroy": ["Nick-D · CC BY-SA 4.0", "Buildings_on_Gertrude_Street_December_2020.jpg"],
+  "au-d8-convent": ["Redtree21 · CC BY-SA 4.0", "Abbotsford_Convent_Looking_North.jpg"],
+  "au-d8-ngv": ["Shkuru Afshar · CC BY-SA 4.0", "National_Gallery_of_Victoria_2024.jpg"]
+};
+
+function photo(id) {
+  const [credit, file] = PHOTOS[id];
+  return { src: `photos/${id}.jpg`, credit, link: `https://commons.wikimedia.org/wiki/File:${file}` };
+}
+
 window.SEED_TRIPS = [
   {
     id: "australia-2027",
     title: "澳洲",
     start: "2027-04-28",
     end: "2027-05-05",
-    covers: {
-      悉尼: {
-        src: "covers/sydney.jpg",
-        credit: "Benh LIEU SONG · CC BY-SA 4.0",
-        link: "https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_and_Harbour_Bridge_Dusk_(2)_2019-06-21.jpg"
-      },
-      圣灵群岛: {
-        src: "covers/whitsundays.jpg",
-        credit: "Isderion · CC BY-SA 3.0 DE",
-        link: "https://commons.wikimedia.org/wiki/File:Hill_Inlet_at_the_end_of_Whitehaven_Beach_in_the_Whitsundays.JPG"
-      },
-      墨尔本: {
-        src: "covers/melbourne.jpg",
-        credit: "Donaldytong · CC BY-SA 3.0",
-        link: "https://commons.wikimedia.org/wiki/File:Melbourne_Yarra_River.jpg"
-      }
-    },
-    summary: "按开口程排：4月28日进悉尼，5月1日飞圣灵群岛，5月4日飞墨尔本，5月5日从墨尔本离开。如果你的回程也在悉尼，把墨尔本放到最前面。5月2日是这趟唯一要早起的一天，船早上开。维多利亚女王市场星期三不开，所以5月5日不去。蓝山和大洋路来回都要一整天，这趟没排。",
+    summary: "按开口程排：4月28日进悉尼，5月1日飞圣灵群岛，5月4日飞墨尔本，5月5日从墨尔本离开。这几天三个州都在上学，没有学校假期。要注意的是5月3日是昆士兰劳动节，5月1日到3日是艾尔利的长周末，酒店和船先订。景点挑的是本地人推荐、人比经典打卡点少的地方：悉尼不走邦迪到库吉，改走海港东岸；墨尔本不去 Hosier Lane 和圣基尔达，改去 Carlton、Fitzroy 和 Abbotsford。",
     days: [
       {
         id: "au-d1",
@@ -51,9 +59,9 @@ window.SEED_TRIPS = [
             lat: -33.8612,
             lng: 151.2108,
             reservation: "required",
-            reservationNote: "国庆前后不是旺季，但港边酒店仍然要先订。",
+            reservationNote: "港边酒店位置好的先满，三晚一起订。",
             bookingUrl: "https://www.booking.com/searchresults.html?ss=Circular+Quay%2C+Sydney&checkin=2027-04-28&checkout=2027-05-01",
-            note: "住这儿，歌剧院、岩石区和渡轮码头都能走路到。后面两晚都住同一家，5月1日早上再去机场。"
+            note: "住这儿，歌剧院、岩石区和渡轮码头都能走路到。后两天都从环形码头坐渡轮出发。5月1日早上再去机场。"
           },
           {
             id: "au-d1-opera",
@@ -66,6 +74,8 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "只在室外走，不用票。",
             bookingUrl: "",
+            why: "第一天有时差，这里走路就到，不用转车。外面看不要票。",
+            photo: photo("au-d1-opera"),
             note: "从环形码头沿着海走过去。先看壳，再绕到海岬一侧。刚下飞机不要排室内导览。"
           },
           {
@@ -79,6 +89,8 @@ window.SEED_TRIPS = [
             reservation: "recommended",
             reservationNote: "官网写明建议提前买。每场大约35人，迟到超过5分钟票作废。",
             bookingUrl: "https://www.sydneyoperahouse.com/tours/sydney-opera-house-tour",
+            why: "只有想看音乐厅内部才去。每场限人数，里面不挤。",
+            photo: photo("au-d1-tour"),
             note: "到了再决定。订的话选下午场，提前15分钟到下层的 Welcome Centre。不订也不影响这天。"
           },
           {
@@ -92,6 +104,8 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "植物园免费，不用订。",
             bookingUrl: "",
+            why: "歌剧院和大桥同框的位置，傍晚比环形码头人少。",
+            photo: photo("au-d1-chair"),
             note: "从歌剧院继续往东走进植物园，顺着海走到尽头，就是看歌剧院和港湾的那个石头椅子。原路走回岩石区。"
           },
           {
@@ -113,72 +127,91 @@ window.SEED_TRIPS = [
         id: "au-d2",
         date: "2027-04-29",
         city: "悉尼",
-        title: "邦迪走到库吉",
+        title: "海港东岸：玫瑰湾走到沃森斯湾",
         items: [
           {
-            id: "au-d2-bus",
+            id: "au-d2-ferry",
             time: "10:00",
             kind: "transport",
-            name: "333 路到邦迪海滩",
-            address: "Circular Quay, Elizabeth Street",
+            name: "F9 渡轮到玫瑰湾",
+            address: "Circular Quay Wharf 2",
             lat: -33.8612,
             lng: 151.2108,
             reservation: "none",
-            reservationNote: "公交车，刷卡上车。",
+            reservationNote: "刷 Opal 或银行卡，不用提前买。",
             bookingUrl: "",
-            note: "在环形码头附近找 333，车头写 Bondi Beach。坐到终点就是邦迪海滩，大约四十分钟。不要在 Bondi Junction 下车，那儿离海滩还有一段。"
+            note: "环形码头 2 号码头，看牌子 F9 Watsons Bay。坐到 Rose Bay 下，大约 12 分钟。"
           },
           {
-            id: "au-d2-ice",
-            time: "12:00",
+            id: "au-d2-nielsen",
+            time: "10:30",
+            kind: "sight",
+            name: "隐士步道到尼尔森公园",
+            address: "Hermitage Foreshore Track, Vaucluse",
+            lat: -33.8505,
+            lng: 151.268,
+            reservation: "none",
+            reservationNote: "国家公园步道，不用票。",
+            bookingUrl: "",
+            why: "本地人推荐的海港步道，平路，回头就是大桥和歌剧院。比邦迪到库吉人少很多。",
+            photo: photo("au-d2-nielsen"),
+            note: "下船沿 New South Head Road 往北走，左转 Tivoli Avenue，再左转 Bay View Hill Road，看牌子 Hermitage Foreshore 进步道。从码头到尼尔森公园大约一个半小时，路上经过几个小沙湾。终点的沙滩叫 Shark Beach，有防鲨网，可以下水。"
+          },
+          {
+            id: "au-d2-lunch",
+            time: "12:30",
             kind: "food",
-            name: "Icebergs 餐厅",
-            address: "1 Notts Avenue, Bondi Beach NSW 2026",
-            lat: -33.8949,
-            lng: 151.2743,
-            reservation: "required",
-            reservationNote: "靠海的正餐厅要订位。楼下酒吧可以不订，但没位子。星期四中午开。",
-            bookingUrl: "https://www.opentable.com.au/r/icebergs-dining-room-and-bar-bondi-beach",
-            note: "在邦迪海滩南端，游泳池上面。窗边位子要在备注里写。订的是午餐，吃完从这儿开始往南走。不订就在海滩上随便吃，然后照样走。"
+            name: "The Nielsen",
+            address: "Nielsen Park, Greycliffe Avenue, Vaucluse",
+            lat: -33.8508,
+            lng: 151.2683,
+            reservation: "none",
+            reservationNote: "公园里的咖啡馆，现场点。",
+            bookingUrl: "",
+            note: "就在 Shark Beach 后面。吃完可以在草地上坐一会儿再走。"
           },
           {
-            id: "au-d2-walk",
+            id: "au-d2-parsley",
             time: "13:30",
             kind: "sight",
-            name: "邦迪到库吉海岸步道",
-            address: "Bondi to Coogee Walk",
-            lat: -33.9005,
-            lng: 151.269,
+            name: "帕斯利湾吊桥",
+            address: "Parsley Bay Reserve, Vaucluse",
+            lat: -33.8496,
+            lng: 151.2777,
             reservation: "none",
-            reservationNote: "公共步道，不用票。",
+            reservationNote: "公共公园，不用票。",
             bookingUrl: "",
-            note: "从 Icebergs 游泳池南边的台阶走上悬崖。跟着海岸走，经过 Tamarama、Bronte、Clovelly，到库吉。大约 6 公里，两小时。看牌子 Coastal Walk，不要走到上面的马路。秋天傍晚五点多天就暗，四点前要走到库吉。"
+            why: "顺路的小吊桥和雨林小沟，走过去只多十分钟。",
+            photo: photo("au-d2-parsley"),
+            note: "从尼尔森公园沿 Coolong Road 走到 Wentworth Road，右转 Fitzwilliam Road，在 43a 号旁边的小路进去就是吊桥。过桥后顺 The Crescent 往下走，一直到沃森斯湾。尼尔森公园到沃森斯湾不进 Vaucluse House 的话，大约一个半小时。"
+          },
+          {
+            id: "au-d2-gap",
+            time: "15:00",
+            kind: "sight",
+            name: "沃森斯湾和 The Gap 悬崖",
+            address: "Gap Park, Watsons Bay",
+            lat: -33.8452,
+            lng: 151.287,
+            reservation: "none",
+            reservationNote: "不用票。",
+            bookingUrl: "",
+            why: "港湾这边是小渔村，翻过小坡就是外海悬崖。终点有渡轮直接回城，不用坐车。",
+            photo: photo("au-d2-gap"),
+            note: "到了沃森斯湾先穿过码头对面的草地，走上 Gap Park，看外海那一侧的悬崖，来回二十分钟。天还亮、腿还有劲，可以再走去 Hornby 灯塔，来回多 3 公里左右。傍晚五点多天黑，四点半前往回走。"
           },
           {
             id: "au-d2-back",
             time: "16:30",
             kind: "transport",
-            name: "从库吉坐公交回城",
-            address: "Coogee Beach",
-            lat: -33.9208,
-            lng: 151.2555,
+            name: "沃森斯湾坐渡轮回环形码头",
+            address: "Watsons Bay Wharf",
+            lat: -33.8443,
+            lng: 151.2817,
             reservation: "none",
             reservationNote: "不用订。",
             bookingUrl: "",
-            note: "库吉海滩公交站坐往市区的车，车头写 City 或 Museum。回环形码头。"
-          },
-          {
-            id: "au-d2-climb",
-            time: "可不去",
-            kind: "sight",
-            name: "海港大桥攀爬",
-            address: "3 Cumberland Street, The Rocks",
-            lat: -33.8556,
-            lng: 151.209,
-            reservation: "recommended",
-            reservationNote: "要爬才订，不爬就忽略这一条。黄昏和周末最先满，现场基本没有票。",
-            bookingUrl: "https://www.bridgeclimb.com/book",
-            note: "全程大约三小时，不能自己带手机，他们发一套衣服。鞋子要穿包住脚面的运动鞋。这天如果海岸步道走完已经累了，就放弃，不要硬排。"
+            note: "还是 F9，不到 20 分钟回到环形码头。这条船有时一小时才一班，到码头先看下一班时间，在旁边的海边草地等。"
           }
         ]
       },
@@ -186,11 +219,11 @@ window.SEED_TRIPS = [
         id: "au-d3",
         date: "2027-04-30",
         city: "悉尼",
-        title: "渡轮去曼利",
+        title: "渡轮去曼利，往北角走",
         items: [
           {
             id: "au-d3-ferry",
-            time: "10:30",
+            time: "10:00",
             kind: "transport",
             name: "F1 渡轮到曼利",
             address: "Circular Quay Wharf 3",
@@ -199,33 +232,50 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "刷 Opal 或银行卡，不用提前买。",
             bookingUrl: "",
-            note: "环形码头看牌子 F1 Manly，一般在 3 号码头。船大约 30 分钟。坐船头或上层的外侧，进港湾那一段。风大，外套带着。"
+            note: "环形码头看牌子 F1 Manly，一般在 3 号码头。船大约 30 分钟。坐船头或上层的外侧，这段是最好看的海港风景。风大，外套带着。"
           },
           {
             id: "au-d3-manly",
-            time: "11:10",
+            time: "10:40",
             kind: "sight",
             name: "曼利海滩到 Shelly Beach",
-            address: "Manly Beach",
-            lat: -33.7972,
-            lng: 151.2887,
+            address: "Shelly Beach, Manly",
+            lat: -33.8003,
+            lng: 151.2975,
             reservation: "none",
             reservationNote: "不用票。",
             bookingUrl: "",
-            note: "下船穿过 The Corso 商业街就是海滩。再沿右边海岸走大约 1 公里到 Shelly Beach，小湾，人比主滩少。走回去。"
+            why: "曼利主滩人多，不停留。Shelly Beach 是朝北的小湾，水平静。",
+            photo: photo("au-d3-manly"),
+            note: "下船穿过 The Corso 商业街，在这条街上买好午饭和水带走，北角上面没有店。到海滩右转，沿海边步道走大约 1 公里到 Shelly Beach。"
           },
           {
-            id: "au-d3-lunch",
-            time: "13:00",
-            kind: "food",
-            name: "曼利 Corso 吃饭",
-            address: "The Corso, Manly",
-            lat: -33.7982,
-            lng: 151.2865,
+            id: "au-d3-northhead",
+            time: "11:30",
+            kind: "sight",
+            name: "北角 Fairfax 观景台",
+            address: "Fairfax Lookout, North Head Scenic Drive, Manly",
+            lat: -33.8167,
+            lng: 151.2963,
             reservation: "none",
-            reservationNote: "这条街上的馆子大多现场坐。",
+            reservationNote: "国家公园，不用票。",
             bookingUrl: "",
-            note: "不要为了吃饭再坐回市区。吃完可以在海滩再坐一会儿。"
+            why: "站在悬崖上看整个悉尼港口和外海，5月开始有机会看到鲸鱼。来的人比曼利海滩少得多。",
+            photo: photo("au-d3-northhead"),
+            note: "从 Shelly Beach 停车场后面的步道往上爬，大约 80 米高，这是唯一累的一段。上去以后看牌子 Fairfax Lookout，在观景台附近吃带上来的午饭。从曼利码头算起单程大约 5 公里，两到三小时。出发前看一眼国家公园网站有没有封路通知。南边没有厕所，在曼利海滩上厕所、装水。"
+          },
+          {
+            id: "au-d3-bus",
+            time: "14:30",
+            kind: "transport",
+            name: "161 路回曼利码头",
+            address: "North Fort, North Head Scenic Drive",
+            lat: -33.8133,
+            lng: 151.2925,
+            reservation: "none",
+            reservationNote: "公交车，刷卡上车。",
+            bookingUrl: "",
+            note: "North Fort 停车场坐 161 回曼利码头，工作日大约半小时一班，以 Transport NSW 的时刻为准。不想等车就原路走回去，下坡为主，大约 3 公里。"
           },
           {
             id: "au-d3-back",
@@ -238,7 +288,7 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不用订。",
             bookingUrl: "",
-            note: "原船回去。晚上在歌剧院脚下的 Opera Bar 现场坐，或者回酒店。今天不再加景点。"
+            note: "原船回去。今天不再加景点，晚上收拾行李，明天早上飞。"
           }
         ]
       },
@@ -257,9 +307,9 @@ window.SEED_TRIPS = [
             lat: -20.495,
             lng: 148.552,
             reservation: "required",
-            reservationNote: "国内线，肩季也要先锁票。目标是中午前后落地，不要订下午太晚的。",
+            reservationNote: "这天是昆士兰长周末的第一天，飞机会比平时满。目标是中午前后落地，不要订下午太晚的。",
             bookingUrl: "https://www.google.com/travel/flights?hl=zh-CN&q=One%20way%20flights%20from%20Sydney%20to%20Proserpine%20on%20May%201%202027",
-            note: "机场代码 PPP，也叫 Whitsunday Coast。飞行大约两个半小时。汉密尔顿岛机场（HTI）更靠近海岛，但怀特黑文的船大多从艾尔利海滩开，所以飞 PPP。悉尼国内航站楼出发，国际转国内要留足时间，如果行李不能直挂，自己提出来再办托运。"
+            note: "机场代码 PPP，也叫 Whitsunday Coast。飞行大约两个半小时。汉密尔顿岛机场（HTI）更靠近海岛，但怀特黑文的船大多从艾尔利海滩开，所以飞 PPP。悉尼国内航站楼出发。"
           },
           {
             id: "au-d4-shuttle",
@@ -283,7 +333,7 @@ window.SEED_TRIPS = [
             lat: -20.2682,
             lng: 148.7172,
             reservation: "required",
-            reservationNote: "只有两晚，但游船客人会把码头附近订满。",
+            reservationNote: "5月3日是昆士兰劳动节，这三晚正好是长周末，码头附近会先订满。",
             bookingUrl: "https://www.booking.com/searchresults.html?ss=Airlie+Beach&checkin=2027-05-01&checkout=2027-05-04",
             note: "优先住 Coral Sea Marina 或主街，第二天早上走去码头。不要住到普罗瑟派恩镇上。"
           },
@@ -298,7 +348,9 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "免费公共泻湖。",
             bookingUrl: "",
-            note: "5月仍算刺胞动物季节，外海游泳要穿防刺服。这个泻湖有防护，适合下水。主街走到海就看见。晚饭在主街吃，肩季大多不用订。"
+            why: "5月还是水母季，这是镇上不用穿防刺服就能下水的地方。",
+            photo: photo("au-d4-lagoon"),
+            note: "主街走到海边就看见。泻湖有防护，可以直接游。外海游泳要穿防刺服。晚饭在主街吃，长周末热门的馆子早点去。"
           }
         ]
       },
@@ -317,9 +369,39 @@ window.SEED_TRIPS = [
             lat: -20.267,
             lng: 148.7135,
             reservation: "required",
-            reservationNote: "这是这趟最该先订的一项。小船名额少。只订「南端白沙滩半天」会看不到希尔因莱特观景台。",
+            reservationNote: "这是这趟最该先订的一项，而且这天是长周末的周日。只订「南端白沙滩半天」会看不到希尔因莱特观景台。",
             bookingUrl: "https://www.oceanrafting.com.au/",
-            note: "订 Northern Exposure：怀特黑文沙滩、希尔因莱特观景台，加浮潜。集合点以确认邮件为准，常见是 Coral Sea Marina，不要走到另一头的 Port of Airlie。船早上开，这是五天里要早起的一天，具体时间以订单为准，提前半小时到。防刺服船上有。带泳衣、毛巾、一双能上岸的鞋。晕船药在开船前吃。大风他们会改期或换沙滩，看短信。"
+            why: "小快艇，人少，跑得快。怀特黑文上午十点到下午两点是大船集中靠岸的时候，越早出发越清静。",
+            note: "订 Northern Exposure：怀特黑文沙滩、希尔因莱特观景台，加浮潜。有两个出发时间就选早的那个。集合点以确认邮件为准，常见是 Coral Sea Marina，不要走到另一头的 Port of Airlie。提前半小时到。防刺服船上有。带泳衣、毛巾、一双能上岸的鞋。晕船药在开船前吃。大风他们会改期或换沙滩，看短信。"
+          },
+          {
+            id: "au-d5-enid",
+            time: "二选一",
+            kind: "sight",
+            name: "Lady Enid 小帆船（备选）",
+            address: "Airlie Beach",
+            lat: -20.2682,
+            lng: 148.7172,
+            reservation: "recommended",
+            reservationNote: "不坐快艇就订这条。最多24人，只收成人。",
+            bookingUrl: "https://www.australiancruisegroup.com.au/whitsundays/whitehaven-beach-cruises/10hr-lady-enid-whitehaven-beach-sail-snorkel-cruise",
+            why: "1962 年的老木帆船，最多 24 人，比快艇慢但安静，也去希尔因莱特和怀特黑文。",
+            note: "早上 8 点从艾尔利出发，全天大约九个半小时，含吃的和浮潜。怕颠、想慢慢玩选这条；想早回来休息选上面的快艇。两个只订一个。"
+          },
+          {
+            id: "au-d5-hill",
+            time: "船上",
+            kind: "sight",
+            name: "希尔因莱特观景台",
+            address: "Hill Inlet Lookout, Whitsunday Island",
+            lat: -20.2597,
+            lng: 149.0378,
+            reservation: "none",
+            reservationNote: "含在船票里。确认你订的那条船会上这个观景台。",
+            bookingUrl: "",
+            why: "白沙和蓝水搅在一起的那张照片就是从这里拍的，只能从高处看。",
+            photo: photo("au-d5-hill"),
+            note: "大多数船停在 Tongue Bay，上岸走一段林间路和台阶到观景台。花纹好不好看取决于潮水，订船时问一句他们当天几点上观景台。穿船方要求的鞋。"
           },
           {
             id: "au-d5-sand",
@@ -332,20 +414,9 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不能自己去，已经含在船票里。",
             bookingUrl: "",
+            why: "7 公里长的白沙滩，大船都停在南端，往北走一段人就少了。",
+            photo: photo("au-d5-sand"),
             note: "岛上没有路，也没有店。沙子细，会粘鞋。不要把沙子带走，公园在管。回程晚饭回艾尔利主街，今天不要再加别的活动。"
-          },
-          {
-            id: "au-d5-hill",
-            time: "船上",
-            kind: "sight",
-            name: "希尔因莱特观景台",
-            address: "Hill Inlet Lookout, Whitsunday Island",
-            lat: -20.2597,
-            lng: 149.0378,
-            reservation: "none",
-            reservationNote: "含在 Northern Exposure 里。大船如果只停南端沙滩，就上不了这个台。",
-            bookingUrl: "",
-            note: "看水的颜色要爬一段台阶。穿船方要求的鞋。拍照从观景台往下看海湾，不是站在沙滩上。"
           }
         ]
       },
@@ -353,7 +424,7 @@ window.SEED_TRIPS = [
         id: "au-d6",
         date: "2027-05-03",
         city: "圣灵群岛",
-        title: "镇上休息，不要再订一整天的船",
+        title: "劳动节，在镇上休息",
         items: [
           {
             id: "au-d6-town",
@@ -366,7 +437,9 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "不用订。",
             bookingUrl: "",
-            note: "睡够再出门。泻湖、主街、码头走一圈。晚饭早点吃，行李收好。第二天要去机场。"
+            why: "前一天出海很累，这天又是昆士兰公共假日，不再排远的。",
+            photo: photo("au-d6-town"),
+            note: "睡够再出门。泻湖、主街、码头走一圈。今天是公共假日，有的馆子会加收假日附加费，营业时间也可能变短。晚饭早点吃，行李收好，第二天要去机场。"
           },
           {
             id: "au-d6-half",
@@ -387,7 +460,7 @@ window.SEED_TRIPS = [
         id: "au-d7",
         date: "2027-05-04",
         city: "墨尔本",
-        title: "飞到墨尔本，只走城中心",
+        title: "飞到墨尔本，傍晚走小巷",
         items: [
           {
             id: "au-d7-flight",
@@ -426,20 +499,22 @@ window.SEED_TRIPS = [
             reservation: "required",
             reservationNote: "只住两晚，城中心方便坐电车。",
             bookingUrl: "https://www.booking.com/searchresults.html?ss=Flinders+Street+Melbourne&checkin=2027-05-04&checkout=2027-05-06",
-            note: "如果 5 日晚上的国际航班，6 日清晨再退房也行。住这儿，联邦广场和明天的电车都在走路范围内。"
+            note: "如果 5 日晚上的国际航班，6 日清晨再退房也行。住这儿，明天坐电车和火车都方便。"
           },
           {
-            id: "au-d7-lane",
-            time: "下午",
+            id: "au-d7-lanes",
+            time: "傍晚",
             kind: "sight",
-            name: "联邦广场和 Hosier Lane",
-            address: "Hosier Lane, Melbourne",
-            lat: -37.8166,
-            lng: 144.969,
+            name: "Flinders Lane 一带的小巷",
+            address: "Centre Place, Melbourne",
+            lat: -37.816,
+            lng: 144.9653,
             reservation: "none",
             reservationNote: "巷子免费。",
             bookingUrl: "",
-            note: "南十字走到弗林德斯街火车站，对面是联邦广场。Hosier Lane 在弗林德斯街和弗林德斯巷之间，涂鸦巷，走到头就行，不用逛很久。"
+            why: "本地人说 Hosier Lane 这几年又挤又乱。旁边这几条巷子一样有涂鸦和小店，傍晚人少一些。",
+            photo: photo("au-d7-lanes"),
+            note: "从弗林德斯街车站对面开始，先走 Degraves Street 和 Centre Place，再沿 Flinders Lane 往东走到 AC/DC Lane。整段走路二十分钟，最后正好到下面的晚饭。"
           },
           {
             id: "au-d7-coda",
@@ -450,7 +525,7 @@ window.SEED_TRIPS = [
             lat: -37.8162,
             lng: 144.9704,
             reservation: "recommended",
-            reservationNote: "弗林德斯巷的小馆子，晚餐建议订。就在 Hosier Lane 旁边。",
+            reservationNote: "弗林德斯巷的小馆子，晚餐建议订。",
             bookingUrl: "https://www.opentable.com/r/coda-melbourne",
             note: "亚洲口味、分着吃。订 19:00 左右。如果飞机晚点，取消预订，在巷子口随便吃。"
           }
@@ -460,11 +535,56 @@ window.SEED_TRIPS = [
         id: "au-d8",
         date: "2027-05-05",
         city: "墨尔本",
-        title: "美术馆、植物园、圣基尔达",
+        title: "Carlton、Fitzroy 和老修道院",
         items: [
           {
-            id: "au-d8-ngv",
+            id: "au-d8-reb",
             time: "10:30",
+            kind: "sight",
+            name: "皇家展览馆和卡尔顿花园",
+            address: "9 Nicholson Street, Carlton VIC",
+            lat: -37.8047,
+            lng: 144.9717,
+            reservation: "none",
+            reservationNote: "花园和建筑外面免费。旁边的墨尔本博物馆要票，想进再买。",
+            bookingUrl: "",
+            why: "世界遗产建筑，周三上午人很少。从这里走路就进 Fitzroy。",
+            photo: photo("au-d8-reb"),
+            note: "走到 Bourke Street 坐 86 或 96 路电车往东，到 11 号站 Melbourne Museum 下，走五分钟。绕建筑和喷泉走一圈就够。"
+          },
+          {
+            id: "au-d8-fitzroy",
+            time: "11:30",
+            kind: "sight",
+            name: "Fitzroy 的 Gertrude Street 和后街",
+            address: "Gertrude Street, Fitzroy VIC",
+            lat: -37.806,
+            lng: 144.981,
+            reservation: "none",
+            reservationNote: "街区，不用票。午饭在这条街上现场找。",
+            bookingUrl: "",
+            why: "本地人推荐的老街区。主街后面的 Rose Street、Kerr Street 一带是老排屋、小画廊和涂鸦，游客少。",
+            photo: photo("au-d8-fitzroy"),
+            note: "从花园东边过 Nicholson Street 就是 Gertrude Street。顺着往东走，看到喜欢的就拐进北边的小街。午饭在 Gertrude Street 或 Smith Street 吃，不用订。"
+          },
+          {
+            id: "au-d8-convent",
+            time: "14:00",
+            kind: "sight",
+            name: "Abbotsford Convent 老修道院",
+            address: "1 St Heliers Street, Abbotsford VIC",
+            lat: -37.8025,
+            lng: 145.0036,
+            reservation: "none",
+            reservationNote: "园区免费进。",
+            bookingUrl: "",
+            why: "旧修道院改成的艺术园区，有草地、咖啡馆和亚拉河边步道，几乎没有旅行团。",
+            photo: photo("au-d8-convent"),
+            note: "从 Fitzroy 往北走到 Johnston Street，坐 200 或 207 路公交往东，Clarke Street 站下，走三到五分钟。不想等车就打车，十分钟左右。回城走 10 到 15 分钟到 Victoria Park 火车站，坐 Mernda 或 Hurstbridge 线进城。如果国际航班在下午，这一站取消，吃完午饭直接回城。"
+          },
+          {
+            id: "au-d8-ngv",
+            time: "下雨再去",
             kind: "sight",
             name: "维多利亚国家美术馆",
             address: "180 St Kilda Road, Melbourne",
@@ -473,33 +593,9 @@ window.SEED_TRIPS = [
             reservation: "none",
             reservationNote: "常设展免费，直接进。特展才要票。",
             bookingUrl: "https://www.ngv.vic.gov.au/whats-on/",
-            note: "从弗林德斯街沿圣基尔达路往南坐电车，有 Arts Precinct 或 NGV 字样的站下。看常设就行。想看特展再点上面的链接，有票再订，没有就进免费展厅。"
-          },
-          {
-            id: "au-d8-garden",
-            time: "12:30",
-            kind: "sight",
-            name: "皇家植物园",
-            address: "Birdwood Avenue, South Yarra",
-            lat: -37.83,
-            lng: 144.9796,
-            reservation: "none",
-            reservationNote: "免费。",
-            bookingUrl: "",
-            note: "美术馆旁边就是植物园，从圣基尔达路的门进去。走观赏湖一圈，大约一小时。午饭在园里或美术馆咖啡，不用订。墨尔本这天可能刮风下雨，外套带着。"
-          },
-          {
-            id: "au-d8-stkilda",
-            time: "14:30",
-            kind: "sight",
-            name: "圣基尔达海滩和 Acland 街",
-            address: "St Kilda Beach",
-            lat: -37.8678,
-            lng: 144.974,
-            reservation: "none",
-            reservationNote: "电车和海滩都不用订。",
-            bookingUrl: "",
-            note: "坐 16 路电车往圣基尔达，到 Luna Park 那一站。海滩看一眼，Acland 街买一块蛋糕。如果国际航班在下午，这里取消，从植物园回南十字坐 SkyBus，国际航班起飞前三小时到机场。"
+            why: "下雨的备选。周三白天人不多，常设展免费。",
+            photo: photo("au-d8-ngv"),
+            note: "下雨就把 Fitzroy 和修道院换成这里。从弗林德斯街沿圣基尔达路往南坐电车，有 Arts Precinct 或 NGV 字样的站下。"
           },
           {
             id: "au-d8-air",
