@@ -135,6 +135,24 @@ function aud(amount, exact) {
   return `${amount < 0 ? "−" : ""}A$${value.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
 }
 
+function cnyRate() {
+  const current = trip();
+  const value = Number(current && current.budget && current.budget.cnyRate);
+  return value > 0 ? value : 0;
+}
+
+function cny(amount, known) {
+  const value = Number.isFinite(known) ? known : amount * cnyRate();
+  if (!Number.isFinite(known) && !cnyRate()) return "";
+  const rounded = Math.abs(value) >= 1000 ? Math.round(Math.abs(value) / 10) * 10 : Math.round(Math.abs(value));
+  return `${value < 0 ? "−" : ""}¥${rounded.toLocaleString("en-US")}`;
+}
+
+function money(amount, exact, known) {
+  const rmb = cny(amount, known);
+  return `${aud(amount, exact)}${rmb ? `<span class="rmb">${rmb}</span>` : ""}`;
+}
+
 function pickOrigin(current) {
   const list = (current.budget && current.budget.origins) || [];
   return list.find((item) => item.id === state.origin) || list[0] || null;
@@ -146,7 +164,7 @@ function originLines(current) {
   const rate = Number(current.budget.cnyRate);
   const lines = [];
   if (Number.isFinite(origin.cny) && rate) {
-    lines.push({ label: `${origin.label}往返机票`, cat: "flight", aud: Math.round(origin.cny / rate), note: `约 ¥${origin.cny.toLocaleString("en-US")}。${origin.note || ""}` });
+    lines.push({ label: `${origin.label}往返机票`, cat: "flight", aud: Math.round(origin.cny / rate), cny: origin.cny, note: origin.note || "" });
   }
   return lines.concat(origin.adjust || []);
 }
@@ -303,7 +321,7 @@ function renderBudget(current) {
     <button type="button" class="budget-head" id="toggle-budget" aria-expanded="${budgetOpen}">
       <span class="banner-icon">${icon("wallet")}</span>
       <span class="banner-text">
-        <b>预算：每人约 ${aud(plan.total)}${rate ? `<span class="cny">约 ¥${(Math.round(plan.total * rate / 10) * 10).toLocaleString("en-US")}</span>` : ""}</b>
+        <b>预算：每人澳币约 ${aud(plan.total)}${rate ? `，人民币约 ${cny(plan.total)}` : ""}</b>
         <small>两人同住一间${origin ? `，${esc(origin.label)}出发，含国际机票` : ""}${left.length ? `，不含${esc(left.map((extra) => extra.label).join("、"))}` : ""}</small>
       </span>
       <span class="banner-cta">${budgetOpen ? "收起" : "看明细"}<span class="chev${budgetOpen ? " up" : ""}">${icon("chevron")}</span></span>
@@ -317,7 +335,7 @@ function renderBudget(current) {
       ${cats.map((cat) => `<span class="cat-${cat}" style="width:${(plan.cats[cat] / plan.total * 100).toFixed(1)}%"></span>`).join("")}
     </div>
     <div class="budget-legend">
-      ${cats.map((cat) => `<span class="cat-${cat}"><i></i>${COST_CAT[cat]}<b>${aud(plan.cats[cat])}</b></span>`).join("")}
+      ${cats.map((cat) => `<span class="cat-${cat}"><i></i>${COST_CAT[cat]}<b>${money(plan.cats[cat])}</b></span>`).join("")}
     </div>
     ${budgetOpen ? `<div class="budget-detail">
       <h3 class="section-title">按天（住宿算在入住那天），点一天跳过去</h3>
@@ -325,25 +343,25 @@ function renderBudget(current) {
         ${plan.days.map(({ day, sum }) => `<li><button type="button" data-day="${esc(day.id)}">
           <span class="bd-date">${esc(monthDay(day.date) || "未定")} ${esc(day.city || "")}</span>
           <span class="bd-bar"><i style="width:${(sum / top * 100).toFixed(1)}%"></i></span>
-          <b>${aud(sum)}</b>
+          <b>${money(sum)}</b>
         </button></li>`).join("")}
       </ol>
       ${plan.extras.length ? `<h3 class="section-title">不跟某一站走的开销</h3>
       <ul class="budget-rows">
-        ${plan.extras.map((extra) => `<li><span><b>${esc(extra.label)}</b><small>${esc(extra.note || "")}</small></span><em class="${Number.isFinite(extra.aud) ? "" : "none"}">${Number.isFinite(extra.aud) ? aud(extra.aud, true) : "没算"}</em></li>`).join("")}
+        ${plan.extras.map((extra) => `<li><span><b>${esc(extra.label)}</b><small>${esc(extra.note || "")}</small></span><em class="${Number.isFinite(extra.aud) ? "" : "none"}">${Number.isFinite(extra.aud) ? money(extra.aud, true, extra.cny) : "没算"}</em></li>`).join("")}
       </ul>` : ""}
       ${plan.optional.length ? `<h3 class="section-title">可选的，没算进总数</h3>
       <ul class="budget-rows">
-        ${plan.optional.map(({ day, item }) => `<li><span><b>${esc(item.name)}</b><small>${esc(monthDay(day.date))} · ${esc(item.cost.note || "")}</small></span><em>${aud(item.cost.aud, true)}</em></li>`).join("")}
+        ${plan.optional.map(({ day, item }) => `<li><span><b>${esc(item.name)}</b><small>${esc(monthDay(day.date))} · ${esc(item.cost.note || "")}</small></span><em>${money(item.cost.aud, true)}</em></li>`).join("")}
       </ul>` : ""}
-      ${info.basis || rate ? `<p class="budget-note">${esc(info.basis || "")}${rate ? ` 人民币按 1 澳元 ≈ ${esc(rate)} 元${info.rateDate ? `（${esc(info.rateDate)}）` : ""}。` : ""}</p>` : ""}
+      ${info.basis || rate ? `<p class="budget-note">${esc(info.basis || "")}${rate ? ` 所有人民币金额按 1 澳元 ≈ ${esc(rate)} 元换算${info.rateDate ? `（${esc(info.rateDate)}）` : ""}。` : ""}</p>` : ""}
     </div>` : ""}
   </section>`;
 }
 
 function priceChip(item) {
   if (!hasCost(item)) return "";
-  if (item.cost.aud > 0) return `<span class="price">${aud(item.cost.aud, true)}<small>/人</small></span>`;
+  if (item.cost.aud > 0) return `<span class="price">${money(item.cost.aud, true)}<small>/人</small></span>`;
   return `<span class="price free">${/含/.test(item.cost.note || "") ? "已含" : "免费"}</span>`;
 }
 
@@ -353,7 +371,7 @@ function renderDay(day, number) {
   return `<section class="day" id="${esc(day.id)}">
     <header class="day-head">
       <div>
-        <p class="eyebrow">第 ${number} 天 · ${esc(monthDay(day.date) || "日期未定")}${day.date ? ` 周${weekday(day.date)}` : ""} · ${esc(day.city || "未定")}${spend ? ` · 每人约 ${aud(spend)}` : ""}</p>
+        <p class="eyebrow">第 ${number} 天 · ${esc(monthDay(day.date) || "日期未定")}${day.date ? ` 周${weekday(day.date)}` : ""} · ${esc(day.city || "未定")}${spend ? ` · 每人约 ${aud(spend)}${cnyRate() ? `（${cny(spend)}）` : ""}` : ""}</p>
         <h2>${esc(day.title || day.city)}</h2>
       </div>
       <div class="day-tools">
