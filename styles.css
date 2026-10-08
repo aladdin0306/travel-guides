@@ -204,18 +204,51 @@ main { overflow: auto; min-height: 0; }
 }
 
 .day-head { align-items: flex-start; }
-.day h2 { margin: 0; font-size: 18px; font-weight: 650; }
-.day h2 small { display: block; margin-top: 2px; color: var(--muted); font-size: 13px; font-weight: 450; }
+.eyebrow {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.day h2 { margin: 2px 0 0; font-size: 20px; font-weight: 650; }
 
-.chain {
-  margin: 10px 0 0;
-  color: var(--ink);
-  font-size: 13px;
+.layer-label {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
 }
 
-.chain span { color: var(--muted); padding: 0 4px; }
+.glance { margin-top: 16px; }
+.glance-list { list-style: none; margin: 0; padding: 0; }
+.glance-row {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+}
+.glance-row time {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 450;
+}
+.glance-row a {
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: none;
+}
+.glance-row a:hover { color: var(--accent); }
+.glance-row.optional a { color: var(--muted); font-weight: 450; }
 
-.stops { list-style: none; margin: 14px 0 0; padding: 0; }
+.detail {
+  margin-top: 16px;
+  padding: 12px 14px 4px;
+  background: #f6f7f9;
+  border-radius: 12px;
+}
+
+.stops { list-style: none; margin: 0; padding: 0; }
 
 .stop {
   display: grid;
@@ -231,7 +264,7 @@ main { overflow: auto; min-height: 0; }
   top: 28px;
   bottom: 0;
   width: 2px;
-  background: var(--line);
+  background: #e1e4e8;
 }
 .stop:last-child .stop-rail::after { display: none; }
 
@@ -253,13 +286,12 @@ main { overflow: auto; min-height: 0; }
 
 .stop-body { padding-bottom: 18px; }
 
-.stop-top h3 { margin: 2px 0 0; font-size: 16px; font-weight: 650; }
-
-time {
-  color: var(--accent);
+.stop-top h3 { margin: 2px 0 0; font-size: 14px; font-weight: 650; }
+.stop-top time {
+  color: var(--muted);
   font-size: 12px;
-  font-weight: 650;
-  font-variant-numeric: tabular-nums;
+  font-weight: 450;
+  white-space: nowrap;
 }
 
 .kind {
