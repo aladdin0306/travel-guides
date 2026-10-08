@@ -24,9 +24,6 @@ python3 -m http.server 8766
 
 - 悉尼歌剧院（`photos/au-d1-opera.jpg`）：[Bernard Spragg · CC0](https://commons.wikimedia.org/wiki/File:Sydney_Australia._(21339175489).jpg)
 - 歌剧院音乐厅（`photos/au-d1-tour.jpg`）：[Nick-D · CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_concert_hall_October_2018.jpg)
-- 麦考利夫人椅子（`photos/au-d1-chair.jpg`）：[Mitch Ames · CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Mrs_Macquarie%27s_Chair_2013.jpg)
-- 尼尔森公园（`photos/au-d2-nielsen.jpg`）：[Peter Woodard · CC0](https://commons.wikimedia.org/wiki/File:Nielsen_Park_Port_Jackson.JPG)
-- 帕斯利湾吊桥（`photos/au-d2-parsley.jpg`）：[-wuppertaler · CC BY 4.0](https://commons.wikimedia.org/wiki/File:AUS_Sydney,_Woollahra,_Parsley_Bay_Bridge_005.jpg)
 - 沃森斯湾（`photos/au-d2-gap.jpg`）：[Dietmar Rabich · CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:Sydney_(AU),_Watsons_Bay_--_2019_--_2295.jpg)
 - Shelly Beach（`photos/au-d3-manly.jpg`）：[J Bar · CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Shelly_Beach_Manly.JPG)
 - 北角观景台（`photos/au-d3-northhead.jpg`）：[ColonelLight · CC0](https://commons.wikimedia.org/wiki/File:Burragula_Lookout_North_Head_02.jpg)

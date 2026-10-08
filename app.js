@@ -396,7 +396,7 @@ function renderDay(day, number) {
 }
 
 function isOptional(item) {
-  return /可不去|想进去|再订|二选一|下雨/.test(item.time || "");
+  return /可不去|想进去|再订|二选一|下雨|早到/.test(item.time || "");
 }
 
 function renderGlance(item, index) {
