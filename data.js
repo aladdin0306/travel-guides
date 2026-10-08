@@ -4,6 +4,23 @@ window.SEED_TRIPS = [
     title: "澳洲",
     start: "2027-04-28",
     end: "2027-05-05",
+    covers: {
+      悉尼: {
+        src: "covers/sydney.jpg",
+        credit: "Benh LIEU SONG · CC BY-SA 4.0",
+        link: "https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_and_Harbour_Bridge_Dusk_(2)_2019-06-21.jpg"
+      },
+      圣灵群岛: {
+        src: "covers/whitsundays.jpg",
+        credit: "Isderion · CC BY-SA 3.0 DE",
+        link: "https://commons.wikimedia.org/wiki/File:Hill_Inlet_at_the_end_of_Whitehaven_Beach_in_the_Whitsundays.JPG"
+      },
+      墨尔本: {
+        src: "covers/melbourne.jpg",
+        credit: "Donaldytong · CC BY-SA 3.0",
+        link: "https://commons.wikimedia.org/wiki/File:Melbourne_Yarra_River.jpg"
+      }
+    },
     summary: "按开口程排：4月28日进悉尼，5月1日飞圣灵群岛，5月4日飞墨尔本，5月5日从墨尔本离开。如果你的回程也在悉尼，把墨尔本放到最前面。5月2日是这趟唯一要早起的一天，船早上开。维多利亚女王市场星期三不开，所以5月5日不去。蓝山和大洋路来回都要一整天，这趟没排。",
     days: [
       {

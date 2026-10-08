@@ -1,6 +1,36 @@
 const STORAGE_KEY = "travel-guides-v2";
 const KIND = { sight: "景点", food: "餐厅", transport: "交通", stay: "住宿" };
 const FLAG = { required: "必须预约", recommended: "建议预约", none: "不用预约" };
+const KIND_ICON = { sight: "camera", food: "food", transport: "bus", stay: "bed" };
+
+// Lucide icons (ISC), https://lucide.dev
+const ICONS = {
+  compass: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+  upload: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>',
+  download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>',
+  plus: '<path d="M5 12h14"/><path d="M12 5v14"/>',
+  pencil: '<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/>',
+  trash: '<path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/>',
+  pin: '<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
+  map: '<path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/>',
+  navigation: '<polygon points="3 11 22 2 13 21 11 13 3 11"/>',
+  calendar: '<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  chevron: '<path d="m6 9 6 6 6-6"/>',
+  plane: '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>',
+  camera: '<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>',
+  food: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+  bus: '<path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/>',
+  bed: '<path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>'
+};
+
+function icon(name) {
+  return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ""}</svg>`;
+}
+
+document.querySelectorAll("[data-icon]").forEach((node) => {
+  node.outerHTML = icon(node.dataset.icon);
+});
 
 const state = load();
 let map;
@@ -85,13 +115,36 @@ function pending(current = trip()) {
   return rows;
 }
 
+function coverOf(current, day) {
+  const covers = current.covers || {};
+  const pick = (day && covers[day.city]) || Object.values(covers)[0];
+  if (!pick || !/^(covers\/[\w-]+\.jpg|https:\/\/[^'"()\s]+)$/.test(pick.src || "")) return null;
+  return pick;
+}
+
+function monthDay(date) {
+  if (!date) return "";
+  const [, m, d] = date.split("-").map(Number);
+  return `${m}月${d}日`;
+}
+
+function tripRange(current) {
+  if (!current.start) return "日期未定";
+  const days = Math.round((new Date(`${current.end || current.start}T12:00:00`) - new Date(`${current.start}T12:00:00`)) / 86400000) + 1;
+  return `${monthDay(current.start)} – ${monthDay(current.end || current.start)} · ${days} 天`;
+}
+
 function renderTrips() {
   tripList.innerHTML = state.trips.map((item) => {
     const left = pending(item).filter((row) => row.item.reservation === "required").length;
-    return `<button type="button" class="trip-btn${item.id === trip().id ? " active" : ""}" data-trip="${esc(item.id)}">
-      <b>${esc(item.title)}</b>
-      <span>${esc(item.start || "未定日期")} — ${esc(item.end || "")}</span>
-      ${left ? `<em>${left} 项必须预约还没订</em>` : `<span>该订的都勾过了</span>`}
+    const cover = coverOf(item, item.days[0]);
+    return `<button type="button" class="trip-card${item.id === trip().id ? " active" : ""}" data-trip="${esc(item.id)}">
+      <span class="trip-thumb"${cover ? ` style="background-image:url('${esc(cover.src)}')"` : ""}>${cover ? "" : icon("compass")}</span>
+      <span class="trip-meta">
+        <b>${esc(item.title)}</b>
+        <span>${esc(tripRange(item))}</span>
+        ${left ? `<em>${left} 项必须预约没订</em>` : `<span class="ok">该订的都订了</span>`}
+      </span>
     </button>`;
   }).join("");
 }
@@ -103,83 +156,105 @@ function renderMain() {
   const required = todo.filter((row) => row.item.reservation === "required");
   const suggested = todo.length - required.length;
   const days = dayFilter === "all" ? current.days : current.days.filter((day) => day.id === (chosen && chosen.id));
-  const bookLabel = required.length
-    ? `${required.length} 项必须订${suggested ? ` · ${suggested} 项建议订` : ""}`
-    : "必须订的都已勾掉";
+  const cover = coverOf(current, chosen);
+  const route = cityRun(current.days)
+    .map((run) => `<span class="hop">${esc(run.city)}<small>${run.n} 天</small></span>`)
+    .join(`<span class="hop-sep">${icon("plane")}</span>`);
 
   main.innerHTML = `
-    <section class="summary">
-      <div class="day-head">
-        <h2>${esc(current.title)}</h2>
-        <span class="day-tools">
-          <button type="button" class="btn btn-quiet" id="rename-trip">改名</button>
-          <button type="button" class="btn btn-quiet" id="add-day">加一天</button>
-          ${state.trips.length > 1 ? `<button type="button" class="btn btn-quiet" id="delete-trip">删除</button>` : ""}
-        </span>
-      </div>
-      <p class="path">${esc(cityRun(current.days))}</p>
-      <div class="day-switch">
-        ${current.days.map((day) => `
-          <button type="button" class="btn${dayFilter !== "all" && chosen && day.id === chosen.id ? " active" : ""}" data-day="${esc(day.id)}">
-            ${esc((day.date || "").slice(5) || "未定")} ${esc(day.city)}
-          </button>`).join("")}
-        <button type="button" class="btn${dayFilter === "all" ? " active" : ""}" data-day="all">全部</button>
+    <section class="hero${cover ? "" : " no-cover"}"${cover ? ` style="background-image:url('${esc(cover.src)}')"` : ""}>
+      <div class="hero-shade">
+        <div class="hero-tools">
+          <button type="button" class="btn btn-glass btn-sm" id="rename-trip">${icon("pencil")}改名</button>
+          <button type="button" class="btn btn-glass btn-sm" id="add-day">${icon("plus")}加一天</button>
+          ${state.trips.length > 1 ? `<button type="button" class="btn btn-glass btn-sm" id="delete-trip">${icon("trash")}删除</button>` : ""}
+        </div>
+        <div class="hero-text">
+          <p class="hero-dates">${esc(tripRange(current))}</p>
+          <h2>${esc(current.title)}</h2>
+          <div class="hero-route">${route}</div>
+        </div>
+        ${cover ? `<a class="credit" href="${esc(safeUrl(cover.link))}" target="_blank" rel="noopener">照片 ${esc(cover.credit)}</a>` : ""}
       </div>
     </section>
-    <button type="button" class="btn book-bar" id="toggle-books">${esc(bookLabel)}</button>
-    ${bookingsOpen ? `<section class="alert">
+
+    <button type="button" class="booking-banner${required.length ? " due" : " done"}" id="toggle-books" aria-expanded="${bookingsOpen}">
+      <span class="banner-icon">${icon(required.length ? "calendar" : "check")}</span>
+      <span class="banner-text">
+        <b>${required.length ? `还有 ${required.length} 项必须提前订` : "必须订的都订好了"}</b>
+        <small>${suggested ? `另外 ${suggested} 项建议订` : "没有其他要订的"}</small>
+      </span>
+      <span class="banner-cta">${bookingsOpen ? "收起" : "查看并预约"}<span class="chev${bookingsOpen ? " up" : ""}">${icon("chevron")}</span></span>
+    </button>
+    ${bookingsOpen ? `<section class="book-list">
       ${todo.length ? todo.map(({ day, item }) => `
-        <div class="alert-row">
-          <div>
-            <span class="flag ${esc(item.reservation)}">${FLAG[item.reservation]}</span>
-            <b>${esc(item.name)}</b>
-            <span class="muted"> ${esc((day.date || "").slice(5))} ${esc(day.city)}</span>
-          </div>
-          ${safeUrl(item.bookingUrl) ? `<a class="btn ${item.reservation === "required" ? "btn-primary" : "btn-primary warn"}" href="${esc(safeUrl(item.bookingUrl))}" target="_blank" rel="noopener">预约</a>` : ""}
+        <div class="book-row">
+          <span class="flag ${esc(item.reservation)}">${FLAG[item.reservation]}</span>
+          <span class="book-name"><b>${esc(item.name)}</b><small>${esc(monthDay(day.date))} · ${esc(day.city)}</small></span>
+          ${safeUrl(item.bookingUrl) ? `<a class="btn btn-sm btn-book ${esc(item.reservation)}" href="${esc(safeUrl(item.bookingUrl))}" target="_blank" rel="noopener">${icon("calendar")}去预约</a>` : ""}
         </div>`).join("") : `<p class="muted">这趟没有还要处理的预约。</p>`}
     </section>` : ""}
-    ${days.map((day) => renderDay(day)).join("")}
+
+    <nav class="day-tabs" aria-label="选择哪一天">
+      ${current.days.map((day, index) => {
+        const [, m, d] = (day.date || "--").split("-");
+        return `<button type="button" class="day-tab${dayFilter !== "all" && chosen && day.id === chosen.id ? " active" : ""}" data-day="${esc(day.id)}">
+          <span class="dt-top">${day.date ? `${Number(m)}月 周${weekday(day.date)}` : `第${index + 1}天`}</span>
+          <span class="dt-num">${day.date ? Number(d) : index + 1}</span>
+          <span class="dt-city">${esc(day.city || "未定")}</span>
+        </button>`;
+      }).join("")}
+      <button type="button" class="day-tab all${dayFilter === "all" ? " active" : ""}" data-day="all">
+        <span class="dt-top">全部</span>
+        <span class="dt-num">${current.days.length}</span>
+        <span class="dt-city">天</span>
+      </button>
+    </nav>
+
+    ${days.map((day) => renderDay(day, current.days.indexOf(day) + 1)).join("")}
   `;
-  document.querySelector("#map-title").textContent = dayFilter === "all" ? "全程" : (chosen ? chosen.city : "这一天");
+  document.querySelector("#map-title").textContent = dayFilter === "all" ? "全程" : (chosen ? `${monthDay(chosen.date)} ${chosen.city}` : "这一天");
 }
 
-function renderDay(day) {
+function renderDay(day, number) {
   const link = googleDayUrl(day.items);
   return `<section class="day" id="${esc(day.id)}">
-    <div class="day-head">
+    <header class="day-head">
       <div>
-        <p class="eyebrow">${esc((day.date || "").slice(5) || "未定日期")} 周${weekday(day.date)} · ${esc(day.city)}</p>
+        <p class="eyebrow">第 ${number} 天 · ${esc(monthDay(day.date) || "日期未定")}${day.date ? ` 周${weekday(day.date)}` : ""} · ${esc(day.city || "未定")}</p>
         <h2>${esc(day.title || day.city)}</h2>
       </div>
-      <span class="day-tools">
-        ${link ? `<a class="btn" href="${esc(link)}" target="_blank" rel="noopener">这一天的地图</a>` : ""}
-        <button type="button" class="btn btn-quiet" data-add="${esc(day.id)}">加一站</button>
-      </span>
-    </div>
-    <div class="glance">
-      <p class="layer-label">总结</p>
-      <ol class="glance-list">
-        ${day.items.map((item) => renderGlance(item)).join("") || `<li class="empty">这一天还没有地点。</li>`}
+      <div class="day-tools">
+        ${link ? `<a class="btn btn-primary" href="${esc(link)}" target="_blank" rel="noopener">${icon("navigation")}用谷歌地图走这一天</a>` : ""}
+        <button type="button" class="btn" data-add="${esc(day.id)}">${icon("plus")}加一站</button>
+      </div>
+    </header>
+    ${day.items.length ? `
+    <div class="plan">
+      <h3 class="section-title">今天的安排</h3>
+      <ol class="plan-list">
+        ${day.items.map((item, index) => renderGlance(item, index)).join("")}
       </ol>
     </div>
-    ${day.items.length ? `<div class="detail">
-      <p class="layer-label">详情</p>
+    <div class="detail">
+      <h3 class="section-title">每一站怎么走</h3>
       <ol class="stops">
         ${day.items.map((item, index) => renderItem(day, item, index)).join("")}
       </ol>
-    </div>` : ""}
+    </div>` : `<p class="empty">这一天还没有地点，点「加一站」。</p>`}
   </section>`;
 }
 
-function renderGlance(item) {
-  const optional = /可不去|想进去|再订/.test(item.time || "");
-  const flag = item.reservation !== "none"
-    ? `<span class="flag ${esc(item.reservation)}">${FLAG[item.reservation]}</span>`
-    : "";
-  return `<li class="glance-row${optional ? " optional" : ""}">
+function isOptional(item) {
+  return /可不去|想进去|再订/.test(item.time || "");
+}
+
+function renderGlance(item, index) {
+  return `<li class="plan-row kind-${esc(item.kind)}${isOptional(item) ? " optional" : ""}">
+    <span class="plan-num">${index + 1}</span>
     <time>${esc(item.time || "—")}</time>
     <a href="#item-${esc(item.id)}">${esc(item.name)}</a>
-    ${flag}
+    ${item.reservation !== "none" ? `<span class="flag ${esc(item.reservation)}">${FLAG[item.reservation]}</span>` : ""}
   </li>`;
 }
 
@@ -187,39 +262,37 @@ function renderItem(day, item, index) {
   const book = safeUrl(item.bookingUrl);
   const booked = !!state.booked[item.id];
   const parts = splitNote(item.note);
-  const optional = /可不去|想进去|再订/.test(item.time || "");
-  return `<li class="stop${optional ? " optional" : ""}" id="item-${esc(item.id)}">
+  const needs = item.reservation !== "none";
+  return `<li class="stop kind-${esc(item.kind)}${isOptional(item) ? " optional" : ""}" id="item-${esc(item.id)}">
     <div class="stop-rail"><span class="stop-num">${index + 1}</span></div>
-    <div class="stop-body">
-      <div class="stop-top">
-        <h3>${esc(item.name)}</h3>
-        <time>${esc(item.time || "—")}</time>
-      </div>
-      ${parts.lead ? `<p class="lead">${esc(parts.lead)}</p>` : ""}
+    <article class="stop-card">
+      <header class="stop-head">
+        <div>
+          <p class="stop-meta"><span class="kind-chip">${icon(KIND_ICON[item.kind] || "pin")}${KIND[item.kind] || "地点"}</span><time>${esc(item.time || "")}</time></p>
+          <h4>${esc(item.name)}</h4>
+        </div>
+        <div class="stop-edit">
+          <button type="button" class="icon-btn" data-edit="${esc(day.id)}:${esc(item.id)}" title="修改这一站" aria-label="修改这一站">${icon("pencil")}</button>
+          <button type="button" class="icon-btn danger" data-del="${esc(day.id)}:${esc(item.id)}" title="删除这一站" aria-label="删除这一站">${icon("trash")}</button>
+        </div>
+      </header>
+      ${parts.lead ? `<p class="how">${icon("navigation")}<span>${esc(parts.lead)}</span></p>` : ""}
       ${parts.rest ? `<p class="extra">${esc(parts.rest)}</p>` : ""}
-      ${item.reservation !== "none" && item.reservationNote ? `<p class="extra">${esc(item.reservationNote)}</p>` : ""}
+      ${needs ? `<div class="book-box ${esc(item.reservation)}${booked ? " is-booked" : ""}"><b>${booked ? "已订好" : FLAG[item.reservation]}</b><span>${esc(item.reservationNote || "")}</span></div>` : ""}
       <div class="stop-actions">
-        <a class="btn" href="${esc(googleUrl(item))}" target="_blank" rel="noopener">地图</a>
-        ${book && item.reservation !== "none" ? `<a class="btn ${item.reservation === "required" ? "btn-primary" : "btn-primary warn"}" href="${esc(book)}" target="_blank" rel="noopener">预约</a>` : ""}
-        ${item.reservation !== "none" ? `<label class="booked"><input type="checkbox" data-booked="${esc(item.id)}" ${booked ? "checked" : ""} /> 已订</label>` : ""}
-        <button type="button" class="btn btn-quiet" data-edit="${esc(day.id)}:${esc(item.id)}">改</button>
-        <button type="button" class="btn btn-quiet" data-del="${esc(day.id)}:${esc(item.id)}">删</button>
+        <a class="btn btn-sm" href="${esc(googleUrl(item))}" target="_blank" rel="noopener">${icon("pin")}谷歌地图</a>
+        ${book && needs ? `<a class="btn btn-sm btn-book ${esc(item.reservation)}" href="${esc(book)}" target="_blank" rel="noopener">${icon("calendar")}去预约</a>` : ""}
+        ${needs ? `<label class="booked-toggle${booked ? " on" : ""}"><input type="checkbox" data-booked="${esc(item.id)}" ${booked ? "checked" : ""} />${booked ? `${icon("check")}已订好` : "标记已订"}</label>` : ""}
       </div>
-    </div>
+    </article>
   </li>`;
-}
-
-function color(reservation) {
-  if (reservation === "required") return "#b42318";
-  if (reservation === "recommended") return "#9a6700";
-  return "#18794e";
 }
 
 function splitNote(note) {
   const text = String(note || "").trim();
   const sentences = text.split(/(?<=。)/).map((part) => part.trim()).filter(Boolean);
   if (sentences.length < 2) return { lead: text, rest: "" };
-  const route = sentences.find((part) => /坐|走|换乘|打车|下车|上船|电车|公交|渡轮|导航/.test(part));
+  const route = sentences.find((part) => /坐|走到|走过|走进|走回|走路|沿着|步行|换乘|打车|下车|上船|电车|公交|渡轮|导航/.test(part));
   if (!route || route === sentences[0]) {
     return { lead: sentences[0], rest: sentences.slice(1).join("") };
   }
@@ -233,7 +306,7 @@ function cityRun(days) {
     if (!runs.length || runs[runs.length - 1].city !== city) runs.push({ city, n: 1 });
     else runs[runs.length - 1].n += 1;
   }
-  return runs.map((run) => `${run.city} ${run.n}天`).join(" → ");
+  return runs;
 }
 
 function activeDay(current) {
@@ -249,37 +322,48 @@ function visibleItems() {
 }
 
 function drawMap() {
-  markers.forEach((marker) => marker.remove());
+  markers.forEach((layer) => layer.remove());
   markers = [];
-  const groups = new Map();
-  for (const row of visibleItems()) {
-    const { item } = row;
-    if (!Number.isFinite(item.lat) || !Number.isFinite(item.lng)) continue;
-    const key = `${item.lat.toFixed(4)},${item.lng.toFixed(4)}`;
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push(row);
-  }
+  const current = trip();
+  const chosen = activeDay(current);
+  const days = dayFilter === "all" ? current.days : (chosen ? [chosen] : []);
   const bounds = [];
-  for (const rows of groups.values()) {
-    const worst = rows.some((row) => row.item.reservation === "required")
-      ? "required"
-      : rows.some((row) => row.item.reservation === "recommended") ? "recommended" : "none";
-    const { lat, lng } = rows[0].item;
-    const marker = L.circleMarker([lat, lng], {
-      radius: 8,
-      color: color(worst),
-      fillColor: color(worst),
-      fillOpacity: 0.95,
-      weight: 2
+  for (const day of days) {
+    const dayNo = current.days.indexOf(day) + 1;
+    const groups = new Map();
+    const line = [];
+    day.items.forEach((item, index) => {
+      if (!Number.isFinite(item.lat) || !Number.isFinite(item.lng)) return;
+      const key = `${item.lat.toFixed(4)},${item.lng.toFixed(4)}`;
+      if (!groups.has(key)) groups.set(key, { first: item, nums: [], items: [] });
+      groups.get(key).nums.push(index + 1);
+      groups.get(key).items.push(item);
+      line.push([item.lat, item.lng]);
+      bounds.push([item.lat, item.lng]);
     });
-    marker.bindPopup(rows.map(({ item }) =>
-      `<b>${esc(item.name)}</b><span>${esc(FLAG[item.reservation] || "")}</span><br><a href="${esc(googleUrl(item))}" target="_blank" rel="noopener">在谷歌地图打开</a>`
-    ).join("<hr>"));
-    marker.addTo(map);
-    markers.push(marker);
-    bounds.push([lat, lng]);
+    if (line.length > 1) {
+      markers.push(L.polyline(line, { color: "#0e7c86", weight: 3, opacity: 0.75, dashArray: "6 8" }).addTo(map));
+    }
+    for (const group of groups.values()) {
+      const label = dayFilter === "all" ? `${dayNo}` : group.nums.join("·");
+      const marker = L.marker([group.first.lat, group.first.lng], {
+        icon: L.divIcon({
+          className: "pin-wrap",
+          html: `<span class="pin kind-${esc(group.first.kind)}${dayFilter === "all" ? " day" : ""}">${esc(label)}</span>`,
+          iconSize: null
+        })
+      });
+      marker.bindPopup(group.items.map((item) =>
+        `<b>${esc(item.name)}</b><span>${esc(item.time || "")}</span><a href="${esc(googleUrl(item))}" target="_blank" rel="noopener">在谷歌地图打开</a>`
+      ).join("<hr>"));
+      marker.addTo(map);
+      markers.push(marker);
+    }
   }
-  if (bounds.length) map.fitBounds(bounds, { padding: [28, 28], maxZoom: 14 });
+  if (bounds.length) map.fitBounds(bounds, { padding: [36, 36], maxZoom: 14 });
+  document.querySelector("#map-legend").textContent = dayFilter === "all"
+    ? "数字是第几天。点日期回到某一天，能看到每一站。"
+    : "数字和左边每一站的编号对应，虚线是先后顺序。";
   setTimeout(() => map.invalidateSize(), 0);
 }
 
@@ -328,8 +412,8 @@ function readForm() {
 
 map = L.map("map", { zoomControl: true });
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: "&copy; OpenStreetMap"
+  maxZoom: 19,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 map.setView([-25.5, 146.5], 4);
 
@@ -386,25 +470,26 @@ document.querySelector("#geocode-btn").addEventListener("click", async () => {
   const query = `${form.elements.name.value} ${form.elements.address.value}`.trim();
   if (!query) return;
   const button = document.querySelector("#geocode-btn");
+  const label = button.querySelector(".label");
   button.disabled = true;
-  button.textContent = "正在查";
+  label.textContent = "正在查";
   try {
     const response = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=${encodeURIComponent(query)}`, {
       headers: { Accept: "application/json" }
     });
     const rows = await response.json();
     if (!rows.length) {
-      button.textContent = "没找到，换个地址再试";
+      label.textContent = "没找到，换个地址再试";
       return;
     }
     form.elements.lat.value = Number(rows[0].lat).toFixed(5);
     form.elements.lng.value = Number(rows[0].lon).toFixed(5);
-    button.textContent = "已找到坐标";
+    label.textContent = "已找到坐标";
   } catch (_) {
-    button.textContent = "查找失败";
+    label.textContent = "查找失败";
   } finally {
     button.disabled = false;
-    setTimeout(() => { button.textContent = "按名称查找坐标并打点"; }, 1600);
+    setTimeout(() => { label.textContent = "按名称查找坐标并打点"; }, 1600);
   }
 });
 
@@ -440,15 +525,17 @@ main.addEventListener("click", (event) => {
   if (del) {
     const [dayId, itemId] = del.dataset.del.split(":");
     const day = trip().days.find((item) => item.id === dayId);
+    const target = day.items.find((item) => item.id === itemId);
+    if (!window.confirm(`删除「${target ? target.name : "这一站"}」？`)) return;
     day.items = day.items.filter((item) => item.id !== itemId);
     delete state.booked[itemId];
     return render();
   }
-  const jump = event.target.closest(".glance-row a");
+  const jump = event.target.closest(".plan-row a");
   if (jump) {
     event.preventDefault();
-    const target = document.querySelector(jump.getAttribute("href"));
-    if (target) target.scrollIntoView({ block: "nearest" });
+    const target = document.getElementById(jump.getAttribute("href").slice(1));
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
     return;
   }
   const dayButton = event.target.closest("[data-day]");
@@ -457,11 +544,11 @@ main.addEventListener("click", (event) => {
     main.scrollTop = 0;
     return render();
   }
-  if (event.target.id === "toggle-books") {
+  if (event.target.closest("#toggle-books")) {
     bookingsOpen = !bookingsOpen;
     return render();
   }
-  if (event.target.id === "add-day") {
+  if (event.target.closest("#add-day")) {
     const date = window.prompt("日期，写成 2027-05-06", "");
     if (date == null) return;
     const current = trip();
@@ -474,13 +561,13 @@ main.addEventListener("click", (event) => {
     });
     return render();
   }
-  if (event.target.id === "rename-trip") {
+  if (event.target.closest("#rename-trip")) {
     const title = window.prompt("行程名称", trip().title);
     if (!title) return;
     trip().title = title.trim();
     return render();
   }
-  if (event.target.id === "delete-trip") {
+  if (event.target.closest("#delete-trip")) {
     if (!window.confirm(`删除「${trip().title}」？`)) return;
     state.trips = state.trips.filter((item) => item.id !== state.tripId);
     state.tripId = state.trips[0].id;

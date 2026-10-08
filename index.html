@@ -9,10 +9,13 @@
 </head>
 <body>
   <header class="top">
-    <h1>行程库</h1>
+    <div class="brand">
+      <span class="brand-mark"><span data-icon="compass"></span></span>
+      <h1>行程库</h1>
+    </div>
     <div class="top-actions">
-      <button type="button" class="btn" id="export-btn">导出</button>
-      <button type="button" class="btn" id="import-btn">导入</button>
+      <button type="button" class="btn" id="import-btn"><span data-icon="upload"></span>导入</button>
+      <button type="button" class="btn" id="export-btn"><span data-icon="download"></span>导出</button>
       <input id="import-file" type="file" accept="application/json" hidden />
     </div>
   </header>
@@ -21,10 +24,10 @@
     <aside class="rail">
       <div class="rail-head">
         <h2>我的行程</h2>
-        <button type="button" id="new-trip" class="btn btn-quiet">新建</button>
+        <button type="button" id="new-trip" class="btn btn-sm"><span data-icon="plus"></span>新建</button>
       </div>
       <div id="trip-list"></div>
-      <p class="rail-note">改动存在这台浏览器里。换电脑或发给别人，用右上角导出。</p>
+      <p class="rail-note">改动只存在这台浏览器里。换电脑或发给别人，用右上角的导出。</p>
     </aside>
 
     <main id="main"></main>
@@ -32,14 +35,10 @@
     <aside class="map-panel">
       <div class="map-bar">
         <h2 id="map-title">地图</h2>
-        <button type="button" id="fit-all" class="btn btn-quiet">全程</button>
+        <button type="button" id="fit-all" class="btn btn-sm"><span data-icon="map"></span>看全程</button>
       </div>
       <div id="map"></div>
-      <div id="map-legend">
-        <span><i class="dot required"></i>必须预约</span>
-        <span><i class="dot recommended"></i>建议预约</span>
-        <span><i class="dot none"></i>不用预约</span>
-      </div>
+      <p id="map-legend">数字和左边每一站的编号对应，虚线是先后顺序。</p>
     </aside>
   </div>
 
@@ -61,7 +60,7 @@
         <label>纬度 <input name="lat" inputmode="decimal" /></label>
         <label>经度 <input name="lng" inputmode="decimal" /></label>
       </div>
-      <button type="button" id="geocode-btn" class="btn">按名称查找坐标并打点</button>
+      <button type="button" id="geocode-btn" class="btn"><span data-icon="pin"></span><span class="label">按名称查找坐标并打点</span></button>
       <label>要不要提前订
         <select name="reservation">
           <option value="none">不用预约</option>
