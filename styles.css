@@ -390,7 +390,8 @@ main { overflow: auto; min-height: 0; padding-bottom: 8px; }
 .budget-head .banner-cta { border-color: var(--edge); color: var(--ink); }
 .budget-head:hover .banner-cta { border-color: var(--ink); }
 .budget-head:focus-visible { outline: 3px solid rgba(14, 124, 134, 0.35); outline-offset: 4px; border-radius: 10px; }
-.cny { margin-left: 8px; color: var(--muted); font-size: 13px; font-weight: 600; }
+.rmb { margin-left: 5px; color: var(--muted); font-weight: 600; }
+.budget-days .rmb, .budget-rows .rmb { display: block; margin: 0; font-size: 12px; font-weight: 500; }
 
 .origin-pick {
   display: flex;
@@ -443,7 +444,7 @@ main { overflow: auto; min-height: 0; padding-bottom: 8px; }
 .budget-days, .budget-rows { list-style: none; margin: 0; padding: 0; }
 .budget-days button {
   display: grid;
-  grid-template-columns: 112px minmax(0, 1fr) 72px;
+  grid-template-columns: 112px minmax(0, 1fr) 84px;
   align-items: center;
   gap: 12px;
   width: 100%;
@@ -846,8 +847,7 @@ dialog input:focus, dialog select:focus, dialog textarea:focus {
   .day { padding: 16px 14px 6px; }
   .plan-row { grid-template-columns: 22px 70px minmax(0, 1fr); }
   .plan-row .plan-end { grid-column: 3; justify-self: start; }
-  .budget-days button { grid-template-columns: 92px minmax(0, 1fr) 64px; gap: 8px; }
-  .cny { display: block; margin: 2px 0 0; }
+  .budget-days button { grid-template-columns: 92px minmax(0, 1fr) 76px; gap: 8px; }
   .stop { grid-template-columns: 26px minmax(0, 1fr); gap: 8px; }
   .stop-num { width: 26px; height: 26px; font-size: 12px; }
   .stop-rail::after { left: 12px; top: 40px; }
