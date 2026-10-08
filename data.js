@@ -7,7 +7,6 @@ const PHOTOS = {
   "au-d4-lagoon": ["Niki Gango · CC BY-SA 3.0", "Airlie_Beach_Lagoon.JPG"],
   "au-d5-sand": ["Slug69 · CC BY-SA 2.0", "Whitehaven_Beach,_Whitsunday_Island,_Queensland.jpg"],
   "au-d5-hill": ["Isderion · CC BY-SA 3.0 DE", "Hill_Inlet_at_the_end_of_Whitehaven_Beach_in_the_Whitsundays.JPG"],
-  "au-d6-town": ["Richard N Horne · CC BY 4.0", "Airlie_Beach_is_a_departure_point_for_the_Great_Barrier_Reef.jpg"],
   "au-d7-lanes": ["Ashton 29 · CC BY-SA 4.0", "Melbourne_laneway.jpg"],
   "au-d8-reb": ["Diliff, Ian Fieggen · CC BY 2.5", "Royal_exhibition_building_tulips_straight.jpg"],
   "au-d8-fitzroy": ["Nick-D · CC BY-SA 4.0", "Buildings_on_Gertrude_Street_December_2020.jpg"],
@@ -26,7 +25,7 @@ window.SEED_TRIPS = [
     title: "澳洲",
     start: "2027-04-29",
     end: "2027-05-05",
-    summary: "按开口程排：4月28日晚上从国内出发，29日到悉尼，5月1日飞圣灵群岛，5月4日飞墨尔本，5月5日从墨尔本回国。这几天三个州都在上学，没有学校假期。要注意的是5月3日是昆士兰劳动节，5月1日到3日是艾尔利的长周末，酒店和船先订。景点挑的是本地人推荐、人比经典打卡点少的地方：悉尼不走邦迪到库吉，改去沃森斯湾和曼利北角；墨尔本不去 Hosier Lane 和圣基尔达，改去 Carlton、Fitzroy 和 Abbotsford。",
+    summary: "按开口程排：4月28日晚上从国内出发，29日到悉尼，5月1日飞圣灵群岛，5月3日飞墨尔本，5月5日从墨尔本回国。这几天三个州都在上学，没有学校假期。要注意的是5月3日是昆士兰劳动节，5月1日到3日是艾尔利的长周末，酒店和船先订。景点挑的是本地人推荐、人比经典打卡点少的地方：悉尼不走邦迪到库吉，改去沃森斯湾和曼利北角；墨尔本不去 Hosier Lane 和圣基尔达，改去 Carlton、Fitzroy 和 Abbotsford。",
     budget: {
       basis: "每人，两人同住一间。价格是 2026年10月查的，机票和酒店按淡季中间价估。",
       cnyRate: 4.68,
@@ -42,7 +41,7 @@ window.SEED_TRIPS = [
           label: "北京",
           cny: 7000,
           brief: "去：4月28日深夜到首都机场，29日 01:40 国航 CA173 直飞悉尼，14:50 到。回：5月5日 19:40 国航 CA166 墨尔本直飞北京首都，6日 05:45 到。",
-          note: "经济舱含税开口程，估 ¥6,000–8,000，按 ¥7,000 算。CA173 按 2026 年班期是周二、四、六、日，4月29日周四有班。想上午就到悉尼，可以 28日先飞上海转 20:20 的东航 MU561，29日 09:00 到。5月5日下午三点前从修道院回酒店拿行李，四点前上 SkyBus。",
+          note: "经济舱含税开口程，估 ¥6,000–8,000，按 ¥7,000 算。CA173 按 2026 年班期是周二、四、六、日，4月29日周四有班。想上午就到悉尼，可以 28日先飞上海转 20:20 的东航 MU561，29日 09:00 到。5月5日上午逛植物园，下午三点前回酒店拿行李，四点前上 SkyBus。",
           adjust: []
         },
         {
@@ -50,7 +49,7 @@ window.SEED_TRIPS = [
           label: "上海",
           cny: 6000,
           brief: "去：4月28日（周三）18:25 吉祥 HO1669 浦东直飞悉尼，29日 06:15 左右到。回：5月5日（周三）08:00 吉祥 HO1656 墨尔本直飞浦东，16:20 到，票买到温州，在浦东下飞机不坐后段。",
-          note: "经济舱含税，估 ¥5,000–7,000，按 ¥6,000 算，出票后改成实际价格。时间按 2026 年冬季班期，2027 年出了再核对。回程甩尾要注意：只带手提行李，托运的箱子会直挂到温州；回程必须是这张票的最后一段，不坐的只能是浦东到温州那段；吉祥条款不允许不按顺序乘坐，可能被要求补差价，会员里程别累积到这张票。HO1656 早上 8 点飞，5月5日凌晨 4:30 前就要上 SkyBus，那天的景点都去不了。",
+          note: "经济舱含税，估 ¥5,000–7,000，按 ¥6,000 算，出票后改成实际价格。时间按 2026 年冬季班期，2027 年出了再核对。回程甩尾要注意：只带手提行李，托运的箱子会直挂到温州；回程必须是这张票的最后一段，不坐的只能是浦东到温州那段；吉祥条款不允许不按顺序乘坐，可能被要求补差价，会员里程别累积到这张票。HO1656 早上 8 点飞，5月5日凌晨 4:30 前就要上 SkyBus。",
           adjust: []
         }
       ]
@@ -279,9 +278,9 @@ window.SEED_TRIPS = [
             lat: -20.2682,
             lng: 148.7172,
             reservation: "required",
-            reservationNote: "5月3日是昆士兰劳动节，这三晚正好是长周末，码头附近会先订满。",
-            bookingUrl: "https://www.booking.com/searchresults.html?ss=Airlie+Beach&checkin=2027-05-01&checkout=2027-05-04",
-            cost: { aud: 420, note: "长周末每晚大约 A$250–300 一间。三晚按 A$840，两人分。" },
+            reservationNote: "5月3日是昆士兰劳动节，这两晚正好是长周末，码头附近会先订满。",
+            bookingUrl: "https://www.booking.com/searchresults.html?ss=Airlie+Beach&checkin=2027-05-01&checkout=2027-05-03",
+            cost: { aud: 280, note: "长周末每晚大约 A$250–300 一间。两晚按 A$560，两人分。" },
             note: "优先住 Coral Sea Marina 或主街，第二天早上走去码头。不要住到普罗瑟派恩镇上。"
           },
           {
@@ -321,7 +320,7 @@ window.SEED_TRIPS = [
             bookingUrl: "https://www.oceanrafting.com.au/",
             cost: { aud: 249, note: "官网 15 岁以上 A$249，含午饭、防刺服和酒店接送。5月2日是周日，不是公共假日，不加钱。" },
             why: "小快艇，人少，跑得快。怀特黑文上午十点到下午两点是大船集中靠岸的时候，越早出发越清静。",
-            note: "订 Northern Exposure：怀特黑文沙滩、希尔因莱特观景台，加浮潜。这条 8:45 出发、15:30 左右回来，比 10 点出发的 Southern Lights 早到怀特黑文。集合点以确认邮件为准，常见是 Coral Sea Marina，不要走到另一头的 Port of Airlie。提前半小时到。防刺服船上有。带泳衣、毛巾、一双能上岸的鞋。晕船药在开船前吃。大风他们会改期或换沙滩，看短信。"
+            note: "订 Northern Exposure：怀特黑文沙滩、希尔因莱特观景台，加浮潜。这条 8:45 出发、15:30 左右回来，比 10 点出发的 Southern Lights 早到怀特黑文。集合点以确认邮件为准，常见是 Coral Sea Marina，不要走到另一头的 Port of Airlie。提前半小时到。防刺服船上有。带泳衣、毛巾、一双能上岸的鞋。晕船药在开船前吃。大风他们会改期或换沙滩，看短信。这趟只留了这一天出海，取消了没有备用日，订之前看清退款规则。"
           },
           {
             id: "au-d5-enid",
@@ -368,53 +367,15 @@ window.SEED_TRIPS = [
             cost: { aud: 0, note: "含在船票里。" },
             why: "7 公里长的白沙滩，大船都停在南端，往北走一段人就少了。",
             photo: photo("au-d5-sand"),
-            note: "岛上没有路，也没有店。沙子细，会粘鞋。不要把沙子带走，公园在管。回程晚饭回艾尔利主街，今天不要再加别的活动。"
-          }
-        ]
-      },
-      {
-        id: "au-d6",
-        date: "2027-05-03",
-        city: "圣灵群岛",
-        title: "劳动节，在镇上休息",
-        items: [
-          {
-            id: "au-d6-town",
-            time: "10:30",
-            kind: "sight",
-            name: "艾尔利主街和码头",
-            address: "Airlie Beach Main Street",
-            lat: -20.2676,
-            lng: 148.7166,
-            reservation: "none",
-            reservationNote: "不用订。",
-            bookingUrl: "",
-            cost: { aud: 0, note: "免费。" },
-            why: "前一天出海很累，这天又是昆士兰公共假日，不再排远的。",
-            photo: photo("au-d6-town"),
-            note: "睡够再出门。泻湖、主街、码头走一圈。今天是公共假日，有的馆子会加收假日附加费，营业时间也可能变短。晚饭早点吃，行李收好，第二天要去机场。"
-          },
-          {
-            id: "au-d6-half",
-            time: "可不去",
-            kind: "sight",
-            name: "半天浮潜",
-            address: "Airlie Beach",
-            lat: -20.267,
-            lng: 148.7135,
-            reservation: "recommended",
-            reservationNote: "只有还想下海才订。订半天，不要再订一整天。",
-            bookingUrl: "https://www.oceanrafting.com.au/",
-            cost: { aud: 200, note: "半天团大约 A$150–180，劳动节每人加收 A$20。订前看官网价格。" },
-            note: "如果昨天的船因为天气取消，用这一天补。补的话仍然订含希尔因莱特的那条，并且把5月4日的飞机改到下午。"
+            note: "岛上没有路，也没有店。沙子细，会粘鞋。不要把沙子带走，公园在管。回程晚饭回艾尔利主街，晚上把行李收好，明天上午飞墨尔本。"
           }
         ]
       },
       {
         id: "au-d7",
-        date: "2027-05-04",
+        date: "2027-05-03",
         city: "墨尔本",
-        title: "飞到墨尔本，傍晚走小巷",
+        title: "劳动节飞墨尔本，傍晚走小巷",
         items: [
           {
             id: "au-d7-flight",
@@ -425,10 +386,10 @@ window.SEED_TRIPS = [
             lat: -37.669,
             lng: 144.841,
             reservation: "required",
-            reservationNote: "只有捷星直飞，每天一班 JQ833，大约三小时，上午十一点左右起飞。卖完就只能转机，先订这班。",
-            bookingUrl: "https://www.google.com/travel/flights?hl=zh-CN&q=One%20way%20flights%20from%20Proserpine%20to%20Melbourne%20on%20May%204%202027",
+            reservationNote: "只有捷星直飞，每天一班 JQ833，大约三小时，上午十一点左右起飞。这天是昆士兰长周末最后一天，往南飞的人多，卖完就只能转机，先订这班。",
+            bookingUrl: "https://www.google.com/travel/flights?hl=zh-CN&q=One%20way%20flights%20from%20Proserpine%20to%20Melbourne%20on%20May%203%202027",
             cost: { aud: 322, note: "捷星直飞大约 A$250–350，含一件托运行李按 A$300 算；去机场的班车 A$22 也算在这里。" },
-            note: "早上从艾尔利返回 PPP，班车大约 40 分钟，再加安检，按飞机起飞前两小时到机场倒推。落地是墨尔本国内航站楼。"
+            note: "早上从艾尔利返回 PPP，班车大约 40 分钟，再加安检，按飞机起飞前两小时到机场倒推。劳动节班车照开，前一天订好座位。落地是墨尔本国内航站楼，维州这天不放假。"
           },
           {
             id: "au-d7-sky",
@@ -453,10 +414,10 @@ window.SEED_TRIPS = [
             lat: -37.8183,
             lng: 144.9671,
             reservation: "required",
-            reservationNote: "只住 5月4日一晚，城中心方便坐电车。",
-            bookingUrl: "https://www.booking.com/searchresults.html?ss=Flinders+Street+Melbourne&checkin=2027-05-04&checkout=2027-05-05",
-            cost: { aud: 120, note: "城中心四星大约每晚 A$200–260 一间。一晚按 A$240，两人分。" },
-            note: "住这儿，明天坐电车和火车都方便。5日早上退房，北京出发的把行李寄存在前台，下午回来拿。"
+            reservationNote: "住 5月3日、4日两晚，城中心方便坐电车。",
+            bookingUrl: "https://www.booking.com/searchresults.html?ss=Flinders+Street+Melbourne&checkin=2027-05-03&checkout=2027-05-05",
+            cost: { aud: 240, note: "城中心四星大约每晚 A$200–260 一间。两晚按 A$480，两人分。" },
+            note: "住这儿，坐电车和火车都方便。5日早上退房，北京出发的把行李寄存在前台，下午回来拿；上海出发的凌晨就走，4日晚上把行李收好。"
           },
           {
             id: "au-d7-lanes",
@@ -486,15 +447,15 @@ window.SEED_TRIPS = [
             reservationNote: "弗林德斯巷的小馆子，晚餐建议订。",
             bookingUrl: "https://www.opentable.com/r/coda-melbourne",
             cost: { aud: 100, note: "分着点几道菜加一杯酒，每人大约 A$90–110。" },
-            note: "亚洲口味、分着吃。订 19:00 左右。如果飞机晚点，取消预订，在巷子口随便吃。"
+            note: "亚洲口味、分着吃。订 19:00 左右，订之前在官网看一下周一是否营业。如果飞机晚点，取消预订，在巷子口随便吃。"
           }
         ]
       },
       {
         id: "au-d8",
-        date: "2027-05-05",
+        date: "2027-05-04",
         city: "墨尔本",
-        title: "Carlton、Fitzroy 和老修道院（北京出发）",
+        title: "Carlton、Fitzroy 和老修道院",
         items: [
           {
             id: "au-d8-reb",
@@ -508,7 +469,7 @@ window.SEED_TRIPS = [
             reservationNote: "花园和建筑外面免费。旁边的墨尔本博物馆要票，想进再买。",
             bookingUrl: "",
             cost: { aud: 17.4, note: "电车、公交、火车全天封顶 A$11.40（维州半价优惠到 2027年1月1日结束）。第一次买 myki 卡另付 A$6。", cat: "transport" },
-            why: "世界遗产建筑，周三上午人很少。从这里走路就进 Fitzroy。",
+            why: "世界遗产建筑，周二上午人很少。从这里走路就进 Fitzroy。",
             photo: photo("au-d8-reb"),
             note: "走到 Bourke Street 坐 86 或 96 路电车往东，到 11 号站 Melbourne Museum 下，走五分钟。绕建筑和喷泉走一圈就够。"
           },
@@ -542,7 +503,7 @@ window.SEED_TRIPS = [
             cost: { aud: 0, note: "免费。来回的公交和火车已含在当天封顶里。" },
             why: "旧修道院改成的艺术园区，有草地、咖啡馆和亚拉河边步道，几乎没有旅行团。",
             photo: photo("au-d8-convent"),
-            note: "从 Fitzroy 往北走到 Johnston Street，坐 200 或 207 路公交往东，Clarke Street 站下，走三到五分钟。不想等车就打车，十分钟左右。回城走 10 到 15 分钟到 Victoria Park 火车站，坐 Mernda 或 Hurstbridge 线进城。如果国际航班在下午，这一站取消，吃完午饭直接回城。"
+            note: "从 Fitzroy 往北走到 Johnston Street，坐 200 或 207 路公交往东，Clarke Street 站下，走三到五分钟。不想等车就打车，十分钟左右。回城走 10 到 15 分钟到 Victoria Park 火车站，坐 Mernda 或 Hurstbridge 线进城。晚饭在城里随便吃。"
           },
           {
             id: "au-d8-ngv",
@@ -556,9 +517,32 @@ window.SEED_TRIPS = [
             reservationNote: "常设展免费，直接进。特展才要票。",
             bookingUrl: "https://www.ngv.vic.gov.au/whats-on/",
             cost: { aud: 0, note: "常设展免费。" },
-            why: "下雨的备选。周三白天人不多，常设展免费。",
+            why: "下雨的备选。周二白天人不多，常设展免费。",
             photo: photo("au-d8-ngv"),
             note: "下雨就把 Fitzroy 和修道院换成这里。从弗林德斯街沿圣基尔达路往南坐电车，有 Arts Precinct 或 NGV 字样的站下。"
+          }
+        ]
+      },
+      {
+        id: "au-d9",
+        date: "2027-05-05",
+        city: "墨尔本",
+        title: "回国",
+        items: [
+          {
+            id: "au-d9-garden",
+            time: "北京出发才去",
+            kind: "sight",
+            name: "皇家植物园和战争纪念馆",
+            address: "Shrine of Remembrance, Birdwood Avenue, Melbourne",
+            lat: -37.8305,
+            lng: 144.9734,
+            reservation: "none",
+            reservationNote: "都免费。植物园 7:30 开门，纪念馆 10:00 开门。",
+            bookingUrl: "",
+            cost: { aud: 0, note: "免费，走路去。" },
+            why: "离酒店走路就到，不用坐车，中午前后回来拿行李不赶。纪念馆楼顶的阳台能看到城市天际线。",
+            note: "从弗林德斯街车站过河，沿 St Kilda Road 往南走 15 分钟到纪念馆，先上楼顶阳台，再往东进植物园，绕湖走一圈。午饭在植物园里的咖啡馆或回城吃，下午三点前回酒店拿行李。"
           },
           {
             id: "au-d8-air",
@@ -572,7 +556,7 @@ window.SEED_TRIPS = [
             reservationNote: "当天买票即可。",
             bookingUrl: "https://www.skybus.com.au/",
             cost: { aud: 0, note: "已含在往返票里。" },
-            note: "车站里跟着 SkyBus 牌子走。国际航班留三小时。大巴大约 30 到 40 分钟，傍晚可能堵。北京出发是 19:40 的国航，下午四点前上车，白天的几站都能去。上海出发是 08:00 的吉祥，凌晨 4:30 前上车（SkyBus 24 小时都有车），这天的景点都去不了，前一晚把行李收好。"
+            note: "车站里跟着 SkyBus 牌子走。国际航班留三小时。大巴大约 30 到 40 分钟，傍晚可能堵。北京出发是 19:40 的国航，下午四点前上车，上午能逛上面的植物园。上海出发是 08:00 的吉祥，凌晨 4:30 前上车（SkyBus 24 小时都有车），植物园去不了，前一晚把行李收好。"
           }
         ]
       }
