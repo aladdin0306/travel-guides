@@ -9,13 +9,10 @@
 </head>
 <body>
   <header class="top">
-    <div>
-      <p class="kicker">旅行攻略</p>
-      <h1>行程库</h1>
-    </div>
+    <h1>行程库</h1>
     <div class="top-actions">
-      <button type="button" id="export-btn">导出</button>
-      <button type="button" id="import-btn">导入</button>
+      <button type="button" class="btn" id="export-btn">导出</button>
+      <button type="button" class="btn" id="import-btn">导入</button>
       <input id="import-file" type="file" accept="application/json" hidden />
     </div>
   </header>
@@ -24,7 +21,7 @@
     <aside class="rail">
       <div class="rail-head">
         <h2>我的行程</h2>
-        <button type="button" id="new-trip" class="text-btn">新建</button>
+        <button type="button" id="new-trip" class="btn btn-quiet">新建</button>
       </div>
       <div id="trip-list"></div>
       <p class="rail-note">改动存在这台浏览器里。换电脑或发给别人，用右上角导出。</p>
@@ -35,7 +32,7 @@
     <aside class="map-panel">
       <div class="map-bar">
         <h2 id="map-title">地图</h2>
-        <button type="button" id="fit-all" class="text-btn">全程</button>
+        <button type="button" id="fit-all" class="btn btn-quiet">全程</button>
       </div>
       <div id="map"></div>
       <div id="map-legend">
@@ -64,7 +61,7 @@
         <label>纬度 <input name="lat" inputmode="decimal" /></label>
         <label>经度 <input name="lng" inputmode="decimal" /></label>
       </div>
-      <button type="button" id="geocode-btn" class="ghost">按名称查找坐标并打点</button>
+      <button type="button" id="geocode-btn" class="btn">按名称查找坐标并打点</button>
       <label>要不要提前订
         <select name="reservation">
           <option value="none">不用预约</option>
@@ -76,8 +73,8 @@
       <label>预约链接 <input name="bookingUrl" placeholder="https://" /></label>
       <label>怎么走 <textarea name="note" rows="4"></textarea></label>
       <div class="dialog-actions">
-        <button type="button" id="editor-cancel" class="ghost">取消</button>
-        <button type="submit" class="solid">保存</button>
+        <button type="button" id="editor-cancel" class="btn">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
       </div>
     </form>
   </dialog>
