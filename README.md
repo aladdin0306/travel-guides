@@ -30,7 +30,6 @@ python3 -m http.server 8766
 - 艾尔利泻湖（`photos/au-d4-lagoon.jpg`）：[Niki Gango · CC BY-SA 3.0](https://commons.wikimedia.org/wiki/File:Airlie_Beach_Lagoon.JPG)
 - 怀特黑文海滩（`photos/au-d5-sand.jpg`）：[Slug69 · CC BY-SA 2.0](https://commons.wikimedia.org/wiki/File:Whitehaven_Beach,_Whitsunday_Island,_Queensland.jpg)
 - 希尔因莱特（`photos/au-d5-hill.jpg`）：[Isderion · CC BY-SA 3.0 DE](https://commons.wikimedia.org/wiki/File:Hill_Inlet_at_the_end_of_Whitehaven_Beach_in_the_Whitsundays.JPG)
-- 艾尔利海滩（`photos/au-d6-town.jpg`）：[Richard N Horne · CC BY 4.0](https://commons.wikimedia.org/wiki/File:Airlie_Beach_is_a_departure_point_for_the_Great_Barrier_Reef.jpg)
 - 墨尔本小巷（`photos/au-d7-lanes.jpg`）：[Ashton 29 · CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:Melbourne_laneway.jpg)
 - 皇家展览馆（`photos/au-d8-reb.jpg`）：[Diliff, Ian Fieggen · CC BY 2.5](https://commons.wikimedia.org/wiki/File:Royal_exhibition_building_tulips_straight.jpg)
 - Gertrude Street（`photos/au-d8-fitzroy.jpg`）：[Nick-D · CC BY-SA 4.0](https://commons.wikimedia.org/wiki/File:Buildings_on_Gertrude_Street_December_2020.jpg)
