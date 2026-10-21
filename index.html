@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>行程库</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=12" />
+  <link rel="stylesheet" href="styles.css?v=13" />
 </head>
 <body>
   <header class="top">
@@ -83,7 +83,18 @@
   </dialog>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="data.js?v=12"></script>
-  <script src="app.js?v=12"></script>
+  <dialog id="pin-sheet" class="pin-sheet">
+    <form method="dialog">
+      <h3 id="pin-sheet-title">在谷歌地图打点</h3>
+      <p class="pin-sheet-note">手机上会打开谷歌地图 App。点哪一站，就在地图里打哪个点；暂不连成路线。</p>
+      <div id="pin-sheet-list" class="pin-sheet-list"></div>
+      <div class="dialog-actions">
+        <button type="submit" class="btn" value="cancel">关闭</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="data.js?v=13"></script>
+  <script src="app.js?v=13"></script>
 </body>
 </html>

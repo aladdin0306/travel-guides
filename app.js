@@ -107,16 +107,53 @@ function safeUrl(url) {
   return url;
 }
 
+function isMobileMaps() {
+  return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+    (navigator.maxTouchPoints > 1 && window.matchMedia("(max-width: 820px)").matches);
+}
+
+function mappableItems(items) {
+  return (items || []).filter((item) =>
+    (Number.isFinite(item.lat) && Number.isFinite(item.lng)) || item.name || item.address);
+}
+
 function googleUrl(item) {
+  if (Number.isFinite(item.lat) && Number.isFinite(item.lng)) {
+    const query = item.name ? `${item.name} @${item.lat},${item.lng}` : `${item.lat},${item.lng}`;
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  }
   const query = `${item.name || ""} ${item.address || ""}`.trim();
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  return query ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}` : "";
 }
 
 function googleDayUrl(items) {
-  const points = items.filter((item) => Number.isFinite(item.lat) && Number.isFinite(item.lng));
+  const points = (items || []).filter((item) => Number.isFinite(item.lat) && Number.isFinite(item.lng));
   if (!points.length) return "";
   if (points.length === 1) return googleUrl(points[0]);
+  if (isMobileMaps()) return "";
   return `https://www.google.com/maps/dir/${points.map((item) => `${item.lat},${item.lng}`).join("/")}`;
+}
+
+function openPinSheet(dayId) {
+  const day = trip().days.find((item) => item.id === dayId);
+  const sheet = document.querySelector("#pin-sheet");
+  const list = document.querySelector("#pin-sheet-list");
+  if (!day || !sheet || !list) return;
+  const points = mappableItems(day.items).filter((item) => googleUrl(item));
+  if (!points.length) return;
+  if (points.length === 1) {
+    window.open(googleUrl(points[0]), "_blank", "noopener");
+    return;
+  }
+  document.querySelector("#pin-sheet-title").textContent =
+    `${monthDay(day.date) || "这一天"} · 在谷歌地图打点`;
+  list.innerHTML = points.map((item, index) => `
+    <a class="pin-row" href="${esc(googleUrl(item))}" target="_blank" rel="noopener">
+      <span class="pin-num">${index + 1}</span>
+      <span class="pin-meta"><b>${esc(item.name)}</b><small>${esc(item.time || "—")}${item.address ? ` · ${esc(item.address)}` : ""}</small></span>
+      <span class="pin-go">${icon("pin")}打开</span>
+    </a>`).join("");
+  sheet.showModal();
 }
 
 function pending(current = trip()) {
@@ -385,7 +422,14 @@ function priceChip(item) {
 }
 
 function renderDay(day, number) {
+  const points = mappableItems(day.items).filter((item) => googleUrl(item));
+  const mobile = isMobileMaps();
   const link = googleDayUrl(day.items);
+  const mapControl = mobile && points.length > 1
+    ? `<button type="button" class="btn btn-primary" data-pins="${esc(day.id)}">${icon("pin")}在谷歌地图打点</button>`
+    : link
+      ? `<a class="btn btn-primary" href="${esc(link)}" target="_blank" rel="noopener">${icon(mobile ? "pin" : "navigation")}${mobile ? "在谷歌地图打点" : "用谷歌地图走这一天"}</a>`
+      : "";
   const spend = dayCost(day);
   return `<section class="day" id="${esc(day.id)}">
     <header class="day-head">
@@ -394,7 +438,7 @@ function renderDay(day, number) {
         <h2>${esc(day.title || day.city)}</h2>
       </div>
       <div class="day-tools">
-        ${link ? `<a class="btn btn-primary" href="${esc(link)}" target="_blank" rel="noopener">${icon("navigation")}用谷歌地图走这一天</a>` : ""}
+        ${mapControl}
         <button type="button" class="btn" data-add="${esc(day.id)}">${icon("plus")}加一站</button>
       </div>
     </header>
@@ -698,6 +742,8 @@ form.addEventListener("submit", (event) => {
 });
 
 main.addEventListener("click", (event) => {
+  const pins = event.target.closest("[data-pins]");
+  if (pins) return openPinSheet(pins.dataset.pins);
   const add = event.target.closest("[data-add]");
   if (add) return openEditor(add.dataset.add, null);
   const edit = event.target.closest("[data-edit]");
