@@ -1,0 +1,565 @@
+const PHOTOS = {
+  "kr-d1-capsule": ["VN.NguyenDucDuy · CC BY-SA 4.0", "Sky_Capsule_train_at_Haeundae_Blueline_Park,_Busan.jpg"],
+  "kr-d1-cheongsapo": ["Andrewssi2 · CC BY-SA 3.0", "Cheongsapo.jpg"],
+  "kr-d1-gwangan": ["Spike · Public domain", "Busan_Gwangan_Bridge_pylon_at_night_01.jpg"],
+  "kr-d2-gamcheon": ["Basile Morin · CC BY-SA 4.0", "Colorful_houses_in_Gamcheon_Culture_Village_at_sunset_in_Busan_South_Korea.jpg"],
+  "kr-d2-jagalchi": ["Bernard Gagnon · CC0", "Jagalchi_Market_02.jpg"],
+  "kr-d2-biff": ["Mobius6 · CC BY-SA 4.0", "Busan_Tower_and_Yongdusan_Park_20200522_004.jpg"],
+  "kr-d2-songdo": ["bryan... · CC BY-SA 2.0", "Songdo_Cloud_Trails_Skywalk_Songdo_Beach_Busan_(45749115681).jpg"],
+  "kr-d3-huinnyeoul": ["VN.NguyenDucDuy · CC BY-SA 4.0", "Stairway_at_Huinnyeoul_Culture_Village_in_Busan,_South_Korea.jpg"],
+  "kr-d3-myeongdong": ["Sgroey · CC BY-SA 4.0", "Myeongdong_night_market_seoul_4.jpg"],
+  "kr-d4-gyeongbokgung": ["Basile Morin · CC BY-SA 4.0", "Front_view_of_the_Imperial_Throne_Hall_Geunjeongjeon_at_Gyeongbokgung_Palace_with_blue_sky_in_Seoul.jpg"],
+  "kr-d4-bukchon": ["Basile Morin · CC BY-SA 4.0", "Bukchon-ro_11-gil_street_with_hanok_houses_at_blue_hour_in_Bukchon_Hanok_Village_Seoul.jpg"],
+  "kr-d4-seongsu": ["CartoonChess · CC BY-SA 4.0", "Snowy_shopping_street_in_Seongsu-dong.jpg"],
+  "kr-d4-hongdae": ["U0894629 · CC BY-SA 4.0", "Street_hongdae_Seoul.jpg"],
+  "kr-d5-itaewon": ["anokarina · CC BY-SA 2.0", "Hamilton_Hotel_in_Itaewon,_Seoul,_March_18,_2016.jpg"],
+  "kr-d5-ddp": ["Eugene Lim · CC BY 2.0", "Dongdaemun_Design_Plaza_at_night,_Seoul,_Korea.jpg"]
+};
+
+function photo(id) {
+  const [credit, file] = PHOTOS[id];
+  return { src: `photos/${id}.jpg`, credit, link: `https://commons.wikimedia.org/wiki/File:${file}` };
+}
+
+window.SEED_TRIPS = [
+  {
+    id: "busan-seoul-2026",
+    title: "釜山 · 首尔 5天4夜",
+    start: "2026-11-12",
+    end: "2026-11-16",
+    summary: "",
+    budget: {
+      currency: "KRW",
+      party: "4位成人同行（程、凯敏、杨、张）",
+      basis: "按每人当地待花开销（舒适型参考）折算；国际机票与 4 晚酒店已提前支付，不计入下方待花总额。4 人合订项（胶囊列车 4 人舱、打车、海鲜拼盘）均已拆分为单人金额。",
+      cnyRate: 0.00525,
+      rateDate: "2026-11-12",
+      extras: [
+        {
+          label: "市内交通（T-money 卡 + 地铁公交 + 4人平摊打车）",
+          cat: "transport",
+          amount: 75000,
+          note: "GS25/CU 便利店各买一张 T-money 卡（₩2,500）充值坐地铁公交；海云台→尾浦、南浦→甘川/松岛、釜山站→影岛等短途 4 人用 Kakao T 平摊打车。"
+        },
+        {
+          label: "韩国流量卡 / 便利店零食咖啡备用",
+          cat: "other",
+          amount: 35000,
+          note: "5 天 eSIM/电话卡及香蕉牛奶、暖宝宝、街头小吃机动预算。每人建议另换 50–100 万韩元现金备用（市场/退税/充值用）。"
+        },
+        {
+          label: "已付机票与 4 晚酒店",
+          cat: "other",
+          note: "国际机票 CA129/CA136 已出票（程付，凯敏已转）；釜山 2 晚东横 INN 海云台店 + 首尔 2 晚 D安旅社东大门（各自已付）。"
+        },
+        {
+          label: "免税店购物",
+          cat: "other",
+          note: "按需消费。提前下载乐天免税店、新罗免税店 APP 注册领券下单，比线下专柜便宜，仁川机场过安检后凭护照取货；4 人同行可拼单凑满减。"
+        }
+      ],
+      origins: [
+        {
+          id: "beijing",
+          label: "北京",
+          brief: "去：11月12日 08:25–11:45 国航 CA129 北京首都直飞釜山金海 · 回：11月16日 16:30–18:00 国航 CA136 首尔仁川直飞北京首都（机票已出：程付，凯敏已转，不重复计入下方待花总额）。",
+          note: "已出票开口程，不回头走冤枉路。"
+        }
+      ]
+    },
+    days: [
+      {
+        id: "kr-d1",
+        date: "2026-11-12",
+        city: "釜山",
+        title: "落地海云台，天空胶囊追日落与广安大桥夜景",
+        items: [
+          {
+            id: "kr-d1-flight",
+            time: "08:25–11:45",
+            kind: "transport",
+            name: "北京首都飞釜山金海 CA129",
+            address: "Gimhae International Airport (김해국제공항)",
+            lat: 35.1796,
+            lng: 128.9382,
+            reservation: "none",
+            reservationNote: "机票已出（程付，凯敏已转）。确认护照有效期满 6 个月及 C-3-9 旅游签。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "已含在已出机票里。" },
+            note: "中午落地金海国际机场，下午留出完整半天玩海云台海岸线。出发前手机装好 Naver Map、Kakao T、Papago，备好圆孔两脚转换插头；倘若航班延误或太累，可把胶囊小火车挪到 Day 3 上午，今晚只保留广安里夜景。"
+          },
+          {
+            id: "kr-d1-bus",
+            time: "12:00–13:15",
+            kind: "transport",
+            name: "机场豪华巴士 1 号线直达海云台",
+            address: "Gimhae Airport Limousine Stop Pillar 3",
+            lat: 35.1790,
+            lng: 128.9401,
+            reservation: "none",
+            reservationNote: "现场购票或刷卡上车。",
+            bookingUrl: "",
+            cost: { amount: 9500, note: "机场大巴约 ₩9,500/人（约 ¥50）；轻轨转地铁 2 号线虽只需 ₩2,000，但要在沙上站拎大箱子换乘。" },
+            note: "走出到达厅到 3 号立柱坐机场豪华巴士 1 号线，约 70 分钟直达海云台沙滩附近。4 人带大件行李选大巴最省力。"
+          },
+          {
+            id: "kr-d1-stay",
+            time: "13:30",
+            kind: "stay",
+            name: "住东横 INN 海云台店（连住 2 晚）",
+            address: "Toyoko Inn Busan Haeundae 2 (토요코인 부산해운대2)",
+            lat: 35.1601,
+            lng: 129.1592,
+            reservation: "none",
+            reservationNote: "4 人各自已订好 2 晚（11.12–11.14）。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "房费各自已含。" },
+            note: "步行去海云台地铁站、沙滩和猪肉汤饭一条街都很近。还没到入住时间就先把行李寄存在前台，轻装出去吃午饭。记得把韩文店名和地址存进手机备忘录方便打车。"
+          },
+          {
+            id: "kr-d1-lunch",
+            time: "13:45–14:45",
+            kind: "food",
+            name: "海云台猪肉汤饭（极东或秀国）",
+            address: "Haeundae Geukdong Dwaeji Gukbap (해운대 극동돼지국밥)",
+            lat: 35.1628,
+            lng: 129.1635,
+            reservation: "none",
+            reservationNote: "现场等位即可，翻台很快。",
+            bookingUrl: "",
+            cost: { amount: 10000, note: "人均 ₩9,000–11,000（约 ¥50–60）。" },
+            why: "釜山第一招牌热食，落地先喝一碗滚烫白汤暖身。",
+            note: "海云台站周边有 20 多家猪肉汤饭，挑极东猪肉汤饭、秀国猪肉汤饭或任意本地人多的店都不会踩雷。点白汤猪肉汤饭或大杂烩汤饭（含血肠猪杂），上桌后自己加韭菜葱花和一勺虾酱提鲜，配萝卜泡菜解腻。"
+          },
+          {
+            id: "kr-d1-capsule",
+            time: "16:40–17:15",
+            kind: "sight",
+            name: "海云台蓝线公园 · 天空胶囊列车（尾浦→青沙浦）",
+            address: "Haeundae Blueline Park Mipo Station (해운대블루라인파크 미포정거장)",
+            lat: 35.1585,
+            lng: 129.1725,
+            reservation: "required",
+            reservationNote: "冬季 18:00 末班，16:40–16:50 日落黄金档最抢手！迟到超 30 分钟车票作废且不退。分账备注：杨已付（程、张未转）。",
+            bookingUrl: "https://www.bluelinepark.com/",
+            cost: { amount: 11000, note: "官网 4 人舱单程 ₩44,000（约 ¥240），4 人独享一车平摊每人 ₩11,000；买单程即可，不要买高价往返。" },
+            why: "彩色复古小车厢架在半空沿海岸线慢行，尾浦往青沙浦方向右侧正对大海，16:40 发车刚好追上 17:15 日落。",
+            photo: photo("kr-d1-capsule"),
+            note: "从酒店步行或打车 10 分钟到尾浦（Mipo）站，务必提前 30 分钟到站扫码排队。车程约 20 分钟，4 人整车包舱拍照最出片。出发前 48 小时看一眼天气预报，若遇强风预警提前确认是否停运。"
+          },
+          {
+            id: "kr-d1-cheongsapo",
+            time: "17:15–18:15",
+            kind: "sight",
+            name: "青沙浦红白双子灯塔 + 海岸列车回尾浦",
+            address: "Cheongsapo Twin Lighthouses (청사포 쌍둥이등대)",
+            lat: 35.1609,
+            lng: 129.1932,
+            reservation: "none",
+            reservationNote: "灯塔免费拍照，回程海岸观光列车现场买单程票即可。",
+            bookingUrl: "",
+            cost: { amount: 7000, note: "海岸列车（海滩小火车）单程约 ₩7,000/人。" },
+            why: "灌篮高手同款跨海铁道口与红白灯塔，日落蓝调时刻光线最柔和。",
+            photo: photo("kr-d1-cheongsapo"),
+            note: "胶囊小火车在青沙浦站下车，步行几分钟到海边拍红白灯塔和日落余晖。拍完直接在青沙浦站坐地面海岸列车返回尾浦，不走回头路。"
+          },
+          {
+            id: "kr-d1-gwangan",
+            time: "19:00–20:30",
+            kind: "sight",
+            name: "广安里海滩看广安大桥夜景",
+            address: "Gwangalli Beach (광안리해수욕장)",
+            lat: 35.1532,
+            lng: 129.1186,
+            reservation: "none",
+            reservationNote: "全天免费开放。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "免费。" },
+            why: "广安大桥每晚 19:00 后亮灯，整片海湾夜景比白天的海云台更有氛围。",
+            photo: photo("kr-d1-gwangan"),
+            note: "坐地铁 2 号线从海云台站到广安站约 10 分钟，出站步行到沙滩。海边夜风冷，围巾帽子戴好。"
+          },
+          {
+            id: "kr-d1-dinner",
+            time: "晚饭",
+            kind: "food",
+            name: "广安里海鲜烤贝 / 韩式烤肉",
+            address: "Gwanganhaebyeon-ro, Suyeong-gu, Busan",
+            lat: 35.1540,
+            lng: 129.1195,
+            reservation: "none",
+            reservationNote: "现场挑店入座。",
+            bookingUrl: "",
+            cost: { amount: 40000, note: "生鱼片/烤扇贝/活章鱼+辣鱼汤人均 ₩30,000–50,000（约 ¥160–270）。" },
+            note: "避坑提示：贴着沙滩第一排的海景位普遍溢价 20%–30%，挑二线位置看广安大桥一样清楚划算；如果不想吃海鲜，后街也有很多韩式烤肉和牛排馆。21:00 左右坐地铁 2 号线 10 分钟回海云台休息。"
+          }
+        ]
+      },
+      {
+        id: "kr-d2",
+        date: "2026-11-13",
+        city: "釜山",
+        title: "老城山海一线：甘川文化村、札嘎其、松岛海上日落缆车",
+        items: [
+          {
+            id: "kr-d2-breakfast",
+            time: "08:30",
+            kind: "food",
+            name: "海云台早餐（EGG DROP 厚蛋吐司或汤饭）",
+            address: "Haeundae Station Exit 5/7",
+            lat: 35.1636,
+            lng: 129.1587,
+            reservation: "none",
+            reservationNote: "随到随买。",
+            bookingUrl: "",
+            cost: { amount: 7000, note: "EGG DROP / Isaac Toast 厚蛋烧三明治+美式人均 ₩5,000–7,000。" },
+            note: "吃完直接进海云台站坐地铁 2 号线到西面站，换乘 1 号线到南浦站（全程约 50 分钟），早出发避开旅行团。"
+          },
+          {
+            id: "kr-d2-gamcheon",
+            time: "10:00–12:00",
+            kind: "sight",
+            name: "甘川文化村",
+            address: "Gamcheon Culture Village (감천문화마을)",
+            lat: 35.0975,
+            lng: 129.0106,
+            reservation: "none",
+            reservationNote: "免费入村；小王子打卡点可能排队。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "门票免费。" },
+            why: "依山而建的阶梯式彩色房子，上午顺光拍照通透，人流也比下午少。",
+            photo: photo("kr-d2-gamcheon"),
+            note: "从南浦站 1 号出口出来，4 人直接打车约 10 分钟到甘川文化村山顶入口（平摊比坐小巴还省事），顺坡往下走不费膝盖。村里坡陡台阶多，一定穿好走的运动鞋。"
+          },
+          {
+            id: "kr-d2-jagalchi",
+            time: "12:15–13:30",
+            kind: "food",
+            name: "札嘎其市场 2 楼现捞海鲜 / 酱蟹午餐",
+            address: "Jagalchi Market (자갈치시장), 52 Jagalchihaean-ro",
+            lat: 35.0968,
+            lng: 129.0306,
+            reservation: "none",
+            reservationNote: "市场内直接选摊位。",
+            bookingUrl: "",
+            cost: { amount: 40000, note: "人均 ₩30,000–50,000（4 人合点大拼盘+酱蟹+辣鱼汤最划算）。" },
+            why: "韩国最大海鲜市场，一楼挑鲜活海产、二楼现做现吃。",
+            photo: photo("kr-d2-jagalchi"),
+            note: "从甘川打车 10 分钟直达札嘎其市场，推荐直奔 2 楼 C 区。避坑铁律：海鲜按斤称重加加工费，下单前务必让老板用计算器敲出包含座位费和加工费的总价再点头！"
+          },
+          {
+            id: "kr-d2-biff",
+            time: "13:45–15:30",
+            kind: "sight",
+            name: "南浦洞商圈 + BIFF 广场小吃 + 龙头山釜山塔",
+            address: "BIFF Square & Busan Tower (비프광장 / 부산타워)",
+            lat: 35.1008,
+            lng: 129.0325,
+            reservation: "none",
+            reservationNote: "街区和公园免费，登塔现场买票。",
+            bookingUrl: "",
+            cost: { amount: 8000, note: "BIFF 坚果黑糖饼、鱼糕串、辣炒年糕边走边吃人均约 ₩8,000。" },
+            why: "从札嘎其过马路即达，一条动线串起釜山老牌电影街小吃与港口俯瞰视角。",
+            photo: photo("kr-d2-biff"),
+            note: "先在 BIFF 广场吃刚出锅的元祖黑糖饼，再顺光复路扶梯上龙头山公园看釜山塔。若下午遇到大雨或大风导致松岛缆车停运，就把时间留给釜山塔观景台和南浦洞地下街。"
+          },
+          {
+            id: "kr-d2-songdo",
+            time: "16:30–17:30",
+            kind: "sight",
+            name: "松岛海上缆车（水晶透明车厢追海上日落）",
+            address: "Songdo Bay Station (송도해상케이블카 송도베이스테이션)",
+            lat: 35.0769,
+            lng: 129.0209,
+            reservation: "recommended",
+            reservationNote: "水晶车厢限流且每车刚好坐 4 人，建议提前 1 周在中文官网或 Klook/携程买票，选 16:50 前后登车看 17:15 日落。",
+            bookingUrl: "https://www.busanaircruise.co.kr/",
+            cost: { amount: 22000, note: "水晶透明底车厢往返 ₩22,000/人（约 ¥115），普通车厢往返 ₩17,000/人。" },
+            why: "松岛位于釜山西侧海岸，是釜山唯一能正面俯瞰黄海金色落日的跨海高空缆车，1.62 公里脚下全是海浪。",
+            photo: photo("kr-d2-songdo"),
+            note: "从南浦洞打车约 10 分钟到松岛海滨站。坐到对面天空公园站后，去瞭望台等蓝调时刻再坐缆车返回。注意：风速超 10m/s 时水晶车厢可能停运；若现场排队超 40 分钟可果断改逛松岛云端散步路或提前去西面。"
+          },
+          {
+            id: "kr-d2-seomyeon",
+            time: "18:00–19:30",
+            kind: "food",
+            name: "西面商圈晚餐（味赞王盐烤肉 / 松亭三代汤饭）",
+            address: "Seomyeon 1-beonga, Busanjin-gu (서면1번가)",
+            lat: 35.1554,
+            lng: 129.0595,
+            reservation: "none",
+            reservationNote: "热门烤肉店饭点小排 15–20 分钟。",
+            bookingUrl: "",
+            cost: { amount: 22000, note: "味赞王厚切盐烤五花肉人均约 ₩22,000；松亭三代猪肉汤饭约 ₩10,000。" },
+            note: "从松岛打车到南浦坐 1 号线 15 分钟到西面站。今天累计步数接近 2 万步，吃完在西面年轻人街区散步消食，19:30 左右坐 2 号线 25 分钟回海云台酒店。"
+          }
+        ]
+      },
+      {
+        id: "kr-d3",
+        date: "2026-11-14",
+        city: "首尔",
+        title: "影岛白浅滩收尾，中午 KTX 北上首尔逛明洞免税店",
+        items: [
+          {
+            id: "kr-d3-huinnyeoul",
+            time: "09:15–11:15",
+            kind: "sight",
+            name: "釜山影岛 · 白浅滩文化村（顺路接釜山站）",
+            address: "Huinnyeoul Culture Village, Yeongdo-gu, Busan (흰여울문화마을)",
+            lat: 35.0785,
+            lng: 129.0452,
+            reservation: "none",
+            reservationNote: "全天免费开放；悬崖海景咖啡馆 10:00 左右陆续开门。",
+            bookingUrl: "",
+            cost: { amount: 8000, note: "村落免费；海边咖啡或 Paris Baguette 早餐人均约 ₩8,000。" },
+            why: "悬崖边的蓝白文艺渔村，电影《辩护人》取景地，游客比甘川少得多，而且就在釜山站南侧的影岛上。",
+            photo: { ...photo("kr-d3-huinnyeoul"), city: "釜山" },
+            note: "路线纠偏：白浅滩在西边的影岛（不在松亭）！早上 08:30 退房后直接带行李坐地铁或打车到釜山站，把大箱子存进车站自助寄存柜，再打车 10 分钟上影岛逛白浅滩海边栈道，11:30 打车 10 分钟回釜山站吃便当上车，完全不折返。若想睡懒觉也可直接砍掉此站。"
+          },
+          {
+            id: "kr-d3-outlet",
+            time: "二选一",
+            kind: "sight",
+            name: "釜山机张 · 乐天东釜山奥特莱斯（购物替代线）",
+            address: "Lotte Premium Outlets Dongbusan (롯데프리미엄아울렛 동부산점)",
+            lat: 35.1923,
+            lng: 129.2130,
+            reservation: "none",
+            reservationNote: "10:30 才开门营业，去的话建议改订 13:30 之后的 KTX。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "逛店免费，购物按需。" },
+            why: "蓝白圣托里尼风海景奥莱，韩国本土户外与运动品牌折扣好，离海云台仅 15 分钟车程。",
+            note: "与上面的影岛白浅滩一东一西，只能二选一：如果全员更想买衣服鞋子，就把行李寄存海云台酒店，10:20 打车 15 分钟去东釜山奥莱逛 1.5 小时，再回酒店拿行李去釜山站。"
+          },
+          {
+            id: "kr-d3-ktx",
+            time: "12:30–15:15",
+            kind: "transport",
+            name: "KTX 高铁：釜山站 → 首尔站（含车站便当）",
+            address: "Busan Station (부산역)",
+            lat: 35.1152,
+            lng: 129.0422,
+            reservation: "required",
+            reservationNote: "周六中午是出行高峰，务必提前 1–2 周在 Korail 官网或 Korail Talk APP 订票选靠窗位！",
+            bookingUrl: "https://www.korail.com/global/eng/intro",
+            cost: { amount: 69000, note: "KTX 普通座 ₩59,800/人（4 人合计约 ¥1,280）+ 釜山站内韩式便当/紫菜包饭午餐约 ₩9,000。" },
+            note: "提前 30 分钟到釜山站，在站内买好热便当或紫菜包饭带上车吃（车程约 2 小时 44 分钟）。韩国高铁不检票直接上站台，对号入座。"
+          },
+          {
+            id: "kr-d3-stay",
+            time: "15:45",
+            kind: "stay",
+            name: "住 D安旅社东大门（连住 2 晚）",
+            address: "Dongdaemun Station Area, Jongno-gu, Seoul (동대문역)",
+            lat: 37.5714,
+            lng: 127.0095,
+            reservation: "none",
+            reservationNote: "各自已订好 2 晚（11.14–11.16）。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "房费各自已含。" },
+            note: "从首尔站坐地铁 1 号线到东大门站仅约 15 分钟，出站步行几分钟即达。首尔气温比釜山低 2–3℃，办完入住多加一件保暖层再出门。"
+          },
+          {
+            id: "kr-d3-myeongdong",
+            time: "17:00–19:30",
+            kind: "sight",
+            name: "明洞逛街 + 乐天 / 新世界免税店扫货",
+            address: "Lotte Duty Free Main Store, 30 Eulji-ro, Jung-gu, Seoul (롯데면세점 명동본점)",
+            lat: 37.5647,
+            lng: 126.9818,
+            reservation: "none",
+            reservationNote: "免税店 20:00 关门（新世界周末至 20:30），务必先逛免税店再吃晚饭！带好护照原件和回程航班号。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "逛街免费，免税购物按需。" },
+            why: "东大门坐 4 号线 10 分钟直达，乐天总店（9–12层，本土品牌与奢品最全）与新世界明洞店（8–12层，美妆多且人少）步行串联。",
+            photo: photo("kr-d3-myeongdong"),
+            note: "省钱技巧：线下试色看款，手机在乐天/新罗免税店 APP 领券网上下单，很多美妆比专柜低 2–3 折，4 人还能拼单凑满减，回程在仁川机场安检后直接提货不用拎回酒店。"
+          },
+          {
+            id: "kr-d3-dinner",
+            time: "19:30–21:00",
+            kind: "food",
+            name: "明洞饺子总店 / 王妃家烤肉 + 夜市小吃摊",
+            address: "Myeongdong Kyoja Main Store, 29 Myeongdong 10-gil (명동교자 본점)",
+            lat: 37.5626,
+            lng: 126.9856,
+            reservation: "none",
+            reservationNote: "明洞饺子饭点排队 20 分钟左右，翻台极快。",
+            bookingUrl: "",
+            cost: { amount: 30000, note: "明洞饺子人均 ₩12,000–18,000；若吃王妃家韩牛五花烤肉+街头小吃人均约 ₩30,000–40,000。" },
+            note: "明洞饺子必点浓郁鸡汤刀切面和皮薄爆汁手工蒸饺（泡菜偏辣重蒜）；想大口吃肉可选王妃家明洞总店。吃完逛一圈明洞主街小吃摊，21:30 坐 4 号线 10 分钟回东大门，明天早起冲景福宫。"
+          }
+        ]
+      },
+      {
+        id: "kr-d4",
+        date: "2026-11-15",
+        city: "首尔",
+        title: "首尔三面气质：景福宫北村古韵、圣水洞咖啡、弘大夜生活",
+        items: [
+          {
+            id: "kr-d4-breakfast",
+            time: "08:00",
+            kind: "food",
+            name: "东大门 24 小时土豆排骨汤早餐",
+            address: "Dongdaemun Station Exit 2/3 Alley",
+            lat: 37.5718,
+            lng: 127.0108,
+            reservation: "none",
+            reservationNote: "24 小时营业，直接进。",
+            bookingUrl: "",
+            cost: { amount: 10000, note: "土豆排骨汤或泡菜汤配米饭人均 ₩9,000–11,000。" },
+            note: "11 月首尔清晨接近 0℃，一锅热排骨汤吃饱抗冻。吃完坐 1 号线到钟路 3 街转 3 号线到景福宫站，约 20 分钟。"
+          },
+          {
+            id: "kr-d4-gyeongbokgung",
+            time: "09:00–11:00",
+            kind: "sight",
+            name: "景福宫 & 光化门守门将交接仪式（韩服免票）",
+            address: "Gyeongbokgung Palace, 161 Sajik-ro, Jongno-gu (경복궁)",
+            lat: 37.5796,
+            lng: 126.9770,
+            reservation: "recommended",
+            reservationNote: "宫殿门票现场买即可（穿韩服免票直接进）；若想挑款式好的韩服店，建议提前在 Klook/小红书约 08:30 到店选衣编发。",
+            bookingUrl: "https://royal.khs.go.kr/ENG/contents/E101010000.do",
+            cost: { amount: 20000, note: "租韩服 4 小时约 ₩20,000/人（免 ₩3,000 景福宫门票）；不穿韩服门票仅 ₩3,000。" },
+            why: "9 点第一波进宫避开大批旅游团，勤政殿与庆会楼秋末银杏红叶收尾非常出片，10:00 光化门有守门将换岗仪式。",
+            photo: photo("kr-d4-gyeongbokgung"),
+            note: "景福宫站 4 号或 5 号出口旁一排韩服租赁店，韩服里面记得穿低领保暖内衣！周日人少清静，拍完把韩服归还再去北村。"
+          },
+          {
+            id: "kr-d4-bukchon",
+            time: "11:15–12:30",
+            kind: "sight",
+            name: "北村韩屋村（北村路 11 街）",
+            address: "Bukchon-ro 11-gil, Jongno-gu, Seoul (북촌한옥마을)",
+            lat: 37.5826,
+            lng: 126.9836,
+            reservation: "none",
+            reservationNote: "核心观光红区仅限 10:00–17:00 对游客开放，切勿早于 10 点闯入！",
+            bookingUrl: "",
+            cost: { amount: 0, note: "免费。" },
+            why: "传统青瓦韩屋坡道尽头正对首尔现代天际线与南山塔。",
+            photo: photo("kr-d4-bukchon"),
+            note: "从景福宫东门步行约 15 分钟上坡即达。重要提醒：北村是真实居住区，现场有巡导员管理，拍照时保持轻声细语，不要拍居民敞开的院门。逛完顺台阶一路下坡就走进三清洞。"
+          },
+          {
+            id: "kr-d4-lunch",
+            time: "12:45–14:00",
+            kind: "food",
+            name: "土俗村参鸡汤 / 三清洞家常韩餐",
+            address: "Tosokchon Samgyetang, 5 Jahamun-ro 5-gil (토속촌삼계탕)",
+            lat: 37.5777,
+            lng: 126.9716,
+            reservation: "none",
+            reservationNote: "现场排队发号，院子座位多、队伍走得快。",
+            bookingUrl: "",
+            cost: { amount: 19000, note: "招牌乌骨/原味人参鸡汤人均 ₩19,000–23,000，附赠一小杯人参酒。" },
+            note: "首尔最经典的韩屋参鸡汤老店。避坑灵活方案：如果门口排队超过 30 分钟且大家饿了，不用死磕，直接留在三清洞主街挑一家顺眼的韩式大酱汤或石锅拌饭小馆，氛围更清静。"
+          },
+          {
+            id: "kr-d4-seongsu",
+            time: "14:30–16:30",
+            kind: "sight",
+            name: "圣水洞咖啡街 & 潮牌买手店",
+            address: "Yeonmujang-gil, Seongsu-dong, Seongdong-gu (성수동 카페거리)",
+            lat: 37.5446,
+            lng: 127.0560,
+            reservation: "none",
+            reservationNote: "街区免费，个别香氛快闪店现场扫码排号。",
+            bookingUrl: "",
+            cost: { amount: 9000, note: "独立工业风咖啡馆饮品+盐面包人均约 ₩9,000。", cat: "food" },
+            why: "老鞋厂仓库改造成的首尔新晋潮流腹地，Dior 概念店、Tamburins、大林仓库和本土设计师买手店全集中在这几条街。",
+            photo: photo("kr-d4-seongsu"),
+            note: "从安国站坐 3 号线到乙支路 3 街换乘 2 号线到圣水站（约 25 分钟），3 号或 4 号出口出来就是演武场街。走累了找一家工厂风咖啡馆坐一小时回血。"
+          },
+          {
+            id: "kr-d4-hongdae",
+            time: "17:30–21:00",
+            kind: "sight",
+            name: "弘大街头路演 & Doma 烤肉晚餐",
+            address: "Hongdae Walking Street, Mapo-gu, Seoul (홍대 걷고싶은거리)",
+            lat: 37.5559,
+            lng: 126.9241,
+            reservation: "none",
+            reservationNote: "烤肉店 17:30–18:00 进店基本不用排长队。",
+            bookingUrl: "",
+            cost: { amount: 35000, note: "Doma（동마）韩牛/猪五花烤肉配麻药大酱汤人均约 ₩30,000–40,000。", cat: "food" },
+            why: "周日傍晚弘大步行街有大学生舞蹈与乐队街头表演，青春感拉满。",
+            photo: photo("kr-d4-hongdae"),
+            note: "从圣水站坐地铁 2 号线直达弘大入口站（约 30 分钟）。晚餐优先选本地人多的烤肉店（如弘大 Doma），4 人先点 2–3 人份肉加一份热汤刚好。明天要赶国际航班，不泡酒吧，21:30 坐 2 号线回东大门（约 35 分钟）。"
+          }
+        ]
+      },
+      {
+        id: "kr-d5",
+        date: "2026-11-16",
+        city: "首尔",
+        title: "梨泰院早午餐、东大门免税补货与仁川机场退税返京",
+        items: [
+          {
+            id: "kr-d5-itaewon",
+            time: "09:30–11:15",
+            kind: "sight",
+            name: "梨泰院 / 汉南洞街逛 & 西式 Brunch 早午餐",
+            address: "Itaewon-ro, Yongsan-gu, Seoul (이태원)",
+            lat: 37.5345,
+            lng: 126.9946,
+            reservation: "none",
+            reservationNote: "早午餐店 09:30–10:00 开门，早到无需等位。",
+            bookingUrl: "",
+            cost: { amount: 22000, note: "班尼迪克蛋/松饼 Brunch 或特色餐厅人均 ₩15,000–28,000。", cat: "food" },
+            why: "吃腻了四天韩餐，最后一天上午在异国风情坡道街区换口味吃顿轻松 Brunch，顺逛汉南洞香氛服装小店。",
+            photo: photo("kr-d5-itaewon"),
+            note: "08:45 先在东大门旅社退房把行李寄存在前台，坐地铁 6 号线（东庙前/新堂方向）约 20 分钟到梨泰院站。若大家免税补货清单很长，也可直接砍掉梨泰院，把整个上午留给东大门。"
+          },
+          {
+            id: "kr-d5-ddp",
+            time: "11:30–12:45",
+            kind: "sight",
+            name: "东大门现代百货免税店补货 & DDP 广场",
+            address: "Dongdaemun Design Plaza & Hyundai Duty Free (동대문디자인플라자)",
+            lat: 37.5665,
+            lng: 127.0092,
+            reservation: "none",
+            reservationNote: "买完务必收好所有纸质退税单（Tax Refund），不要塞进托运行李箱底！",
+            bookingUrl: "",
+            cost: { amount: 0, note: "逛街免费，补货按需。" },
+            why: "就在住宿点旁边，查漏补缺伴手礼后回旅社拿行李零绕路。",
+            photo: photo("kr-d5-ddp"),
+            note: "坐 6 号线回东大门，去现代百货免税店做最后补货，同时打开线上免税店 APP 核对所有待提货订单与护照号。12:45 准时回旅社取行李出发去首尔站。"
+          },
+          {
+            id: "kr-d5-arex",
+            time: "13:00–14:00",
+            kind: "transport",
+            name: "首尔站 AREX 直达列车前往仁川机场",
+            address: "Seoul Station Airport Railroad B2 (서울역 공항철도)",
+            lat: 37.5547,
+            lng: 126.9707,
+            reservation: "recommended",
+            reservationNote: "AREX 直达列车对号入座，可提前在官网/Klook 买二维码票或现场自助机购票；注意看清 CA136 在仁川 T1 航站楼下车。",
+            bookingUrl: "https://www.arex.or.kr/main.do",
+            cost: { amount: 11000, note: "AREX 直达列车约 ₩11,000/人（43 分钟直达仁川机场 T1，普通站站停列车约 60 分钟）。" },
+            note: "从东大门坐 1 号线或打车到首尔站地下 B2 乘车，确保 13:45–14:00 前抵达仁川国际机场，给退税和免税提货留足 2.5 小时以上。"
+          },
+          {
+            id: "kr-d5-return",
+            time: "14:00–18:00",
+            kind: "transport",
+            name: "仁川机场退税 + 免税提货 + CA136 飞回北京",
+            address: "Incheon International Airport Terminal 1 (인천국제공항 제1여객터미널)",
+            lat: 37.4602,
+            lng: 126.4407,
+            reservation: "none",
+            reservationNote: "国航 CA136（16:30 起飞 → 18:00 抵达北京首都）机票已出。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "已含在已出机票里。" },
+            note: "仁川机场丝滑退税 6 步口诀：① 先办登机牌，跟柜台说有退税商品先不托运箱子；② 带退税单+护照去自助退税机扫描（单笔退税额高需海关柜台盖章抽查商品）；③ 回柜台托运行李；④ 过安检与边检；⑤ 在登机口层退税窗口扫码退回支付宝或领现金；⑥ 去免税品引渡场凭护照+登机牌领取线上免税店战利品，登机返京！"
+          }
+        ]
+      }
+    ]
+  }
+];
