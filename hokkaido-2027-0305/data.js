@@ -1,6 +1,8 @@
 const PHOTOS = {
   "hk-d1-susukino": ["Chuoterminal · CC BY 3.0", "Sapporo_tram_Susukino_station_platform_20160207_205636.jpg"],
   "hk-d2-otaru": ["t-konno · CC BY-SA 3.0", "小樽雪あかりの路2013（Otaru_Snow_Light_Path_2013）_-_panoramio_(3).jpg"],
+  "hk-d2-asahikawa": ["ほくなん · Public domain", "SciPal_Asahikawa_Hokkaido_Japan.jpg"],
+  "hk-d2-asahiyama": ["Lionel Leong · CC BY-SA 2.0", "Winter_in_Hokkaido(Asahiyama_Zoo_旭山動物園)_-_03_(26152902302).jpg"],
   "hk-d3-jozankei": ["MIKI Yoshihito · CC BY 2.0", "Jozankei_Onsen,_Sapporo,_Hokkaido_Prefecture;_January_2018_(22).jpg"],
   "hk-d4-odori": ["ノボホショコロトソ · CC BY 4.0", "Sapporo_TV_Tower_and_Odori_Park_01.jpg"],
   "hk-d4-moiwa": ["掬茶 · CC BY-SA 4.0", "City_nightscape_of_Sapporo_from_Mt._Moiwa_20260703b.jpg"]
@@ -14,7 +16,7 @@ function photo(id) {
 window.SEED_TRIPS = [
   {
     id: "hokkaido-2027-0305",
-    title: "北海道 · 札幌休闲 5 日",
+    title: "北海道 · 札幌休闲看雪 5 日",
     start: "2027-03-05",
     end: "2027-03-09",
     summary: "",
@@ -36,14 +38,15 @@ window.SEED_TRIPS = [
       ],
       tips: [
         "中国大陆护照赴日旅游签通常需通过指定旅行社代办，不直接在线填 ImmiAccount 式表格",
-        "不要把护照号、签证申请号写进本页"
+        "不要把护照号、签证申请号写进本页",
+        "3 月初札幌市区积雪不稳定：有残雪就逛市景；想看厚雪优先定山溪，市区几乎化光则把第 2 天改成旭川一日"
       ],
       disclaimer: "政策、费用与材料清单以日本驻华使领馆及指定代办社为准；本页只作出行准备清单，不构成签证代理或获批承诺。"
     },
     budget: {
       currency: "JPY",
       party: "1 人独自出行",
-      basis: "除已订国际/衔接机票外的当地待花，按休闲游省钱口径估算（商务酒店 + 公交/JR + 简餐）。目标合计约合人民币 3,000 元内；若 3 月酒店偏贵，优先压住宿到每晚 ¥7,000 左右或改胶囊/胶囊式商务酒店。",
+      basis: "除已订国际/衔接机票外的当地待花，按休闲游省钱口径估算（商务酒店 + 公交/JR + 简餐）。目标合计约合人民币 3,000 元内；若 3 月酒店偏贵，优先压住宿到每晚 ¥7,000 左右。看雪策略：定山溪保底雪景；若札幌/小樽积雪很少，第 2 天改旭川（JR，不租车），交通会多花约 ¥2,500–3,500。",
       cnyRate: 0.0418,
       rateDate: "2026-11-16",
       extras: [
@@ -54,10 +57,10 @@ window.SEED_TRIPS = [
           note: "使领馆规费 + 常见代办服务费合计约 ¥200–400 人民币，按 ¥300 备；出签前支付，不计入下方日元待花合计时可对照。"
         },
         {
-          label: "当地交通（Kitaca/IC + JR 小樽往返 + 定山溪巴士）",
+          label: "当地交通（机场快线 + 市内 + 小樽或旭川 JR + 定山溪巴士）",
           cat: "transport",
-          amount: 8500,
-          note: "新千岁↔札幌机场快线、市内地铁、JR 到小樽往返、定山溪巴士往返约估。"
+          amount: 10000,
+          note: "默认含小樽往返；若改旭川看雪，JR 往返约 ¥4,500–5,500，比小樽贵，总额按此条机动。"
         },
         {
           label: "便利店/简餐机动",
@@ -156,35 +159,50 @@ window.SEED_TRIPS = [
             bookingUrl: "",
             cost: { amount: 1200, note: "一碗拉面约 ¥900–1,400。" },
             photo: photo("hk-d1-susukino"),
-            note: "落地日只安排一件事：吃热的、早点睡。横丁人多可改去一条街外的单店味噌拉面。"
+            note: "落地日只安排一件事：吃热的、早点睡。顺便看一眼街上积雪厚不厚，并查明天小樽 vs 旭川天气预报，决定第 2 天走哪条。"
           }
         ]
       },
       {
         id: "hk-d2",
         date: "2027-03-06",
-        city: "小樽",
-        title: "JR 一日小樽：运河、仓库街与慢走",
+        city: "小樽 / 旭川",
+        title: "看雪日：默认小樽；市区几乎无雪则改旭川",
         items: [
+          {
+            id: "hk-d2-decide",
+            time: "出发前",
+            kind: "sight",
+            name: "今早怎么选：小樽还是旭川",
+            address: "Sapporo Station",
+            lat: 43.0686,
+            lng: 141.3508,
+            reservation: "none",
+            reservationNote: "",
+            bookingUrl: "https://www.jma.go.jp/bosai/forecast/",
+            cost: { amount: 0, note: "免费。" },
+            why: "3 月初札幌平原积雪一年差一年，当天看地面和预报再定，比死守小樽更稳。",
+            note: "默认 A：小樽（近、轻松，有残雪就很出片）。改走 B：旭川（内陆更冷、积雪通常更厚，JR 约 1.5 小时，不租车）。两者只选一天，别两头跑。"
+          },
           {
             id: "hk-d2-jr",
             time: "09:30–10:20",
             kind: "transport",
-            name: "JR 札幌 → 小樽",
+            name: "方案 A · JR 札幌 → 小樽",
             address: "Sapporo Station",
             lat: 43.0686,
             lng: 141.3508,
             reservation: "none",
             reservationNote: "普通车刷 IC 即可，不必指定席。",
             bookingUrl: "",
-            cost: { amount: 0, note: "往返约 ¥1,500–1,800，已计入预算里的当地交通总额。" },
-            note: "从札幌站坐函馆本线往小樽，约 30–45 分钟。雪天人行道滑，鞋子要有纹路。"
+            cost: { amount: 0, note: "往返约 ¥1,500–1,800，已计入当地交通。" },
+            note: "函馆本线约 30–45 分钟。雪天人行道滑，鞋子要有纹路。若已决定去旭川，跳过本条，改坐特急到旭川。"
           },
           {
             id: "hk-d2-canal",
             time: "10:30–12:00",
             kind: "sight",
-            name: "小樽运河与仓库群散步",
+            name: "方案 A · 小樽运河与仓库群（看残雪街景）",
             address: "Otaru Canal, Otaru",
             lat: 43.1991,
             lng: 141.0064,
@@ -193,50 +211,67 @@ window.SEED_TRIPS = [
             bookingUrl: "",
             cost: { amount: 0, note: "免费。" },
             photo: photo("hk-d2-otaru"),
-            why: "北海道最轻松的经典街景，适合一个人慢慢拍、慢慢走。",
-            note: "沿着运河走到堺町通方向。3 月初可能还有残雪；风大时帽子和手套别省。"
+            why: "近郊最轻松的雪街/运河组合；有积雪时一个人慢慢拍刚好。",
+            note: "沿运河走到堺町通。若到站发现雪已化光、只剩泥水，也不必硬撑整天——可提早回札幌，把体力留给明天定山溪。"
           },
           {
-            id: "hk-d2-lunch",
+            id: "hk-d2-otaru-lunch",
             time: "12:30",
             kind: "food",
-            name: "小樽海鲜丼或烤海鲜午饭",
+            name: "方案 A · 小樽海鲜丼午饭",
             address: "Otaru Sankaku Market / Sakaimachi area",
             lat: 43.1975,
             lng: 141.0089,
             reservation: "none",
-            reservationNote: "市场或堺町通附近选一家坐得住的店。",
+            reservationNote: "",
             bookingUrl: "",
-            cost: { amount: 2200, note: "海鲜丼约 ¥1,800–2,800；想省钱可便利店 + 一块寿司拼盘。" },
-            note: "一个人别点整桌刺身拼盘。吃完可去音乐盒堂或玻璃店随便逛，不强迫购物。"
+            cost: { amount: 2200, note: "海鲜丼约 ¥1,800–2,800；省钱可便利店。" },
+            note: "只在走小樽方案时吃这里。吃完堺町通咖啡歇脚，16:30 前赶回 JR。"
           },
           {
-            id: "hk-d2-sakaimachi",
-            time: "14:00–16:00",
+            id: "hk-d2-asahikawa-jr",
+            time: "08:40–10:20",
+            kind: "transport",
+            name: "方案 B · JR 特急 札幌 → 旭川（备选看雪）",
+            address: "Sapporo Station → Asahikawa Station",
+            lat: 43.7634,
+            lng: 142.3602,
+            reservation: "recommended",
+            reservationNote: "特急 Lilac/Kamui 可买指定席更稳；自由席也行。",
+            bookingUrl: "https://www.jreast.co.jp/",
+            cost: { amount: 0, note: "往返约 ¥4,500–5,500，比小樽贵，从交通机动预算出。" },
+            note: "仅当札幌/小樽积雪很少时启用。单程约 1 小时 20–30 分。不租车；当天必须赶回札幌住。"
+          },
+          {
+            id: "hk-d2-asahiyama",
+            time: "11:00–14:30",
             kind: "sight",
-            name: "堺町通闲逛 + 咖啡歇脚",
-            address: "Sakaimachi-dori, Otaru",
-            lat: 43.1958,
-            lng: 141.0105,
+            name: "方案 B · 旭山动物园冬景（备选）",
+            address: "Asahiyama Zoo, Asahikawa",
+            lat: 43.7682,
+            lng: 142.4786,
+            reservation: "none",
+            reservationNote: "冬季常缩短开园；出发前查官网时间。",
+            bookingUrl: "https://www.city.asahikawa.hokkaido.jp/asahiyamazoo/",
+            cost: { amount: 1000, note: "门票约 ¥1,000；巴士往返另计约 ¥800。" },
+            photo: photo("hk-d2-asahiyama"),
+            why: "内陆雪通常比札幌厚，企鹅散步/雪地动物展是「真的在看雪」的一天。",
+            note: "旭川站前坐巴士去动物园。穿防滑靴。若不想看动物，可改在旭川站周边河畔/公园拍雪景（见下一条）。"
+          },
+          {
+            id: "hk-d2-asahikawa-town",
+            time: "15:00–16:30",
+            kind: "sight",
+            name: "方案 B · 旭川站前雪街与咖啡收尾",
+            address: "Asahikawa Station area",
+            lat: 43.7634,
+            lng: 142.3602,
             reservation: "none",
             reservationNote: "",
             bookingUrl: "",
             cost: { amount: 600, note: "咖啡约 ¥500–800。" },
-            note: "休闲游核心是留空白。累了就坐咖啡馆看窗外，16:30 前再回 JR 站即可。"
-          },
-          {
-            id: "hk-d2-back",
-            time: "17:00–18:00",
-            kind: "transport",
-            name: "JR 小樽 → 札幌",
-            address: "Otaru Station",
-            lat: 43.1971,
-            lng: 140.9941,
-            reservation: "none",
-            reservationNote: "",
-            bookingUrl: "",
-            cost: { amount: 0, note: "已计入当地交通。" },
-            note: "晚上回薄野吃汤咖喱或成吉思汗烤肉都行，控制在 ¥1,500–2,500。"
+            photo: photo("hk-d2-asahikawa"),
+            note: "赶 17 点前后特急回札幌即可。晚上薄野吃饭，控制 ¥1,500–2,500。"
           }
         ]
       },
@@ -244,7 +279,7 @@ window.SEED_TRIPS = [
         id: "hk-d3",
         date: "2027-03-07",
         city: "定山溪",
-        title: "定山溪泡汤日：巴士往返，不赶场",
+        title: "定山溪：泡汤 + 本趟最稳的雪景保底",
         items: [
           {
             id: "hk-d3-bus",
@@ -258,13 +293,13 @@ window.SEED_TRIPS = [
             reservationNote: "可现场买票；旺季或周末建议提前在官网/便利店看班次。",
             bookingUrl: "https://www.chuo-bus.co.jp/",
             cost: { amount: 0, note: "往返约 ¥1,500–2,000，已计入当地交通。" },
-            note: "不租车。巴士约 70–80 分钟到定山溪。确认末班回札幌时间，下午泡完一定要赶上。"
+            note: "不租车。山谷海拔更高，3 月初比市区更容易还有积雪——这是「札幌不下雪」时的主保底。确认末班回札幌时间。"
           },
           {
             id: "hk-d3-onsen",
             time: "11:30–15:30",
             kind: "sight",
-            name: "定山溪温泉·日归入浴",
+            name: "定山溪温泉·日归入浴（雪中汤）",
             address: "Jozankei Onsen, Minami-ku, Sapporo",
             lat: 42.965,
             lng: 141.1636,
@@ -273,8 +308,8 @@ window.SEED_TRIPS = [
             bookingUrl: "https://jozankei.jp/",
             cost: { amount: 2000, note: "日归入浴约 ¥1,500–3,000，含毛巾另计。" },
             photo: photo("hk-d3-jozankei"),
-            why: "这趟最核心的放松：雪景山谷里泡温泉，一个人刚刚好。",
-            note: "带换洗衣物与小毛巾。有文身需提前确认馆方规定。泡完在旅馆食堂或二楼简餐即可，不必再赶别的景点。"
+            why: "泡汤是目标，山谷残雪是加分；哪怕市区化光，这里仍常能看见雪景。",
+            note: "带换洗衣物与小毛巾。有文身需提前确认馆方规定。泡前先在河岸/桥边走一圈拍雪，再进浴场。不必再赶别的景点。"
           },
           {
             id: "hk-d3-lunch",
@@ -326,7 +361,7 @@ window.SEED_TRIPS = [
             cost: { amount: 0, note: "公园免费；若上塔另计约 ¥1,000，可选。" },
             photo: photo("hk-d4-odori"),
             why: "札幌市中心最轻松的散步轴，一个人不用赶行程。",
-            note: "3 月积雪可能未化完。沿着公园走到狸小路方向，需要买伴手礼再进店。"
+            note: "有残雪就当「城市雪景」拍；若已经化光，把看雪期待放在昨天定山溪/前天旭川即可，今天专注吃与夜景。"
           },
           {
             id: "hk-d4-lunch",
