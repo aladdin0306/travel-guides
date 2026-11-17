@@ -1,4 +1,11 @@
-const STORAGE_KEY = "travel-guides-v2";
+function storageScopeKey() {
+  const raw = String(location.pathname || "/")
+    .replace(/\/index\.html$/i, "/")
+    .replace(/\/+$/, "") || "/";
+  return `travel-guides-v3:${raw}`;
+}
+const STORAGE_KEY = storageScopeKey();
+const LEGACY_STORAGE_KEY = "travel-guides-v2";
 const KIND = { sight: "景点", food: "餐厅", transport: "交通", stay: "住宿" };
 const FLAG = { required: "必须预约", recommended: "建议预约", none: "不用预约" };
 const KIND_ICON = { sight: "camera", food: "food", transport: "bus", stay: "bed" };
@@ -62,7 +69,8 @@ const ICONS = {
   food: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
   bus: '<path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/>',
   bed: '<path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>',
-  wallet: '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>'
+  wallet: '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>',
+  passport: '<path d="M2 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2Z"/><path d="M12 5v16"/><path d="M6 10h2"/><path d="M6 14h2"/><circle cx="16" cy="12" r="2"/>'
 };
 
 function icon(name) {
@@ -79,6 +87,7 @@ let markers = [];
 let dayFilter = "all";
 let bookingsOpen = false;
 let budgetOpen = false;
+let visaOpen = false;
 let editing = null;
 const weatherCache = new Map();
 
@@ -89,33 +98,109 @@ const form = document.querySelector("#editor-form");
 const dayEditor = document.querySelector("#day-editor");
 const dayForm = document.querySelector("#day-editor-form");
 const mapFab = document.querySelector("#mobile-map-fab");
+const seedUpdateBtn = document.querySelector("#seed-update-btn");
+const resetLocalBtn = document.querySelector("#reset-local-btn");
 let editingDayId = null;
 let returnScrollY = null;
 let returnStopId = "";
 let lastItineraryY = 0;
 
+function seedHash(obj) {
+  const str = JSON.stringify(obj);
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i += 1) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return (h >>> 0).toString(36);
+}
+
+const SEED_LIST = upgrade(structuredClone(window.SEED_TRIPS || []));
+const SEED_BY_ID = new Map(SEED_LIST.map((item) => [item.id, item]));
+const SEED_HASHES = new Map(SEED_LIST.map((item) => [item.id, seedHash(item)]));
+
+function urlRequestedTripId() {
+  try {
+    const fromQuery = new URLSearchParams(location.search).get("trip");
+    if (fromQuery) return fromQuery;
+    const hash = location.hash.replace(/^#/, "");
+    if (hash.startsWith("trip=")) return new URLSearchParams(hash).get("trip") || "";
+  } catch (_) {}
+  return "";
+}
+
 function load() {
-  const seed = structuredClone(window.SEED_TRIPS);
+  const seed = upgrade(structuredClone(window.SEED_TRIPS || []));
+  const seedIds = new Set(seed.map((item) => item.id));
+  const validStopIds = new Set(seed.flatMap((t) => (t.days || []).flatMap((d) => (d.items || []).map((it) => it.id))));
   let booked = {};
-  let tripId = seed[0].id;
+  let visaChecks = {};
+  let editedTrips = {};
+  let deletedSeedIds = [];
+  let tripId = seed[0] ? seed[0].id : "";
   let origin = "";
   let trips = seed;
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-    if (saved) {
-      booked = saved.booked || {};
-      tripId = saved.tripId || tripId;
+    if (saved && typeof saved === "object") {
+      booked = saved.booked && typeof saved.booked === "object" ? saved.booked : {};
+      visaChecks = saved.visaChecks && typeof saved.visaChecks === "object" ? saved.visaChecks : {};
+      editedTrips = saved.editedTrips && typeof saved.editedTrips === "object" ? saved.editedTrips : {};
+      deletedSeedIds = Array.isArray(saved.deletedSeedIds) ? saved.deletedSeedIds : [];
       origin = saved.origin || "";
-      if (Array.isArray(saved.trips) && saved.trips.length) {
-        const savedById = new Map(upgrade(saved.trips).map((item) => [item.id, item]));
-        const mergedSeed = seed.map((item) => savedById.get(item.id) || item);
-        const seedIds = new Set(seed.map((item) => item.id));
-        const extras = [...savedById.values()].filter((item) => !seedIds.has(item.id));
-        trips = [...mergedSeed, ...extras];
+      const deletedSet = new Set(deletedSeedIds);
+      const customList = upgrade(Array.isArray(saved.customTrips) ? saved.customTrips : []);
+      const customById = new Map(customList.map((item) => [item.id, item]));
+      const userCreated = customList.filter((item) => !seedIds.has(item.id));
+      const mergedSeed = [];
+      for (const item of seed) {
+        if (deletedSet.has(item.id)) continue;
+        if (editedTrips[item.id] && customById.has(item.id)) {
+          mergedSeed.push(customById.get(item.id));
+        } else {
+          delete editedTrips[item.id];
+          mergedSeed.push(item);
+        }
+      }
+      const nextTrips = [...userCreated, ...mergedSeed];
+      trips = nextTrips.length ? nextTrips : seed;
+      if (saved.tripId && trips.some((item) => item.id === saved.tripId)) {
+        tripId = saved.tripId;
+      }
+    } else {
+      // Migrate only checkbox ticks for matching IDs from legacy v2 storage (never stale trip bodies)
+      const legacy = JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || "null");
+      if (legacy && typeof legacy === "object") {
+        if (legacy.booked && typeof legacy.booked === "object") {
+          for (const [k, v] of Object.entries(legacy.booked)) {
+            if (v === true && validStopIds.has(k)) booked[k] = true;
+          }
+        }
+        if (legacy.visaChecks && typeof legacy.visaChecks === "object") {
+          for (const id of seedIds) {
+            if (legacy.visaChecks[id] && typeof legacy.visaChecks[id] === "object") {
+              visaChecks[id] = legacy.visaChecks[id];
+            }
+          }
+        }
       }
     }
   } catch (_) { /* keep the seed trip */ }
-  return { trips, booked, tripId, origin };
+  const reqTrip = urlRequestedTripId();
+  if (reqTrip && trips.some((item) => item.id === reqTrip)) {
+    tripId = reqTrip;
+  } else if (!trips.some((item) => item.id === tripId) && trips[0]) {
+    tripId = trips[0].id;
+  }
+  return { trips, booked, visaChecks, editedTrips, deletedSeedIds, tripId, origin };
+}
+
+function markTripEdited(id) {
+  if (!id) return;
+  if (!state.editedTrips || typeof state.editedTrips !== "object") state.editedTrips = {};
+  if (SEED_BY_ID.has(id) && !state.editedTrips[id]) {
+    state.editedTrips[id] = SEED_HASHES.get(id) || "edited";
+  }
 }
 
 function upgrade(trips) {
@@ -127,14 +212,96 @@ function upgrade(trips) {
 
 function save() {
   if (!(window.TRAVEL_SHARE && window.TRAVEL_SHARE.isSharedRoute())) {
+    const edited = state.editedTrips || {};
+    const customTrips = state.trips.filter((item) => !SEED_BY_ID.has(item.id) || Boolean(edited[item.id]));
     localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      trips: state.trips,
+      customTrips,
+      editedTrips: edited,
+      deletedSeedIds: state.deletedSeedIds || [],
       booked: state.booked,
+      visaChecks: state.visaChecks || {},
       tripId: state.tripId,
       origin: state.origin
     }));
   }
   window.dispatchEvent(new CustomEvent("travelguide:save"));
+}
+
+const VISA_STATUS = {
+  required: { label: "需要提前办签", tone: "due" },
+  visa_free: { label: "免签 / 过境免签", tone: "done" },
+  on_arrival: { label: "落地签", tone: "due" },
+  eta: { label: "电子旅行许可 / ETA", tone: "due" },
+  already_have: { label: "已有有效签证", tone: "done" },
+  not_needed: { label: "无需签证", tone: "done" }
+};
+
+function visaChecksFor(tripId) {
+  if (!state.visaChecks || typeof state.visaChecks !== "object") state.visaChecks = {};
+  if (!state.visaChecks[tripId] || typeof state.visaChecks[tripId] !== "object") {
+    state.visaChecks[tripId] = {};
+  }
+  return state.visaChecks[tripId];
+}
+
+function renderVisa(current) {
+  const visa = current && current.visa;
+  if (!visa || typeof visa !== "object") return "";
+  const statusKey = String(visa.status || "required");
+  if (statusKey === "not_needed") return "";
+  const meta = VISA_STATUS[statusKey] || VISA_STATUS.required;
+  const docs = Array.isArray(visa.docs) ? visa.docs.filter((doc) => doc && doc.label) : [];
+  const tips = Array.isArray(visa.tips) ? visa.tips.filter(Boolean) : [];
+  const checks = visaChecksFor(current.id);
+  const doneCount = docs.filter((doc) => checks[doc.id || doc.label]).length;
+  const allDone = docs.length > 0 && doneCount === docs.length;
+  const tone = allDone && docs.length ? "done" : meta.tone;
+  const applyUrl = safeUrl(visa.applyUrl);
+  const guideUrl = safeUrl(visa.guideUrl);
+  const title = visa.type || meta.label;
+  const subtitleParts = [
+    visa.passport,
+    visa.timeline,
+    docs.length ? `材料 ${doneCount}/${docs.length}` : ""
+  ].filter(Boolean);
+  return `
+    <button type="button" class="visa-banner ${tone}" id="toggle-visa" aria-expanded="${visaOpen}">
+      <span class="banner-icon">${icon("passport")}</span>
+      <span class="banner-text">
+        <b>签证准备 · ${esc(title)}</b>
+        <small>${esc(subtitleParts.join(" · ") || meta.label)}</small>
+      </span>
+      <span class="banner-cta">${visaOpen ? "收起" : "看清单"}<span class="chev${visaOpen ? " up" : ""}">${icon("chevron")}</span></span>
+    </button>
+    ${visaOpen ? `<section class="visa-panel">
+      <div class="visa-meta">
+        ${visa.passport ? `<p><b>持照</b><span>${esc(visa.passport)}</span></p>` : ""}
+        ${visa.type ? `<p><b>类型</b><span>${esc(visa.type)}</span></p>` : ""}
+        ${visa.feeNote ? `<p><b>费用</b><span>${esc(visa.feeNote)}</span></p>` : ""}
+        ${visa.timeline ? `<p><b>时间</b><span>${esc(visa.timeline)}</span></p>` : ""}
+      </div>
+      ${(applyUrl || guideUrl) ? `<div class="visa-actions">
+        ${applyUrl ? `<a class="btn btn-sm btn-primary" href="${esc(applyUrl)}" target="_blank" rel="noopener">${icon("external")}官方申请入口</a>` : ""}
+        ${guideUrl ? `<a class="btn btn-sm" href="${esc(guideUrl)}" target="_blank" rel="noopener">${icon("external")}政策说明页</a>` : ""}
+      </div>` : ""}
+      ${docs.length ? `<h3 class="section-title">材料清单</h3>
+      <ul class="visa-docs">
+        ${docs.map((doc) => {
+          const id = String(doc.id || doc.label);
+          const checked = Boolean(checks[id]);
+          return `<li>
+            <label class="visa-doc${checked ? " on" : ""}">
+              <input type="checkbox" data-visa-check="${esc(id)}" ${checked ? "checked" : ""} />
+              <span><b>${esc(doc.label)}</b>${doc.note ? `<small>${esc(doc.note)}</small>` : ""}</span>
+            </label>
+          </li>`;
+        }).join("")}
+      </ul>` : ""}
+      ${tips.length ? `<h3 class="section-title">提醒</h3>
+      <ul class="visa-tips">${tips.map((tip) => `<li>${esc(tip)}</li>`).join("")}</ul>` : ""}
+      <p class="visa-note">${esc(visa.disclaimer || "政策、费用与审理时间以移民局官网为准；本页只作出行准备清单，不构成签证代理或获批承诺。")}</p>
+    </section>` : ""}
+  `;
 }
 
 function trip() {
@@ -808,6 +975,8 @@ function renderMain() {
         </div>`).join("") : `<p class="muted">这趟没有还要处理的预约。</p>`}
     </section>` : ""}
 
+    ${renderVisa(current)}
+
     ${renderBudget(current)}
 
     <nav class="day-tabs" aria-label="选择哪一天">
@@ -1228,12 +1397,49 @@ if (mapFab) {
   });
 }
 
+function syncLocalSeedButtons() {
+  const current = trip();
+  const isShared = Boolean(window.TRAVEL_SHARE && window.TRAVEL_SHARE.isSharedRoute());
+  const baseHash = current && !isShared && SEED_BY_ID.has(current.id) && state.editedTrips
+    ? state.editedTrips[current.id]
+    : "";
+  const hasLocalEdit = Boolean(baseHash);
+  const hasSeedUpdate = Boolean(hasLocalEdit && baseHash !== SEED_HASHES.get(current.id));
+  if (seedUpdateBtn) seedUpdateBtn.hidden = !hasSeedUpdate;
+  if (resetLocalBtn) resetLocalBtn.hidden = !hasLocalEdit;
+}
+
+function resetCurrentTripToSeed(promptText) {
+  const current = trip();
+  if (!current || !SEED_BY_ID.has(current.id)) return;
+  if (!window.confirm(promptText)) return;
+  const idx = state.trips.findIndex((item) => item.id === current.id);
+  if (idx >= 0) state.trips[idx] = structuredClone(SEED_BY_ID.get(current.id));
+  if (state.editedTrips) delete state.editedTrips[current.id];
+  const more = document.querySelector("#more-menu");
+  if (more) more.open = false;
+  render();
+}
+
+if (seedUpdateBtn) {
+  seedUpdateBtn.addEventListener("click", () => {
+    resetCurrentTripToSeed("线上路书已更新。要用最新线上内容覆盖你在这台浏览器里的本地修改吗？（已订好和签证清单打勾会保留）");
+  });
+}
+
+if (resetLocalBtn) {
+  resetLocalBtn.addEventListener("click", () => {
+    resetCurrentTripToSeed("恢复成线上默认路书内容，清除当前浏览器对这趟行程的本地修改？（已订好和签证清单打勾会保留）");
+  });
+}
+
 function render() {
   if (!state.trips.length) return;
   if (!trip()) state.tripId = state.trips[0].id;
   const scroll = main.scrollTop;
   renderTrips();
   renderMain();
+  syncLocalSeedButtons();
   syncStickyOffsets();
   drawMap();
   main.scrollTop = scroll;
@@ -1352,13 +1558,16 @@ if (printBtn) {
   printBtn.addEventListener("click", () => {
     const prevDay = dayFilter;
     const prevBudget = budgetOpen;
+    const prevVisa = visaOpen;
     dayFilter = "all";
     budgetOpen = true;
+    visaOpen = true;
     render();
     setTimeout(() => {
       window.print();
       dayFilter = prevDay;
       budgetOpen = prevBudget;
+      visaOpen = prevVisa;
       render();
     }, 180);
   });
@@ -1376,6 +1585,9 @@ document.querySelector("#import-file").addEventListener("change", async (event) 
   const trips = Array.isArray(data) ? data : data.trips;
   if (!Array.isArray(trips) || !trips.length) return;
   state.trips = upgrade(trips);
+  for (const item of state.trips) {
+    if (SEED_BY_ID.has(item.id)) markTripEdited(item.id);
+  }
   state.booked = data.booked || {};
   state.tripId = trips[0].id;
   dayFilter = "all";
@@ -1453,6 +1665,7 @@ dayForm.addEventListener("submit", (event) => {
     });
   }
   syncTripDates(current);
+  markTripEdited(current.id);
   dayEditor.close();
   render();
 });
@@ -1572,6 +1785,7 @@ form.addEventListener("submit", (event) => {
   } else {
     day.items.push({ id: `p-${Date.now()}`, ...data });
   }
+  markTripEdited(current.id);
   editor.close();
   render();
 });
@@ -1602,6 +1816,7 @@ main.addEventListener("click", (event) => {
     current.days = current.days.filter((item) => item.id !== day.id);
     if (dayFilter === day.id) dayFilter = "all";
     syncTripDates(current);
+    markTripEdited(current.id);
     return render();
   }
   const edit = event.target.closest("[data-edit]");
@@ -1620,6 +1835,7 @@ main.addEventListener("click", (event) => {
     if (idx < 0 || targetIdx < 0 || targetIdx >= day.items.length) return;
     const [moved] = day.items.splice(idx, 1);
     day.items.splice(targetIdx, 0, moved);
+    markTripEdited(trip().id);
     return render();
   }
   const del = event.target.closest("[data-del]");
@@ -1630,6 +1846,7 @@ main.addEventListener("click", (event) => {
     if (!window.confirm(`删除「${target ? target.name : "这一站"}」？`)) return;
     day.items = day.items.filter((item) => item.id !== itemId);
     delete state.booked[itemId];
+    markTripEdited(trip().id);
     return render();
   }
   const jump = event.target.closest(".plan-row a, .ribbon-pill");
@@ -1662,6 +1879,10 @@ main.addEventListener("click", (event) => {
     bookingsOpen = !bookingsOpen;
     return render();
   }
+  if (event.target.closest("#toggle-visa")) {
+    visaOpen = !visaOpen;
+    return render();
+  }
   if (event.target.closest("#add-day")) {
     return openDayEditor(null);
   }
@@ -1679,17 +1900,24 @@ main.addEventListener("click", (event) => {
       window.alert("请输入 Wikimedia 或本站 /api/img 图片地址");
       return;
     }
+    markTripEdited(current.id);
     return render();
   }
   if (event.target.closest("#rename-trip")) {
     const title = window.prompt("行程名称", trip().title);
     if (!title) return;
     trip().title = title.trim();
+    markTripEdited(trip().id);
     return render();
   }
   if (event.target.closest("#delete-trip")) {
+    const targetId = state.tripId;
     if (!window.confirm(`删除「${trip().title}」？`)) return;
-    state.trips = state.trips.filter((item) => item.id !== state.tripId);
+    if (SEED_BY_ID.has(targetId)) {
+      state.deletedSeedIds = [...new Set([...(state.deletedSeedIds || []), targetId])];
+      if (state.editedTrips) delete state.editedTrips[targetId];
+    }
+    state.trips = state.trips.filter((item) => item.id !== targetId);
     state.tripId = state.trips[0].id;
     dayFilter = "all";
     return render();
@@ -1698,10 +1926,18 @@ main.addEventListener("click", (event) => {
 
 main.addEventListener("change", (event) => {
   const box = event.target.closest("[data-booked]");
-  if (!box) return;
-  if (box.checked) state.booked[box.dataset.booked] = true;
-  else delete state.booked[box.dataset.booked];
-  render();
+  if (box) {
+    if (box.checked) state.booked[box.dataset.booked] = true;
+    else delete state.booked[box.dataset.booked];
+    return render();
+  }
+  const visaBox = event.target.closest("[data-visa-check]");
+  if (visaBox) {
+    const checks = visaChecksFor(trip().id);
+    if (visaBox.checked) checks[visaBox.dataset.visaCheck] = true;
+    else delete checks[visaBox.dataset.visaCheck];
+    return render();
+  }
 });
 
 tripList.addEventListener("click", (event) => {
@@ -1710,6 +1946,7 @@ tripList.addEventListener("click", (event) => {
   state.tripId = button.dataset.trip;
   dayFilter = "all";
   bookingsOpen = false;
+  visaOpen = false;
   returnScrollY = null;
   returnStopId = "";
   render();
@@ -1730,6 +1967,7 @@ window.TRAVEL_GUIDE_APP = {
     dayFilter = "all";
     bookingsOpen = false;
     budgetOpen = false;
+    visaOpen = false;
     returnScrollY = null;
     returnStopId = "";
     render();

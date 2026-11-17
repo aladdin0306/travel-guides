@@ -4,8 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>行程库</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="styles.css?v=13" />
+  <script>
+    if (/^\/t\/[A-Za-z0-9_-]+(?:\/edit)?\/?$/.test(location.pathname)) {
+      document.documentElement.classList.add("shared-loading");
+    }
+  </script>
+  <link rel="stylesheet" href="vendor/leaflet.css?v=1.9.4" />
+  <link rel="stylesheet" href="styles.css?v=8b7e3933" />
 </head>
 <body>
   <header class="top">
@@ -14,8 +19,20 @@
       <h1>行程库</h1>
     </div>
     <div class="top-actions">
-      <button type="button" class="btn" id="import-btn"><span data-icon="upload"></span>导入</button>
-      <button type="button" class="btn" id="export-btn"><span data-icon="download"></span>导出</button>
+      <span id="share-status" class="share-status" hidden></span>
+      <button type="button" class="btn btn-sm" id="seed-update-btn" hidden><span data-icon="refresh"></span>线上已更新 · 用最新版</button>
+      <button type="button" class="btn btn-sm" id="conflict-reload-btn" hidden><span data-icon="refresh"></span>加载最新内容</button>
+      <button type="button" class="btn readonly-only" id="fork-btn"><span data-icon="copy"></span>复制并修改</button>
+      <button type="button" class="btn btn-primary" id="share-btn"><span data-icon="share"></span>分享</button>
+      <details class="more-menu" id="more-menu">
+        <summary class="btn btn-icon-more" aria-label="更多功能" title="打印路书、导入或导出备份"><span data-icon="more"></span></summary>
+        <div class="more-popover">
+          <button type="button" class="menu-item" id="print-btn"><span data-icon="printer"></span>打印 / 导出 PDF 路书</button>
+          <button type="button" class="menu-item edit-only" id="reset-local-btn" hidden><span data-icon="refresh"></span>恢复默认线上内容</button>
+          <button type="button" class="menu-item edit-only" id="import-btn"><span data-icon="upload"></span>导入 JSON 备份</button>
+          <button type="button" class="menu-item" id="export-btn"><span data-icon="download"></span>导出 JSON 备份</button>
+        </div>
+      </details>
       <input id="import-file" type="file" accept="application/json" hidden />
     </div>
   </header>
@@ -24,10 +41,10 @@
     <aside class="rail">
       <div class="rail-head">
         <h2>我的行程</h2>
-        <button type="button" id="new-trip" class="btn btn-sm"><span data-icon="plus"></span>新建</button>
+        <button type="button" id="new-trip" class="btn btn-sm edit-only"><span data-icon="plus"></span>新建</button>
       </div>
       <div id="trip-list"></div>
-      <p class="rail-note">改动只存在这台浏览器里。换电脑或发给别人，用右上角的导出。</p>
+      <p class="rail-note">票价、汇率与班期多为估算，请出行前再核对官网。发布到公共演示沙盒前请勿写入证件号、手机号或预订号；云端超过 90 天未编辑会自动清理，重要路书请导出备份。</p>
     </aside>
 
     <main id="main"></main>
@@ -56,6 +73,7 @@
         </select>
       </label>
       <label>地址 <input name="address" placeholder="用来在谷歌上搜索" /></label>
+      <label>为什么去（亮点简介） <input name="why" placeholder="一句话说明为什么推荐这里" /></label>
       <div class="pair">
         <label>纬度 <input name="lat" inputmode="decimal" /></label>
         <label>经度 <input name="lng" inputmode="decimal" /></label>
@@ -74,6 +92,16 @@
         <label>每人费用（当地货币） <input name="costAmount" inputmode="decimal" placeholder="免费填 0" /></label>
         <label>费用说明 <input name="costNote" placeholder="含什么，怎么算的" /></label>
       </div>
+      <label>配图链接（Wikimedia 或本站 /api/img）
+        <span class="copy-field">
+          <input name="photoSrc" placeholder="https://commons.wikimedia.org/..." />
+          <button type="button" id="photo-search-btn" class="btn btn-sm"><span data-icon="camera"></span><span class="label">自动搜图</span></button>
+        </span>
+      </label>
+      <div class="pair">
+        <label>图片署名 <input name="photoCredit" placeholder="作者 · CC BY-SA 4.0" /></label>
+        <label>来源页面 <input name="photoLink" placeholder="https://commons.wikimedia.org/wiki/File:..." /></label>
+      </div>
       <label>怎么走 <textarea name="note" rows="4"></textarea></label>
       <div class="dialog-actions">
         <button type="button" id="editor-cancel" class="btn">取消</button>
@@ -82,11 +110,26 @@
     </form>
   </dialog>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <dialog id="day-editor">
+    <form id="day-editor-form" method="dialog">
+      <h3 id="day-editor-title">编辑这一天</h3>
+      <div class="pair">
+        <label>日期 <input name="date" placeholder="2027-05-01" /></label>
+        <label>城市 <input name="city" placeholder="京都 / 悉尼" /></label>
+      </div>
+      <label>当天主题 <input name="title" required placeholder="例如：伏见稻荷与清水寺漫步" /></label>
+      <div class="dialog-actions">
+        <button type="button" id="day-editor-cancel" class="btn">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="vendor/leaflet.js?v=1.9.4"></script>
   <dialog id="pin-sheet" class="pin-sheet">
     <form method="dialog">
       <h3 id="pin-sheet-title">在谷歌地图打点</h3>
-      <p class="pin-sheet-note">手机上会打开谷歌地图 App。点哪一站，就在地图里打哪个点；暂不连成路线。</p>
+      <p id="pin-sheet-note" class="pin-sheet-note">点任意一站即可在谷歌地图里单独打点定位；也可以点第一项把今天所有站点连成路线。</p>
       <div id="pin-sheet-list" class="pin-sheet-list"></div>
       <div class="dialog-actions">
         <button type="submit" class="btn" value="cancel">关闭</button>
@@ -94,7 +137,60 @@
     </form>
   </dialog>
 
-  <script src="data.js?v=13"></script>
-  <script src="app.js?v=13"></script>
+  <button type="button" id="mobile-map-fab" class="mobile-map-fab" hidden></button>
+
+  <dialog id="share-dialog" class="share-dialog">
+    <form method="dialog">
+      <div>
+        <p class="dialog-kicker" id="share-dialog-kicker">分享行程</p>
+        <h3 id="share-dialog-title">两个链接，两种权限</h3>
+        <p class="share-explain" id="share-dialog-explain">公开链接只能查看；编辑链接相当于密码，请只发给共同规划的人。</p>
+      </div>
+      <label>公开查看链接
+        <span class="copy-field">
+          <input id="public-link" readonly />
+          <button type="button" class="btn btn-sm" id="copy-public">复制</button>
+        </span>
+      </label>
+      <label id="edit-link-row">持链接可编辑
+        <span class="copy-field">
+          <input id="edit-link" readonly />
+          <button type="button" class="btn btn-sm" id="copy-edit">复制</button>
+        </span>
+      </label>
+      <div id="static-cloud-box" class="static-cloud-box" hidden>
+        <small>当前为静态托管页面，复制上方链接即可发给同行人查看。如果需要在网页上多人实时编辑，也可以生成云端副本（默认沙盒使用 workers.dev，部分国内网络可能无法直连）。</small>
+        <button type="button" class="btn btn-sm" id="static-cloud-btn">生成云端可编辑副本</button>
+      </div>
+      <div id="share-manage-box" class="share-manage-box" hidden>
+        <div class="share-manage-head">
+          <div>
+            <b>编辑安全与历史版本</b>
+            <small>编辑链接泄露时可立即重置；改乱了可恢复到之前的版本。</small>
+          </div>
+          <button type="button" class="btn btn-sm" id="rotate-token-btn">重置编辑密钥</button>
+        </div>
+        <div class="revision-section">
+          <div class="revision-bar">
+            <span>最近保存记录（最多 10 版）</span>
+            <button type="button" class="btn btn-sm" id="load-revisions-btn">刷新列表</button>
+          </div>
+          <div id="revision-list" class="revision-list"></div>
+        </div>
+        <div class="share-delete-row">
+          <small>误发了证件号或预订号时，连同历史版本一起从云端清除。</small>
+          <button type="button" class="btn btn-sm" id="delete-cloud-trip-btn">彻底删除云端行程</button>
+        </div>
+      </div>
+      <p class="share-warning" id="share-warning">公共演示沙盒单行程限 100 KB、超过 90 天未编辑自动清理，不承诺永久保存。请勿把编辑链接公开发布，也不要写入身份证、护照、手机号或预订号。</p>
+      <div class="dialog-actions">
+        <button type="button" id="share-close" class="btn btn-primary">完成</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="data.js?v=2c8356ff"></script>
+  <script src="app.js?v=0060f773"></script>
+  <script src="share.js?v=34f73781"></script>
 </body>
 </html>
