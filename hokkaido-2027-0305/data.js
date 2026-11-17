@@ -1,0 +1,457 @@
+const PHOTOS = {
+  "hk-d1-susukino": ["Chuoterminal · CC BY 3.0", "Sapporo_tram_Susukino_station_platform_20160207_205636.jpg"],
+  "hk-d2-otaru": ["t-konno · CC BY-SA 3.0", "小樽雪あかりの路2013（Otaru_Snow_Light_Path_2013）_-_panoramio_(3).jpg"],
+  "hk-d3-jozankei": ["MIKI Yoshihito · CC BY 2.0", "Jozankei_Onsen,_Sapporo,_Hokkaido_Prefecture;_January_2018_(22).jpg"],
+  "hk-d4-odori": ["ノボホショコロトソ · CC BY 4.0", "Sapporo_TV_Tower_and_Odori_Park_01.jpg"],
+  "hk-d4-moiwa": ["掬茶 · CC BY-SA 4.0", "City_nightscape_of_Sapporo_from_Mt._Moiwa_20260703b.jpg"]
+};
+
+function photo(id) {
+  const [credit, file] = PHOTOS[id];
+  return { src: `photos/${id}.jpg`, credit, link: `https://commons.wikimedia.org/wiki/File:${file}` };
+}
+
+window.SEED_TRIPS = [
+  {
+    id: "hokkaido-2027-0305",
+    title: "北海道 · 札幌休闲 5 日",
+    start: "2027-03-05",
+    end: "2027-03-09",
+    summary: "",
+    visa: {
+      status: "required",
+      passport: "中国大陆护照",
+      type: "日本单次/多次旅游签证（个人旅游）",
+      applyUrl: "https://www.cn.emb-japan.go.jp/itpr_zh/visa.html",
+      guideUrl: "https://www.cn.emb-japan.go.jp/itpr_zh/visa.html",
+      feeNote: "约 ¥200–400 人民币/人（视单次或多次、代办服务费而定，以代办社与使领馆公布为准）",
+      timeline: "建议最晚 2027 年 1 月底前递交；旺季与春节档更早",
+      docs: [
+        { id: "passport", label: "护照有效期覆盖行程", note: "建议剩余有效期 6 个月以上，空白页充足" },
+        { id: "photo", label: "签证用近照", note: "白底，按代办社尺寸要求" },
+        { id: "form", label: "签证申请表与行程表", note: "可用本页打印的路书作行程参考" },
+        { id: "hotel", label: "酒店预订单", note: "札幌 4 晚；可先订可免费取消的商务酒店" },
+        { id: "flight", label: "往返机票行程单", note: "NH972+NH69 / NH78+NH967 已订，导出电子行程单即可" },
+        { id: "funds", label: "资金与在职/学生证明", note: "按代办社清单准备流水与在职证明" }
+      ],
+      tips: [
+        "中国大陆护照赴日旅游签通常需通过指定旅行社代办，不直接在线填 ImmiAccount 式表格",
+        "不要把护照号、签证申请号写进本页"
+      ],
+      disclaimer: "政策、费用与材料清单以日本驻华使领馆及指定代办社为准；本页只作出行准备清单，不构成签证代理或获批承诺。"
+    },
+    budget: {
+      currency: "JPY",
+      party: "1 人独自出行",
+      basis: "除已订国际/衔接机票外的当地待花，按休闲游省钱口径估算（商务酒店 + 公交/JR + 简餐）。目标合计约合人民币 3,000 元内；若 3 月酒店偏贵，优先压住宿到每晚 ¥7,000 左右或改胶囊/胶囊式商务酒店。",
+      cnyRate: 0.0418,
+      rateDate: "2026-11-16",
+      extras: [
+        {
+          label: "日本旅游签证（代办）",
+          cat: "other",
+          cny: 300,
+          note: "使领馆规费 + 常见代办服务费合计约 ¥200–400 人民币，按 ¥300 备；出签前支付，不计入下方日元待花合计时可对照。"
+        },
+        {
+          label: "当地交通（Kitaca/IC + JR 小樽往返 + 定山溪巴士）",
+          cat: "transport",
+          amount: 8500,
+          note: "新千岁↔札幌机场快线、市内地铁、JR 到小樽往返、定山溪巴士往返约估。"
+        },
+        {
+          label: "便利店/简餐机动",
+          cat: "food",
+          amount: 6000,
+          note: "未单列的早饭与咖啡零食；正餐已尽量写在各站。"
+        },
+        {
+          label: "已订机票（上海—羽田—新千岁开口程）",
+          cat: "flight",
+          note: "去：NH972+NH69；回：NH78+NH967。票价已付，不重复计入待花总额。"
+        }
+      ],
+      origins: [
+        {
+          id: "shanghai",
+          label: "上海",
+          brief: "去：3月5日 NH972 浦东 08:35–羽田 12:20，转 NH69 羽田 15:00–新千岁约 16:35。回：3月9日 NH78 新千岁约 19:30–羽田 21:10，转 NH967 羽田 22:40–浦东次日 01:15。",
+          note: "机票已出，班期以机票行程单为准；羽田国内/国际航站楼换乘预留充足时间。"
+        }
+      ]
+    },
+    days: [
+      {
+        id: "hk-d1",
+        date: "2027-03-05",
+        city: "札幌",
+        title: "转机落地，薄野安顿与第一碗拉面",
+        items: [
+          {
+            id: "hk-d1-flight1",
+            time: "08:35–12:20",
+            kind: "transport",
+            name: "上海浦东飞东京羽田 NH972",
+            address: "Shanghai Pudong International Airport (PVG) T2",
+            lat: 31.1443,
+            lng: 121.8083,
+            reservation: "none",
+            reservationNote: "机票已出。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "已含在已订机票里。" },
+            note: "建议提前 2.5–3 小时到浦东。到达羽田国际航站楼（多为 T3）后按指示转机国内线 NH69（通常 T2），预留安检与登机时间。"
+          },
+          {
+            id: "hk-d1-flight2",
+            time: "15:00–16:35",
+            kind: "transport",
+            name: "羽田飞新千岁 NH69",
+            address: "New Chitose Airport (CTS)",
+            lat: 42.7752,
+            lng: 141.6925,
+            reservation: "none",
+            reservationNote: "机票已出；班期请再核行程单。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "已含在已订机票里。" },
+            note: "到新千岁后出站跟随「札幌」方向标去机场快线 JR 站。3 月仍可能下雪，下机后保暖外套备好。"
+          },
+          {
+            id: "hk-d1-airport-train",
+            time: "17:00–17:40",
+            kind: "transport",
+            name: "机场快线 JR 到札幌站",
+            address: "New Chitose Airport Station",
+            lat: 42.7747,
+            lng: 141.6914,
+            reservation: "none",
+            reservationNote: "刷 Kitaca / 西瓜卡 / 信用卡交通功能即可。",
+            bookingUrl: "https://www.jreast.co.jp/",
+            cost: { amount: 1200, note: "单程约 ¥1,070–1,200，以车站公示为准。" },
+            note: "选「快速 Airport」约 37 分钟到札幌站。不租车；全程地铁/JR/巴士即可。"
+          },
+          {
+            id: "hk-d1-hotel",
+            time: "18:00",
+            kind: "stay",
+            name: "住薄野/札幌站南口商务酒店（连住 4 晚）",
+            address: "Susukino, Chuo-ku, Sapporo",
+            lat: 43.0556,
+            lng: 141.3534,
+            reservation: "recommended",
+            reservationNote: "一个人订单人房或经济双人房；优先可免费取消、含浴缸或大浴场的商务酒店。",
+            bookingUrl: "https://www.booking.com/",
+            cost: { amount: 30000, note: "4 晚合计按每晚约 ¥7,500 估；压在总预算内的关键项。" },
+            note: "薄野地铁站步行圈吃饭方便。行李先放前台再去吃饭也行。目标每晚含税 ¥6,500–8,500。"
+          },
+          {
+            id: "hk-d1-ramen",
+            time: "19:00",
+            kind: "food",
+            name: "札幌拉面横丁或附近味噌拉面",
+            address: "Ramen Yokocho, Susukino, Sapporo",
+            lat: 43.0567,
+            lng: 141.354,
+            reservation: "none",
+            reservationNote: "不用预约，排队短就进。",
+            bookingUrl: "",
+            cost: { amount: 1200, note: "一碗拉面约 ¥900–1,400。" },
+            photo: photo("hk-d1-susukino"),
+            note: "落地日只安排一件事：吃热的、早点睡。横丁人多可改去一条街外的单店味噌拉面。"
+          }
+        ]
+      },
+      {
+        id: "hk-d2",
+        date: "2027-03-06",
+        city: "小樽",
+        title: "JR 一日小樽：运河、仓库街与慢走",
+        items: [
+          {
+            id: "hk-d2-jr",
+            time: "09:30–10:20",
+            kind: "transport",
+            name: "JR 札幌 → 小樽",
+            address: "Sapporo Station",
+            lat: 43.0686,
+            lng: 141.3508,
+            reservation: "none",
+            reservationNote: "普通车刷 IC 即可，不必指定席。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "往返约 ¥1,500–1,800，已计入预算里的当地交通总额。" },
+            note: "从札幌站坐函馆本线往小樽，约 30–45 分钟。雪天人行道滑，鞋子要有纹路。"
+          },
+          {
+            id: "hk-d2-canal",
+            time: "10:30–12:00",
+            kind: "sight",
+            name: "小樽运河与仓库群散步",
+            address: "Otaru Canal, Otaru",
+            lat: 43.1991,
+            lng: 141.0064,
+            reservation: "none",
+            reservationNote: "户外散步，不用票。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "免费。" },
+            photo: photo("hk-d2-otaru"),
+            why: "北海道最轻松的经典街景，适合一个人慢慢拍、慢慢走。",
+            note: "沿着运河走到堺町通方向。3 月初可能还有残雪；风大时帽子和手套别省。"
+          },
+          {
+            id: "hk-d2-lunch",
+            time: "12:30",
+            kind: "food",
+            name: "小樽海鲜丼或烤海鲜午饭",
+            address: "Otaru Sankaku Market / Sakaimachi area",
+            lat: 43.1975,
+            lng: 141.0089,
+            reservation: "none",
+            reservationNote: "市场或堺町通附近选一家坐得住的店。",
+            bookingUrl: "",
+            cost: { amount: 2200, note: "海鲜丼约 ¥1,800–2,800；想省钱可便利店 + 一块寿司拼盘。" },
+            note: "一个人别点整桌刺身拼盘。吃完可去音乐盒堂或玻璃店随便逛，不强迫购物。"
+          },
+          {
+            id: "hk-d2-sakaimachi",
+            time: "14:00–16:00",
+            kind: "sight",
+            name: "堺町通闲逛 + 咖啡歇脚",
+            address: "Sakaimachi-dori, Otaru",
+            lat: 43.1958,
+            lng: 141.0105,
+            reservation: "none",
+            reservationNote: "",
+            bookingUrl: "",
+            cost: { amount: 600, note: "咖啡约 ¥500–800。" },
+            note: "休闲游核心是留空白。累了就坐咖啡馆看窗外，16:30 前再回 JR 站即可。"
+          },
+          {
+            id: "hk-d2-back",
+            time: "17:00–18:00",
+            kind: "transport",
+            name: "JR 小樽 → 札幌",
+            address: "Otaru Station",
+            lat: 43.1971,
+            lng: 140.9941,
+            reservation: "none",
+            reservationNote: "",
+            bookingUrl: "",
+            cost: { amount: 0, note: "已计入当地交通。" },
+            note: "晚上回薄野吃汤咖喱或成吉思汗烤肉都行，控制在 ¥1,500–2,500。"
+          }
+        ]
+      },
+      {
+        id: "hk-d3",
+        date: "2027-03-07",
+        city: "定山溪",
+        title: "定山溪泡汤日：巴士往返，不赶场",
+        items: [
+          {
+            id: "hk-d3-bus",
+            time: "09:30–10:50",
+            kind: "transport",
+            name: "定山溪观光巴士（札幌站/大通一带上车）",
+            address: "Sapporo Station Bus Terminal area",
+            lat: 43.0687,
+            lng: 141.3494,
+            reservation: "recommended",
+            reservationNote: "可现场买票；旺季或周末建议提前在官网/便利店看班次。",
+            bookingUrl: "https://www.chuo-bus.co.jp/",
+            cost: { amount: 0, note: "往返约 ¥1,500–2,000，已计入当地交通。" },
+            note: "不租车。巴士约 70–80 分钟到定山溪。确认末班回札幌时间，下午泡完一定要赶上。"
+          },
+          {
+            id: "hk-d3-onsen",
+            time: "11:30–15:30",
+            kind: "sight",
+            name: "定山溪温泉·日归入浴",
+            address: "Jozankei Onsen, Minami-ku, Sapporo",
+            lat: 42.965,
+            lng: 141.1636,
+            reservation: "recommended",
+            reservationNote: "选一家开放日归的温泉旅馆；部分需电话或官网预约入浴时段。",
+            bookingUrl: "https://jozankei.jp/",
+            cost: { amount: 2000, note: "日归入浴约 ¥1,500–3,000，含毛巾另计。" },
+            photo: photo("hk-d3-jozankei"),
+            why: "这趟最核心的放松：雪景山谷里泡温泉，一个人刚刚好。",
+            note: "带换洗衣物与小毛巾。有文身需提前确认馆方规定。泡完在旅馆食堂或二楼简餐即可，不必再赶别的景点。"
+          },
+          {
+            id: "hk-d3-lunch",
+            time: "12:30",
+            kind: "food",
+            name: "定山溪旅馆食堂或街上定食",
+            address: "Jozankei Onsen town",
+            lat: 42.9645,
+            lng: 141.1645,
+            reservation: "none",
+            reservationNote: "",
+            bookingUrl: "",
+            cost: { amount: 1500, note: "定食约 ¥1,200–2,000。" },
+            note: "温泉乡选择不多，吃饱就好。预留体温回升时间再出门等巴士。"
+          },
+          {
+            id: "hk-d3-return",
+            time: "16:00–17:30",
+            kind: "transport",
+            name: "巴士返回札幌",
+            address: "Jozankei Bus Terminal",
+            lat: 42.9658,
+            lng: 141.1628,
+            reservation: "none",
+            reservationNote: "核对末班车，雪天可能误点。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "已计入当地交通。" },
+            note: "晚上薄野随便吃，早睡。若身体舒服，可改成定山溪住一晚——但会多一笔住宿，¥3,000 总预算会更紧。"
+          }
+        ]
+      },
+      {
+        id: "hk-d4",
+        date: "2027-03-08",
+        city: "札幌",
+        title: "大通公园慢逛与藻岩山夜景",
+        items: [
+          {
+            id: "hk-d4-odori",
+            time: "10:30–12:30",
+            kind: "sight",
+            name: "大通公园 + 电视塔外观",
+            address: "Odori Park, Sapporo",
+            lat: 43.0604,
+            lng: 141.3545,
+            reservation: "none",
+            reservationNote: "公园免费；电视塔观景台可选，省钱可只在外观拍照。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "公园免费；若上塔另计约 ¥1,000，可选。" },
+            photo: photo("hk-d4-odori"),
+            why: "札幌市中心最轻松的散步轴，一个人不用赶行程。",
+            note: "3 月积雪可能未化完。沿着公园走到狸小路方向，需要买伴手礼再进店。"
+          },
+          {
+            id: "hk-d4-lunch",
+            time: "12:30",
+            kind: "food",
+            name: "汤咖喱或成吉思汗午饭",
+            address: "Near Odori / Susukino, Sapporo",
+            lat: 43.0578,
+            lng: 141.3538,
+            reservation: "none",
+            reservationNote: "热门汤咖喱店可能排队，错峰或换下一家。",
+            bookingUrl: "",
+            cost: { amount: 1800, note: "约 ¥1,500–2,500。" },
+            note: "一个人点单人套餐。想更省就便利店热食 + 一杯热饮。"
+          },
+          {
+            id: "hk-d4-free",
+            time: "14:00–16:30",
+            kind: "sight",
+            name: "自由时间：狸小路或回酒店休息",
+            address: "Tanukikoji Shopping Arcade, Sapporo",
+            lat: 43.0572,
+            lng: 141.353,
+            reservation: "none",
+            reservationNote: "",
+            bookingUrl: "",
+            cost: { amount: 0, note: "逛街按需；预算紧就只逛不买。" },
+            note: "休闲游故意留白。晚上要上藻岩山的话，下午别排太满。"
+          },
+          {
+            id: "hk-d4-moiwa",
+            time: "17:30–19:30",
+            kind: "sight",
+            name: "藻岩山缆车夜景",
+            address: "Mt. Moiwa Ropeway, Sapporo",
+            lat: 43.0364,
+            lng: 141.3211,
+            reservation: "none",
+            reservationNote: "末班缆车季节不同，当天查官网；雪天可能停运。",
+            bookingUrl: "https://moiwa.keio-cable.co.jp/",
+            cost: { amount: 2300, note: "往返缆车约 ¥2,200–2,400。" },
+            photo: photo("hk-d4-moiwa"),
+            why: "札幌最值得的一晚夜景，公共交通可到，不必租车。",
+            note: "地铁东西线到绳生站再转巴士/接驳（以当日官网为准）。山顶风大，羽绒服必穿。若不开放，改去JR塔展望或早点休息。"
+          }
+        ]
+      },
+      {
+        id: "hk-d5",
+        date: "2027-03-09",
+        city: "札幌",
+        title: "收尾半天，傍晚飞回上海",
+        items: [
+          {
+            id: "hk-d5-morning",
+            time: "09:30–12:00",
+            kind: "sight",
+            name: "札幌站周边轻松逛 / 买伴手礼",
+            address: "Sapporo Station",
+            lat: 43.0686,
+            lng: 141.3508,
+            reservation: "none",
+            reservationNote: "",
+            bookingUrl: "",
+            cost: { amount: 1500, note: "伴手礼按需；白巧克力饼干等，控制冲动消费。" },
+            note: "中午前退房。行李可寄放酒店或站内储物柜。不安排远郊，保证下午去机场从容。"
+          },
+          {
+            id: "hk-d5-lunch",
+            time: "12:00",
+            kind: "food",
+            name: "札幌站午饭",
+            address: "Sapporo Station food court / ramen",
+            lat: 43.0683,
+            lng: 141.3505,
+            reservation: "none",
+            reservationNote: "",
+            bookingUrl: "",
+            cost: { amount: 1200, note: "约 ¥1,000–1,500。" },
+            note: "吃完再去机场。机场也有拉面，但价格通常更高。"
+          },
+          {
+            id: "hk-d5-to-airport",
+            time: "15:00–16:00",
+            kind: "transport",
+            name: "JR 机场快线去新千岁",
+            address: "Sapporo Station → New Chitose Airport",
+            lat: 43.0686,
+            lng: 141.3508,
+            reservation: "none",
+            reservationNote: "NH78 约 19:30 起飞，建议 16:00 前后到机场即可从容。",
+            bookingUrl: "",
+            cost: { amount: 1200, note: "单程约 ¥1,070–1,200。" },
+            note: "不租车。预留误点缓冲；雪天列车可能慢一点。"
+          },
+          {
+            id: "hk-d5-flight1",
+            time: "19:30–21:10",
+            kind: "transport",
+            name: "新千岁飞羽田 NH78",
+            address: "New Chitose Airport (CTS)",
+            lat: 42.7752,
+            lng: 141.6925,
+            reservation: "none",
+            reservationNote: "机票已出。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "已含在已订机票里。" },
+            note: "到羽田后转国际出发的 NH967（多为 T2 国际手续），按机场指示走，别在国内到达区耽搁太久。"
+          },
+          {
+            id: "hk-d5-flight2",
+            time: "22:40–01:15+1",
+            kind: "transport",
+            name: "羽田飞上海浦东 NH967",
+            address: "Tokyo Haneda (HND) → Shanghai Pudong (PVG)",
+            lat: 35.5494,
+            lng: 139.7798,
+            reservation: "none",
+            reservationNote: "机票已出；到达为次日凌晨。",
+            bookingUrl: "",
+            cost: { amount: 0, note: "已含在已订机票里。" },
+            note: "浦东约 01:15 落地，提前想好回市区的地铁末班或打车方案。"
+          }
+        ]
+      }
+    ]
+  }
+];
