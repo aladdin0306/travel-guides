@@ -24,7 +24,7 @@ function photo(id) {
 window.SEED_TRIPS = [
   {
     id: "busan-seoul-2026",
-    title: "釜山 · 首尔 5天4夜",
+    title: "釜山 · 首尔",
     start: "2026-11-12",
     end: "2026-11-16",
     summary: "",

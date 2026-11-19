@@ -89,7 +89,7 @@ function photo(id) {
 window.SEED_TRIPS = [
   {
     "id": "hokkaido-2027",
-    "title": "北海道 · 札幌休闲看雪 5 日",
+    "title": "北海道",
     "start": "2027-03-05",
     "end": "2027-03-09",
     "summary": "",
