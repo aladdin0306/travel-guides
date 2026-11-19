@@ -161,10 +161,10 @@ window.SEED_TRIPS = [
           "note": "默认含小樽往返；若改旭川看雪，JR 往返约 ¥4,500–5,500，比小樽贵，总额按此条机动。"
         },
         {
-          "label": "便利店/简餐机动",
+          "label": "便利店早餐与热饮零食",
           "cat": "food",
-          "amount": 6000,
-          "note": "未单列的早饭与咖啡零食；正餐已尽量写在各站。"
+          "amount": 3500,
+          "note": "每天早上的饭团、热咖啡和温泉牛奶；正餐与下午茶均已单列在每天行程里。"
         },
         {
           "label": "已订机票（上海—羽田—新千岁开口程）",
@@ -282,8 +282,8 @@ window.SEED_TRIPS = [
         "id": "hk-d2",
         "date": "2027-03-06",
         "city": "小樽",
-        "title": "小樽海边铁道、运河仓库与海鲜丼",
-        "altTitle": "备选路线：若小樽积雪太少，改去旭川看厚雪（共 3 站）",
+        "title": "小樽海边铁道、堺町通漫步与运河蓝调亮灯",
+        "altTitle": "备选路线：若小樽积雪太少，改去旭川看厚雪（共 4 站）",
         "items": [
           {
             "id": "hk-d2-jr",
@@ -303,41 +303,94 @@ window.SEED_TRIPS = [
             "note": "坐「快速 Airport」或普通列车约 35–45 分钟就到。去程记得挑靠右边的窗户坐，过了钱函站之后列车几乎贴着海岸线跑，窗外就是大海和雪岸。"
           },
           {
-            "id": "hk-d2-canal",
-            "time": "10:30–12:00",
+            "id": "hk-d2-otaru-lunch",
+            "time": "11:00–12:15",
+            "kind": "food",
+            "name": "三角市场现切海鲜丼",
+            "address": "Otaru Sankaku Market",
+            "lat": 43.1975,
+            "lng": 141.0003,
+            "reservation": "none",
+            "reservationNote": "11 点出头到比正午少排一半队。",
+            "bookingUrl": "",
+            "cost": {
+              "amount": 2200,
+              "note": "三色海鲜丼人均约 ¥1,800–2,800。"
+            },
+            "why": "从小樽站出来左手边走两步就到，现切海胆、甜虾和帆立贝铺满热醋饭，赶在正午旅行团前吃最清静。",
+            "note": "窄坡道两边全是海鲜档口（泷波食堂、武田鲜鱼店、味处武田都很稳），如果某家门口排长队直接换隔壁一家，品质差别不大。"
+          },
+          {
+            "id": "hk-d2-sakaimachi",
+            "time": "12:45–16:15",
             "kind": "sight",
-            "name": "小樽运河与堺町通硝子街",
+            "name": "堺町通玻璃工坊、八音盒堂与 LeTAO 下午茶",
+            "address": "Sakaimachi Hondori Street, Otaru",
+            "lat": 43.1922,
+            "lng": 141.0068,
+            "reservation": "none",
+            "reservationNote": "北一硝子三号馆煤油灯茶屋或 LeTAO 本店二楼茶座现场拿号即可。",
+            "bookingUrl": "",
+            "cost": {
+              "amount": 950,
+              "note": "一块原味双层芝士蛋糕配红茶套组约 ¥900–1,100。"
+            },
+            "why": "保留着百年前石造商铺的老街，一路慢慢逛玻璃器皿、蒸汽钟和木制八音盒，走累了上楼吃块现切芝士蛋糕暖身。",
+            "note": "整条街平缓好走：先逛北一硝子三号馆（里面的北一大厅点着 167 盏真实煤油灯，氛围极好），一路往南走到童话十字路口的小樽八音盒堂（门口蒸汽钟每 15 分钟喷汽报时），最后在街对面的 LeTAO 总店二楼歇脚等天色变暗，还可以免费登上总店顶楼钟楼俯瞰小樽雪顶街景。"
+          },
+          {
+            "id": "hk-d2-canal",
+            "time": "16:40–17:30",
+            "kind": "sight",
+            "name": "小樽运河煤气灯亮灯（蓝调时刻）",
             "address": "Otaru Canal, Otaru",
             "lat": 43.1991,
             "lng": 141.0064,
             "reservation": "none",
-            "reservationNote": "全天开放，不用门票。",
+            "reservationNote": "全天免费开放。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
               "note": "免费。"
             },
             "photo": photo("hk-d2-otaru"),
-            "why": "石造老仓库倒映在运河水面上，顺路逛去堺町通看玻璃工坊、音乐盒堂和现烤甜点。",
-            "note": "从小樽站出来顺着正前方的坡道往下走 10 分钟就是运河浅草桥机位。拍完拐进旁边的堺町通慢慢逛，六花亭、北一硝子三号馆和八音盒堂都在这一条街上，走累了随时进咖啡馆暖手。"
+            "why": "3 月初傍晚五点前夕天空变成深蓝色，沿岸 63 盏复古煤气灯依次亮起，倒映在雪岸与石造仓库间最出片。",
+            "note": "比白天正午干看运河美太多：先在浅草桥拍经典全景，再顺着运河步道往北运河方向走一段，人少安静。海风入夜后很凉，拍完刚好走 10 分钟回小樽站坐车。"
           },
           {
-            "id": "hk-d2-otaru-lunch",
-            "time": "12:30",
-            "kind": "food",
-            "name": "三角市场或堺町通海鲜丼",
-            "address": "Otaru Sankaku Market / Sakaimachi area",
-            "lat": 43.1975,
-            "lng": 141.0089,
+            "id": "hk-d2-jr-back",
+            "time": "17:45–18:25",
+            "kind": "transport",
+            "name": "JR 函馆本线 小樽 → 札幌",
+            "address": "Otaru Station → Sapporo Station",
+            "lat": 43.1977,
+            "lng": 140.9937,
             "reservation": "none",
-            "reservationNote": "饭点人多时现场排号即可。",
+            "reservationNote": "小樽是始发站，提前 10 分钟上车基本都有座。",
             "bookingUrl": "",
             "cost": {
-              "amount": 2200,
-              "note": "海鲜丼人均约 ¥1,800–2,800。"
+              "amount": 0,
+              "note": "已计入当地交通预算。"
             },
-            "why": "港口现切的海胆、甜虾和扇贝铺满热米饭，鲜甜肥厚。",
-            "note": "小樽站左手边的三角市场（泷波食堂、武田鲜鱼店）选择最多，要是排队太长就去堺町通巷子里的寿司屋或海鲜食堂。下午逛到四五点坐 JR 回札幌即可。"
+            "note": "刷交通卡进站坐回札幌站或直接换地铁回薄野。"
+          },
+          {
+            "id": "hk-d2-dinner",
+            "time": "19:00",
+            "kind": "food",
+            "name": "札幌站或薄野炭火串烧居酒屋晚餐",
+            "address": "Susukino / Sapporo Station",
+            "lat": 43.0562,
+            "lng": 141.3532,
+            "reservation": "none",
+            "reservationNote": "连锁串鸟（串鳥）或本地小居酒屋一个人坐吧台免预约。",
+            "bookingUrl": "",
+            "cost": {
+              "amount": 2000,
+              "note": "几串现烤鸡肉串配热汤或生啤约 ¥1,800–2,400。"
+            },
+            "why": "北海道本地人最常去的平价炭火烧鸟店（如「串鸟」），吧台对独行客非常友好，还送免费萝卜泥和热鸡汤。",
+            "note": "札幌站南口、大通和薄野每隔两个路口就有一家「串鳥（Kushidori）」，有平板带图点单，不会日语也毫无压力。"
           },
           {
             "id": "hk-d2-asahikawa-jr",
@@ -380,9 +433,9 @@ window.SEED_TRIPS = [
           {
             "id": "hk-d2-asahikawa-town",
             "alt": true,
-            "time": "15:15–16:45",
-            "kind": "sight",
-            "name": "平和通买物公园与旭川酱油拉面",
+            "time": "15:30–17:15",
+            "kind": "food",
+            "name": "平和通买物公园散步与旭川酱油拉面晚餐",
             "address": "Asahikawa Station area",
             "lat": 43.7634,
             "lng": 142.3602,
@@ -391,11 +444,29 @@ window.SEED_TRIPS = [
             "bookingUrl": "",
             "cost": {
               "amount": 1200,
-              "note": "拉面或咖啡简餐约 ¥1,000–1,500。"
+              "note": "一碗老字号酱油拉面约 ¥1,000–1,300。"
             },
             "photo": photo("hk-d2-asahikawa"),
-            "why": "车站正对面的步行雪街，吃碗猪骨鱼介双汤底的旭川酱油拉面再坐车回札幌。",
-            "note": "梅光轩本店、青叶或山头火总店都在旭川站步行圈内。吃完搭 17 点前后的特急回札幌休息。"
+            "why": "沿着车站正对面的积雪步行街慢逛，吃碗滚烫的猪骨鱼介双汤底旭川酱油拉面暖透全身。",
+            "note": "梅光轩本店、青叶或山头火总店都在旭川站步行几分钟范围内，表层浮着热猪油锁温，冬天吃特别过瘾。"
+          },
+          {
+            "id": "hk-d2-asahikawa-back",
+            "alt": true,
+            "time": "17:30–18:55",
+            "kind": "transport",
+            "name": "JR 特急 旭川 → 札幌",
+            "address": "Asahikawa Station → Sapporo Station",
+            "lat": 43.7634,
+            "lng": 142.3602,
+            "reservation": "none",
+            "reservationNote": "半小时至一小时一班特急，回到札幌刚好回酒店休息。",
+            "bookingUrl": "",
+            "cost": {
+              "amount": 0,
+              "note": "已含在往返套票里。"
+            },
+            "note": "上车前可以在旭川站永旺超市买瓶北海道限定饮品路上喝。"
           }
         ]
       },
@@ -403,7 +474,7 @@ window.SEED_TRIPS = [
         "id": "hk-d3",
         "date": "2027-03-07",
         "city": "定山溪",
-        "title": "定山溪山谷雪见日归温泉",
+        "title": "定山溪雪谷吊桥、日归温泉与成吉思汗烤肉",
         "items": [
           {
             "id": "hk-d3-bus",
@@ -423,29 +494,28 @@ window.SEED_TRIPS = [
             "note": "从札幌站、大通或薄野都能上车，一路进山约 60–75 分钟。买「温泉日归套票（含往返车票 + 入浴券）」通常比单买更划算。"
           },
           {
-            "id": "hk-d3-onsen",
-            "time": "11:15–15:00",
+            "id": "hk-d3-bridge",
+            "time": "11:00–12:00",
             "kind": "sight",
-            "name": "定山溪雪见露天温泉（日归入浴）",
-            "address": "Jozankei Onsen, Minami-ku, Sapporo",
-            "lat": 42.965,
-            "lng": 141.1636,
-            "reservation": "recommended",
-            "reservationNote": "日归开放时间多在 11:00–15:00（如汤元小金汤、鹿之汤、丰平峡温泉等），出发前看一眼选定旅馆的接待时段。",
-            "bookingUrl": "https://jozankei.jp/",
+            "name": "二见公园与二见吊桥雪溪散步",
+            "address": "Futami Tsuribashi Suspension Bridge, Jozankei",
+            "lat": 42.9639,
+            "lng": 141.1597,
+            "reservation": "none",
+            "reservationNote": "免费开放；若积雪太深只走到桥头观景即可。",
+            "bookingUrl": "",
             "cost": {
-              "amount": 2000,
-              "note": "日归入浴费约 ¥1,200–2,500（租浴巾另加 ¥200–300）。"
+              "amount": 0,
+              "note": "免费。"
             },
-            "photo": photo("hk-d3-jozankei"),
-            "why": "峡谷海拔比市区高，3 月初溪谷两岸常挂满白雪，泡在热汤里看对岸雪林特别放松。",
-            "note": "到温泉街后可以先去二见吊桥走一圈拍溪谷雪景，再去泡汤。自带一条小毛巾会更方便；如果有文身记得提前确认馆方是否允许或能否贴遮盖贴。"
+            "why": "鲜红色的二见吊桥横跨在白雪覆盖的丰平川峡谷上，溪水冒着淡淡温泉热气，是定山溪最经典的雪景机位。",
+            "note": "下巴士走几分钟就到，趁中午泡汤前光线最好先去拍照散步，顺路还能在街角的免费源泉足汤暖暖脚。"
           },
           {
             "id": "hk-d3-lunch",
-            "time": "13:30",
+            "time": "12:15",
             "kind": "food",
-            "name": "温泉街食堂或足汤甜点店歇脚",
+            "name": "温泉街荞麦面午餐与「雨之日与雪之日」义式冰淇淋",
             "address": "Jozankei Onsen town",
             "lat": 42.9645,
             "lng": 141.1645,
@@ -454,27 +524,64 @@ window.SEED_TRIPS = [
             "bookingUrl": "",
             "cost": {
               "amount": 1500,
-              "note": "荞麦面/咖喱定食或甜点饮品约 ¥1,200–1,800。"
+              "note": "热汤荞麦面或披萨简餐 + 甜点约 ¥1,300–1,800。"
             },
-            "why": "泡完热汤吃碗热荞麦面，再去坂之上最中饼或雨之日与雪之日咖啡馆坐坐。",
-            "note": "刚泡完温泉身上毛孔张开，别马上站在风口等车，在休息区喝瓶冰牛奶、吃顿热饭缓一缓再出门。"
+            "why": "吃完热腾腾的手打荞麦面，再去高人气小店「雨ノ日と雪ノ日」吃球北海道牛乳冰淇淋看窗外雪景。",
+            "note": "温泉街不大，几家质感很好的烘焙坊、最中饼甜点铺（坂ノ上の最中）和食堂都在步行 10 分钟圈内。"
+          },
+          {
+            "id": "hk-d3-onsen",
+            "time": "13:30–16:00",
+            "kind": "sight",
+            "name": "定山溪雪见露天温泉（日归入浴）",
+            "address": "Jozankei Onsen, Minami-ku, Sapporo",
+            "lat": 42.965,
+            "lng": 141.1636,
+            "reservation": "recommended",
+            "reservationNote": "日归开放时间多在 11:00–15:00 入场截止（如汤元小金汤、鹿之汤、丰平峡温泉等），出发前确认选定旅馆的最晚入场点。",
+            "bookingUrl": "https://jozankei.jp/",
+            "cost": {
+              "amount": 2000,
+              "note": "日归入浴费约 ¥1,200–2,500（租浴巾另加 ¥200–300）。"
+            },
+            "photo": photo("hk-d3-jozankei"),
+            "why": "峡谷海拔比市区高，3 月初溪谷两岸常挂满白雪，整个下午泡在热汤里看对岸雪林发呆。",
+            "note": "自带一条小毛巾更方便；如果有文身记得提前确认馆方是否允许或能否贴遮盖贴。泡完在榻榻米休息室喝瓶冰牛奶、躺一会儿等身体缓过来再去车站。"
           },
           {
             "id": "hk-d3-return",
-            "time": "15:45–17:00",
+            "time": "16:30–17:45",
             "kind": "transport",
-            "name": "巴士返回札幌市区",
+            "name": "巴士返回札幌薄野",
             "address": "Jozankei Jinja-mae Bus Stop",
             "lat": 42.9658,
             "lng": 141.1628,
             "reservation": "none",
-            "reservationNote": "下山巴士下午四五点人较多，提前 10 分钟到站台排队。",
+            "reservationNote": "提前 10 分钟到站台候车。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
               "note": "已含在交通预算里。"
             },
-            "note": "回到薄野或大通还早，晚上找家居酒屋或烤串店慢慢吃。"
+            "note": "一路坐回薄野站下车，先把毛巾杂物放回酒店，轻装出门吃烤羊肉。"
+          },
+          {
+            "id": "hk-d3-dinner",
+            "time": "18:30",
+            "kind": "food",
+            "name": "薄野成吉思汗炭火烤羊肉（达摩或士别）",
+            "address": "Susukino, Chuo-ku, Sapporo",
+            "lat": 43.0548,
+            "lng": 141.3536,
+            "reservation": "none",
+            "reservationNote": "达摩（だるま）分店多，挑 5.5 店或 4.4 二阶亭比总店少排队。",
+            "bookingUrl": "",
+            "cost": {
+              "amount": 2600,
+              "note": "一份鲜切羔羊肉配洋葱烤盘加米饭/生啤约 ¥2,300–3,000。"
+            },
+            "why": "泡完雪谷温泉回城，围着铸铁头盔锅现烤滋滋作响的北海道小羔羊肉，完全不膻。",
+            "note": "店里都有免费衣柜或防味袋把羽绒服锁进去免得沾油烟。吃完可以在薄野霓虹街散步消食再回酒店。"
           }
         ]
       },
@@ -507,18 +614,18 @@ window.SEED_TRIPS = [
             "id": "hk-d4-lunch",
             "time": "12:30",
             "kind": "food",
-            "name": "札幌汤咖喱或成吉思汗烤羊肉",
+            "name": "札幌香料汤咖喱午餐（GARAKU 或 Suage+）",
             "address": "Near Odori / Susukino, Sapporo",
             "lat": 43.0578,
             "lng": 141.3538,
             "reservation": "none",
-            "reservationNote": "GARAKU、Suage+ 等名店饭点常排队，12 点前或 13:15 后去最快。",
+            "reservationNote": "名店饭点常排队，12 点前到或拿电子号在附近逛着等最快。",
             "bookingUrl": "",
             "cost": {
               "amount": 1800,
               "note": "一份脆皮鸡腿汤咖喱约 ¥1,500–2,000。"
             },
-            "why": "札幌最具代表性的香料浓汤配焦香鸡腿和十几种北海道炸蔬菜，配柠檬黄姜饭一绝。",
+            "why": "札幌最具代表性的辛香浓汤，焦香大鸡腿配北海道甜南瓜、舞茸和西兰花，淋上柠檬汁配黄姜饭一绝。",
             "note": "大通到狸小路一带好店非常集中（Suage+、GARAKU、Treasure 等），一个人坐吧台位通常翻台很快。"
           },
           {
@@ -959,7 +1066,25 @@ window.SEED_TRIPS = [
               "amount": 0,
               "note": "已含在当天封顶里。"
             },
-            "note": "坐 F1 渡轮原路回城，傍晚早点吃饭收拾行李，明天一早飞圣灵群岛。"
+            "note": "坐 F1 渡轮迎着夕阳光线回环形码头，下船往西走两步就是岩石区。"
+          },
+          {
+            "id": "au-d3-rocks",
+            "time": "16:45–19:30",
+            "kind": "food",
+            "name": "岩石区（The Rocks）石板老街漫步与海港晚餐",
+            "address": "The Rocks, Sydney NSW",
+            "lat": -33.8599,
+            "lng": 151.209,
+            "reservation": "none",
+            "reservationNote": "历史老酒馆与露天餐座随到随坐。",
+            "bookingUrl": "",
+            "cost": {
+              "amount": 0,
+              "note": "餐费已计入每日三餐预算。"
+            },
+            "why": "海港大桥正下方的百年砂岩老街区，傍晚逛手工小店，再找家百年酒馆露台吃牛排或炸鱼薯条。",
+            "note": "从环形码头西侧步行 5 分钟即达。The Glenmore 顶层露台正好平视歌剧院夜景，吃完慢慢走回酒店收拾行李，准备明早飞圣灵群岛。"
           }
         ]
       },
@@ -1270,7 +1395,7 @@ window.SEED_TRIPS = [
           },
           {
             "id": "au-d8-convent",
-            "time": "14:00",
+            "time": "14:00–16:15",
             "kind": "sight",
             "name": "Abbotsford Convent 老修道院艺术园",
             "address": "1 St Heliers Street, Abbotsford VIC",
@@ -1285,7 +1410,42 @@ window.SEED_TRIPS = [
             },
             "why": "亚拉河湾畔的百年修道院建筑群，大草坪、花园面包房与手工作坊安静得像世外桃源。",
             "photo": photo("au-d8-convent"),
-            "note": "从 Fitzroy 走到 Johnston Street 坐 200 或 207 路公交到终点 Clarke Street 下车（打车也只要 10 分钟）。逛完走 12 分钟到 Victoria Park 站坐火车回市中心。"
+            "note": "从 Fitzroy 走到 Johnston Street 坐 200 或 207 路公交到终点 Clarke Street 下车（打车也只要 10 分钟），顺着河岸步道还可以走到隔壁小农场看看。"
+          },
+          {
+            "id": "au-d8-back-city",
+            "time": "16:30–17:00",
+            "kind": "transport",
+            "name": "Victoria Park 站乘火车回市中心",
+            "address": "Victoria Park Station, Abbotsford",
+            "lat": -37.7995,
+            "lng": 144.9945,
+            "reservation": "none",
+            "reservationNote": "刷 myki 进站。",
+            "bookingUrl": "",
+            "cost": {
+              "amount": 0,
+              "note": "已含在当天 myki 封顶里。"
+            },
+            "note": "从修道院步行 12 分钟到车站，坐 Mernda 或 Hurstbridge 线约 10 分钟回到 Flinders Street。"
+          },
+          {
+            "id": "au-d8-southbank",
+            "time": "17:45–20:00",
+            "kind": "food",
+            "name": "雅拉河南岸（Southbank）日落散步与晚餐",
+            "address": "Southbank Promenade, Melbourne",
+            "lat": -37.8204,
+            "lng": 144.9647,
+            "reservation": "none",
+            "reservationNote": "河畔餐厅与唐人街/意大利街馆子选择极多，现场挑即可。",
+            "bookingUrl": "",
+            "cost": {
+              "amount": 0,
+              "note": "餐费已计入每日三餐预算。"
+            },
+            "why": "沿着王子桥与雅拉河岸看市中心高楼亮起灯火，找家河景餐厅或去 Lygon St 吃意面收尾。",
+            "note": "如果在澳洲的最后一晚想吃热乎中餐，从河边走两个街区就是 Little Bourke St 唐人街；若明天搭早班机回国，今晚吃完记得提前把箱子打包好。"
           },
           {
             "id": "au-d8-ngv",
