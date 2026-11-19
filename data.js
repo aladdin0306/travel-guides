@@ -144,7 +144,7 @@ window.SEED_TRIPS = [
     "budget": {
       "currency": "JPY",
       "party": "1 人独自出行",
-      "basis": "当地吃住行门票约 6.37 万日元（约 ¥2,660 人民币），压在 3,000 元以内；但加上 2026 年 7 月涨价后的日本单次签证（规费 ¥715 + 代办费，合计约 ¥980），除机票外总成本约 ¥3,640 人民币。若想连签证一起严控在 ¥3,000 左右，需把 4 晚住宿压到高级胶囊/青旅（每晚 ¥4,000–5,000 日元）。",
+      "basis": "当地吃住行门票约 6.2 万日元（约 ¥2,600 人民币），加上 2026 年 7 月调价后的日本单次签证（领馆规费 ¥715 + 旅行社服务费，合计约 ¥980），除已买机票外总预算约 ¥3,580。",
       "cnyRate": 0.0418,
       "rateDate": "2026-11-16",
       "extras": [
@@ -186,7 +186,7 @@ window.SEED_TRIPS = [
         "id": "hk-d1",
         "date": "2027-03-05",
         "city": "札幌",
-        "title": "转机落地，薄野安顿与第一碗拉面",
+        "title": "飞抵札幌，入住安顿与第一碗热拉面",
         "items": [
           {
             "id": "hk-d1-flight1",
@@ -201,199 +201,188 @@ window.SEED_TRIPS = [
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "已含在已订机票里。"
+              "note": "已含在往返机票里。"
             },
-            "note": "建议提前 2.5–3 小时到浦东 T2。落地羽田 T3 后先入境、取行李、过海关，出海关找全日空国内线转机柜台重挂行李到新千岁，再坐免费接驳巴士去 T2 搭 NH69。"
+            "note": "提前两个半小时到浦东 T2。落地羽田 T3 后先办入境、取行李过海关，出来找全日空国内线转机柜台把行李重新托运到新千岁，再坐免费接驳巴士去 T2 候机。"
           },
           {
             "id": "hk-d1-flight2",
             "time": "15:00–16:35",
             "kind": "transport",
-            "name": "羽田飞新千岁 NH69",
+            "name": "东京羽田飞札幌新千岁 NH69",
             "address": "New Chitose Airport (CTS)",
             "lat": 42.7752,
             "lng": 141.6925,
             "reservation": "none",
-            "reservationNote": "机票已出；班期请再核行程单。",
+            "reservationNote": "机票已出，出发前核对航站楼与登机口。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "已含在已订机票里。"
+              "note": "已含在往返机票里。"
             },
-            "note": "到新千岁后出站跟随「札幌」方向标去机场快线 JR 站。3 月仍可能下雪，下机后保暖外套备好。"
+            "note": "落地新千岁后跟着「JR 線」指示牌下到地下车站。北海道 3 月室外依然很冷，下飞机前先把厚外套拿出来。"
           },
           {
             "id": "hk-d1-airport-train",
             "time": "17:00–17:40",
             "kind": "transport",
-            "name": "机场快线 JR 到札幌站",
+            "name": "JR 快速 Airport 到札幌站",
             "address": "New Chitose Airport Station",
             "lat": 42.7747,
             "lng": 141.6914,
             "reservation": "none",
-            "reservationNote": "刷 Kitaca / 西瓜卡 / 信用卡交通功能即可。",
-            "bookingUrl": "https://www.jreast.co.jp/",
+            "reservationNote": "直接刷西瓜卡 / Kitaca 进站坐自由席即可。",
+            "bookingUrl": "https://www.jrhokkaido.co.jp/",
             "cost": {
               "amount": 1200,
-              "note": "单程约 ¥1,070–1,200，以车站公示为准。"
+              "note": "自由席单程约 ¥1,150。"
             },
-            "note": "选「快速 Airport」约 37 分钟到札幌站。不租车；全程地铁/JR/巴士即可。"
+            "note": "认准「快速エアポート（Rapid Airport）」，约 37 分钟直达札幌站，班次很密不用提前买指定席。"
           },
           {
             "id": "hk-d1-hotel",
             "time": "18:00",
             "kind": "stay",
-            "name": "住薄野/札幌站南口商务酒店（连住 4 晚）",
+            "name": "入住札幌站—大通—薄野一带酒店（连住 4 晚）",
             "address": "Susukino, Chuo-ku, Sapporo",
             "lat": 43.0556,
             "lng": 141.3534,
             "reservation": "recommended",
-            "reservationNote": "一个人订单人房或经济双人房；优先可免费取消、含浴缸或大浴场的商务酒店。",
+            "reservationNote": "优先挑带大浴场、可免费取消的商务酒店，连住 4 晚不用搬箱子。",
             "bookingUrl": "https://www.booking.com/",
             "cost": {
               "amount": 30000,
-              "note": "4 晚合计按每晚约 ¥7,500 估；压在总预算内的关键项。"
+              "note": "按每晚约 ¥7,500 日元估算，4 晚合计约 ¥30,000。"
             },
-            "note": "札幌站到大通、薄野有地下步行空间，风雪天不用走地面；出站可在便利店备一副防滑鞋套（3 月早晚人行道易结冰）。目标每晚含税 ¥6,500–8,500。"
+            "why": "从札幌站一直到薄野都有地下步行街连通，刮风下雪也不用拖着箱子走冰面。",
+            "note": "从札幌站走地下通道（チ・カ・ホ）就能一路通到大通和薄野。3 月早晚路面容易结黑冰，路过便利店可以顺手买一副简易防滑鞋套备着。"
           },
           {
             "id": "hk-d1-ramen",
             "time": "19:00",
             "kind": "food",
-            "name": "札幌拉面横丁或附近味噌拉面",
+            "name": "薄野元祖拉面横丁",
             "address": "Ramen Yokocho, Susukino, Sapporo",
             "lat": 43.0567,
             "lng": 141.354,
             "reservation": "none",
-            "reservationNote": "不用预约，排队短就进。",
+            "reservationNote": "不用预约，哪家队伍短进哪家。",
             "bookingUrl": "",
             "cost": {
               "amount": 1200,
-              "note": "一碗拉面约 ¥900–1,400。"
+              "note": "一碗味噌拉面约 ¥1,000–1,400。"
             },
             "photo": photo("hk-d1-susukino"),
-            "note": "落地日只安排一件事：吃热的、早点睡。顺便看一眼街上积雪厚不厚，并查明天小樽 vs 旭川天气预报，决定第 2 天走哪条。"
+            "why": "窄巷里一字排开十几家老牌拉面铺，转了一整天飞机，先喝碗滚烫的黄油玉米味噌拉面最解乏。",
+            "note": "就在薄野站旁的小巷里，进店在自动售票机买食券即可。吃完早点回酒店休息，顺便看一眼明早天气预报——要是小樽雪化得差不多了，明天就改坐 JR 去旭川看厚雪。"
           }
         ]
       },
       {
         "id": "hk-d2",
         "date": "2027-03-06",
-        "city": "小樽 / 旭川",
-        "title": "看雪日：默认小樽；市区几乎无雪则改旭川",
+        "city": "小樽",
+        "title": "小樽海边铁道、运河仓库与海鲜丼",
+        "altTitle": "备选路线：若小樽积雪太少，改去旭川看厚雪（共 3 站）",
         "items": [
           {
-            "id": "hk-d2-decide",
-            "time": "出发前",
-            "kind": "sight",
-            "name": "今早怎么选：小樽还是旭川",
-            "address": "Sapporo Station",
-            "lat": 43.0686,
-            "lng": 141.3508,
-            "reservation": "none",
-            "reservationNote": "",
-            "bookingUrl": "https://www.jma.go.jp/bosai/forecast/",
-            "cost": {
-              "amount": 0,
-              "note": "免费。"
-            },
-            "why": "3 月初札幌平原积雪一年差一年，当天看地面和预报再定，比死守小樽更稳。",
-            "note": "默认 A：小樽（近、轻松，有残雪就很出片）。改走 B：旭川（内陆更冷、积雪通常更厚，JR 约 1.5 小时，不租车）。两者只选一天，别两头跑。"
-          },
-          {
             "id": "hk-d2-jr",
-            "time": "09:30–10:20",
+            "time": "09:30–10:15",
             "kind": "transport",
-            "name": "方案 A · JR 札幌 → 小樽",
+            "name": "JR 函馆本线 札幌 → 小樽",
             "address": "Sapporo Station",
             "lat": 43.0686,
             "lng": 141.3508,
             "reservation": "none",
-            "reservationNote": "普通车刷 IC 即可，不必指定席。",
+            "reservationNote": "刷交通卡进站即可，不用买指定席。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "往返约 ¥1,500–1,800，已计入当地交通。"
+              "note": "往返约 ¥1,500–1,600，已计入当地交通预算。"
             },
-            "note": "函馆本线约 30–45 分钟。雪天人行道滑，鞋子要有纹路。若已决定去旭川，跳过本条，改坐特急到旭川。"
+            "note": "坐「快速 Airport」或普通列车约 35–45 分钟就到。去程记得挑靠右边的窗户坐，过了钱函站之后列车几乎贴着海岸线跑，窗外就是大海和雪岸。"
           },
           {
             "id": "hk-d2-canal",
             "time": "10:30–12:00",
             "kind": "sight",
-            "name": "方案 A · 小樽运河与仓库群（看残雪街景）",
+            "name": "小樽运河与堺町通硝子街",
             "address": "Otaru Canal, Otaru",
             "lat": 43.1991,
             "lng": 141.0064,
             "reservation": "none",
-            "reservationNote": "户外散步，不用票。",
+            "reservationNote": "全天开放，不用门票。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
               "note": "免费。"
             },
             "photo": photo("hk-d2-otaru"),
-            "why": "近郊最轻松的雪街/运河组合；有积雪时一个人慢慢拍刚好。",
-            "note": "沿运河走到堺町通。若到站发现雪已化光、只剩泥水，也不必硬撑整天——可提早回札幌，把体力留给明天定山溪。"
+            "why": "石造老仓库倒映在运河水面上，顺路逛去堺町通看玻璃工坊、音乐盒堂和现烤甜点。",
+            "note": "从小樽站出来顺着正前方的坡道往下走 10 分钟就是运河浅草桥机位。拍完拐进旁边的堺町通慢慢逛，六花亭、北一硝子三号馆和八音盒堂都在这一条街上，走累了随时进咖啡馆暖手。"
           },
           {
             "id": "hk-d2-otaru-lunch",
             "time": "12:30",
             "kind": "food",
-            "name": "方案 A · 小樽海鲜丼午饭",
+            "name": "三角市场或堺町通海鲜丼",
             "address": "Otaru Sankaku Market / Sakaimachi area",
             "lat": 43.1975,
             "lng": 141.0089,
             "reservation": "none",
-            "reservationNote": "",
+            "reservationNote": "饭点人多时现场排号即可。",
             "bookingUrl": "",
             "cost": {
               "amount": 2200,
-              "note": "海鲜丼约 ¥1,800–2,800；省钱可便利店。"
+              "note": "海鲜丼人均约 ¥1,800–2,800。"
             },
-            "note": "只在走小樽方案时吃这里。吃完堺町通咖啡歇脚，16:30 前赶回 JR。"
+            "why": "港口现切的海胆、甜虾和扇贝铺满热米饭，鲜甜肥厚。",
+            "note": "小樽站左手边的三角市场（泷波食堂、武田鲜鱼店）选择最多，要是排队太长就去堺町通巷子里的寿司屋或海鲜食堂。下午逛到四五点坐 JR 回札幌即可。"
           },
           {
             "id": "hk-d2-asahikawa-jr",
-            "time": "08:40–10:20",
+            "alt": true,
+            "time": "08:30–10:00",
             "kind": "transport",
-            "name": "方案 B · JR 特急 札幌 → 旭川（备选看雪）",
+            "name": "JR 特急 札幌 → 旭川",
             "address": "Sapporo Station → Asahikawa Station",
             "lat": 43.7634,
             "lng": 142.3602,
             "reservation": "recommended",
-            "reservationNote": "特急 Lilac/Kamui 可买指定席更稳；自由席也行。",
-            "bookingUrl": "https://www.jreast.co.jp/",
+            "reservationNote": "特急 Lilac / Kamui 号，车站售票机现买自由席或指定席都很方便。",
+            "bookingUrl": "https://www.jrhokkaido.co.jp/",
             "cost": {
               "amount": 0,
-              "note": "往返约 ¥4,500–5,500，比小樽贵，从交通机动预算出。"
+              "note": "往返套票（S 切符等）约 ¥5,500，从交通机动预算里出。"
             },
-            "note": "仅当札幌/小樽积雪很少时启用。单程约 1 小时 20–30 分。不租车；当天必须赶回札幌住。"
+            "note": "如果 3 月初札幌和小樽刚好回暖化雪，当天一早改坐特急往内陆走，1 小时 25 分钟直达旭川，那边气温更低、雪量通常厚得多。"
           },
           {
             "id": "hk-d2-asahiyama",
-            "time": "11:00–14:30",
+            "alt": true,
+            "time": "10:40–14:30",
             "kind": "sight",
-            "name": "方案 B · 旭山动物园冬景（备选）",
+            "name": "旭山动物园（企鹅雪地散步）",
             "address": "Asahiyama Zoo, Asahikawa",
             "lat": 43.7682,
             "lng": 142.4786,
             "reservation": "none",
-            "reservationNote": "冬季常缩短开园；出发前查官网时间。",
+            "reservationNote": "冬季闭园早（常为 15:30），进园先看当天企鹅散步时间牌。",
             "bookingUrl": "https://www.city.asahikawa.hokkaido.jp/asahiyamazoo/",
             "cost": {
               "amount": 1000,
-              "note": "门票约 ¥1,000；巴士往返另计约 ¥800。"
+              "note": "门票 ¥1,000；旭川站往返巴士另约 ¥1,000。"
             },
             "photo": photo("hk-d2-asahiyama"),
-            "why": "内陆雪通常比札幌厚，企鹅散步/雪地动物展是「真的在看雪」的一天。",
-            "note": "旭川站前坐巴士去动物园。穿防滑靴。若不想看动物，可改在旭川站周边河畔/公园拍雪景（见下一条）。"
+            "why": "帝企鹅排着队从厚雪道上摇摇摆摆走过眼前，还有北极熊和圆柱玻璃水柱里的海豹。",
+            "note": "从旭川站北口 6 号站台坐 41 或 47 路巴士约 40 分钟直达正门。园区在山坡上，雪道很滑，一定穿防滑保暖靴。"
           },
           {
             "id": "hk-d2-asahikawa-town",
-            "time": "15:00–16:30",
+            "alt": true,
+            "time": "15:15–16:45",
             "kind": "sight",
-            "name": "方案 B · 旭川站前雪街与咖啡收尾",
+            "name": "平和通买物公园与旭川酱油拉面",
             "address": "Asahikawa Station area",
             "lat": 43.7634,
             "lng": 142.3602,
@@ -401,11 +390,12 @@ window.SEED_TRIPS = [
             "reservationNote": "",
             "bookingUrl": "",
             "cost": {
-              "amount": 600,
-              "note": "咖啡约 ¥500–800。"
+              "amount": 1200,
+              "note": "拉面或咖啡简餐约 ¥1,000–1,500。"
             },
             "photo": photo("hk-d2-asahikawa"),
-            "note": "赶 17 点前后特急回札幌即可。晚上薄野吃饭，控制 ¥1,500–2,500。"
+            "why": "车站正对面的步行雪街，吃碗猪骨鱼介双汤底的旭川酱油拉面再坐车回札幌。",
+            "note": "梅光轩本店、青叶或山头火总店都在旭川站步行圈内。吃完搭 17 点前后的特急回札幌休息。"
           }
         ]
       },
@@ -413,49 +403,49 @@ window.SEED_TRIPS = [
         "id": "hk-d3",
         "date": "2027-03-07",
         "city": "定山溪",
-        "title": "定山溪：泡汤 + 本趟最稳的雪景保底",
+        "title": "定山溪山谷雪见日归温泉",
         "items": [
           {
             "id": "hk-d3-bus",
             "time": "09:30–10:50",
             "kind": "transport",
-            "name": "定山溪观光巴士（札幌站/大通一带上车）",
-            "address": "Sapporo Station Bus Terminal area",
+            "name": "河童号或定铁巴士前往定山溪",
+            "address": "Sapporo Station / Odori / Susukino Bus Stop",
             "lat": 43.0687,
             "lng": 141.3494,
             "reservation": "recommended",
-            "reservationNote": "可现场买票；旺季或周末建议提前在官网/便利店看班次。",
-            "bookingUrl": "https://www.chuo-bus.co.jp/",
+            "reservationNote": "直达「河童 Liner 号」需提前在官网预约；普通「快速 7 / 8 号」巴士免预约直接刷卡上车。",
+            "bookingUrl": "https://jotetsu-reservation.com/",
             "cost": {
               "amount": 0,
-              "note": "往返约 ¥1,500–2,000，已计入当地交通。"
+              "note": "往返巴士或日归套票已计入当地交通预算。"
             },
-            "note": "不租车。山谷海拔更高，3 月初比市区更容易还有积雪——这是「札幌不下雪」时的主保底。确认末班回札幌时间。"
+            "note": "从札幌站、大通或薄野都能上车，一路进山约 60–75 分钟。买「温泉日归套票（含往返车票 + 入浴券）」通常比单买更划算。"
           },
           {
             "id": "hk-d3-onsen",
-            "time": "11:30–15:30",
+            "time": "11:15–15:00",
             "kind": "sight",
-            "name": "定山溪温泉·日归入浴（雪中汤）",
+            "name": "定山溪雪见露天温泉（日归入浴）",
             "address": "Jozankei Onsen, Minami-ku, Sapporo",
             "lat": 42.965,
             "lng": 141.1636,
             "reservation": "recommended",
-            "reservationNote": "选一家开放日归的温泉旅馆；部分需电话或官网预约入浴时段。",
+            "reservationNote": "日归开放时间多在 11:00–15:00（如汤元小金汤、鹿之汤、丰平峡温泉等），出发前看一眼选定旅馆的接待时段。",
             "bookingUrl": "https://jozankei.jp/",
             "cost": {
               "amount": 2000,
-              "note": "日归入浴约 ¥1,500–3,000，含毛巾另计。"
+              "note": "日归入浴费约 ¥1,200–2,500（租浴巾另加 ¥200–300）。"
             },
             "photo": photo("hk-d3-jozankei"),
-            "why": "泡汤是目标，山谷残雪是加分；哪怕市区化光，这里仍常能看见雪景。",
-            "note": "带换洗衣物与小毛巾。有文身需提前确认馆方规定。泡前先在河岸/桥边走一圈拍雪，再进浴场。不必再赶别的景点。"
+            "why": "峡谷海拔比市区高，3 月初溪谷两岸常挂满白雪，泡在热汤里看对岸雪林特别放松。",
+            "note": "到温泉街后可以先去二见吊桥走一圈拍溪谷雪景，再去泡汤。自带一条小毛巾会更方便；如果有文身记得提前确认馆方是否允许或能否贴遮盖贴。"
           },
           {
             "id": "hk-d3-lunch",
-            "time": "12:30",
+            "time": "13:30",
             "kind": "food",
-            "name": "定山溪旅馆食堂或街上定食",
+            "name": "温泉街食堂或足汤甜点店歇脚",
             "address": "Jozankei Onsen town",
             "lat": 42.9645,
             "lng": 141.1645,
@@ -464,26 +454,27 @@ window.SEED_TRIPS = [
             "bookingUrl": "",
             "cost": {
               "amount": 1500,
-              "note": "定食约 ¥1,200–2,000。"
+              "note": "荞麦面/咖喱定食或甜点饮品约 ¥1,200–1,800。"
             },
-            "note": "温泉乡选择不多，吃饱就好。预留体温回升时间再出门等巴士。"
+            "why": "泡完热汤吃碗热荞麦面，再去坂之上最中饼或雨之日与雪之日咖啡馆坐坐。",
+            "note": "刚泡完温泉身上毛孔张开，别马上站在风口等车，在休息区喝瓶冰牛奶、吃顿热饭缓一缓再出门。"
           },
           {
             "id": "hk-d3-return",
-            "time": "16:00–17:30",
+            "time": "15:45–17:00",
             "kind": "transport",
-            "name": "巴士返回札幌",
-            "address": "Jozankei Bus Terminal",
+            "name": "巴士返回札幌市区",
+            "address": "Jozankei Jinja-mae Bus Stop",
             "lat": 42.9658,
             "lng": 141.1628,
             "reservation": "none",
-            "reservationNote": "核对末班车，雪天可能误点。",
+            "reservationNote": "下山巴士下午四五点人较多，提前 10 分钟到站台排队。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "已计入当地交通。"
+              "note": "已含在交通预算里。"
             },
-            "note": "晚上薄野随便吃，早睡。若身体舒服，可改成定山溪住一晚——但会多一笔住宿，¥3,000 总预算会更紧。"
+            "note": "回到薄野或大通还早，晚上找家居酒屋或烤串店慢慢吃。"
           }
         ]
       },
@@ -491,49 +482,50 @@ window.SEED_TRIPS = [
         "id": "hk-d4",
         "date": "2027-03-08",
         "city": "札幌",
-        "title": "大通公园慢逛与藻岩山夜景",
+        "title": "大通公园、汤咖喱与藻岩山夜景",
         "items": [
           {
             "id": "hk-d4-odori",
-            "time": "10:30–12:30",
+            "time": "10:30–12:15",
             "kind": "sight",
-            "name": "大通公园 + 电视塔外观",
+            "name": "大通公园、时计台与北海道厅红砖厅舍",
             "address": "Odori Park, Sapporo",
             "lat": 43.0604,
             "lng": 141.3545,
             "reservation": "none",
-            "reservationNote": "公园免费；电视塔观景台可选，省钱可只在外观拍照。",
+            "reservationNote": "户外街区全部免费；电视塔展望台想上去现场买票即可。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "公园免费；若上塔另计约 ¥1,000，可选。"
+              "note": "街区免费（上电视塔展望台另约 ¥1,000）。"
             },
             "photo": photo("hk-d4-odori"),
-            "why": "札幌市中心最轻松的散步轴，一个人不用赶行程。",
-            "note": "有残雪就当「城市雪景」拍；若已经化光，把看雪期待放在昨天定山溪/前天旭川即可，今天专注吃与夜景。"
+            "why": "睡到自然醒在市中心散步，一眼收进札幌电视塔和百年红砖老建筑。",
+            "note": "这几处地标彼此隔着两三个街区，平地慢走 20 多分钟就能串起来，路上随时可以钻进森彦咖啡（MORIHICO）喝杯手冲。"
           },
           {
             "id": "hk-d4-lunch",
             "time": "12:30",
             "kind": "food",
-            "name": "汤咖喱或成吉思汗午饭",
+            "name": "札幌汤咖喱或成吉思汗烤羊肉",
             "address": "Near Odori / Susukino, Sapporo",
             "lat": 43.0578,
             "lng": 141.3538,
             "reservation": "none",
-            "reservationNote": "热门汤咖喱店可能排队，错峰或换下一家。",
+            "reservationNote": "GARAKU、Suage+ 等名店饭点常排队，12 点前或 13:15 后去最快。",
             "bookingUrl": "",
             "cost": {
               "amount": 1800,
-              "note": "约 ¥1,500–2,500。"
+              "note": "一份脆皮鸡腿汤咖喱约 ¥1,500–2,000。"
             },
-            "note": "一个人点单人套餐。想更省就便利店热食 + 一杯热饮。"
+            "why": "札幌最具代表性的香料浓汤配焦香鸡腿和十几种北海道炸蔬菜，配柠檬黄姜饭一绝。",
+            "note": "大通到狸小路一带好店非常集中（Suage+、GARAKU、Treasure 等），一个人坐吧台位通常翻台很快。"
           },
           {
             "id": "hk-d4-free",
             "time": "14:00–16:30",
             "kind": "sight",
-            "name": "自由时间：狸小路或回酒店休息",
+            "name": "狸小路商店街闲逛与咖啡歇脚",
             "address": "Tanukikoji Shopping Arcade, Sapporo",
             "lat": 43.0572,
             "lng": 141.353,
@@ -542,28 +534,29 @@ window.SEED_TRIPS = [
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "逛街按需；预算紧就只逛不买。"
+              "note": "按需消费。"
             },
-            "note": "休闲游故意留白。晚上要上藻岩山的话，下午别排太满。"
+            "why": "头顶有透明长拱廊遮风挡雪，药妆、古着小店和老牌吃茶店都在这一条街上。",
+            "note": "从 1 丁目到 7 丁目全长近一公里，逛累了可以回酒店小睡一会儿，养足精神傍晚上山看夜景。"
           },
           {
             "id": "hk-d4-moiwa",
-            "time": "17:30–19:30",
+            "time": "17:15–19:30",
             "kind": "sight",
-            "name": "藻岩山缆车夜景",
+            "name": "藻岩山缆车看札幌夜景",
             "address": "Mt. Moiwa Ropeway, Sapporo",
             "lat": 43.0364,
             "lng": 141.3211,
             "reservation": "none",
-            "reservationNote": "末班缆车季节不同，当天查官网；雪天可能停运。",
-            "bookingUrl": "https://moiwa.keio-cable.co.jp/",
+            "reservationNote": "遇大风雪可能临时停运，出门前看一眼官网顶部的运行状态提示。",
+            "bookingUrl": "https://mt-moiwa.jp/",
             "cost": {
               "amount": 2300,
-              "note": "往返缆车约 ¥2,200–2,400。"
+              "note": "两段缆车往返套票 ¥2,100。"
             },
             "photo": photo("hk-d4-moiwa"),
-            "why": "札幌最值得的一晚夜景，公共交通可到，不必租车。",
-            "note": "地铁东西线到绳生站再转巴士/接驳（以当日官网为准）。山顶风大，羽绒服必穿。若不开放，改去JR塔展望或早点休息。"
+            "why": "日本新三大夜景之一，整座札幌棋盘状的万家灯火铺在雪原上，视野极开阔。",
+            "note": "在薄野十字路口坐复古市电（有轨电车）约 20 分钟到「ロープウェイ入口」站，下车走两步就有免费接驳巴士送到山麓缆车站。3 月日落在 17:30 左右，提前半小时上山能一次看全蓝调时刻和夜景。山顶风非常硬，帽子手套围巾全副武装；万一当天缆车停开，就改去札幌站楼上的 JR 塔 T38 室内展望室看夜景。"
           }
         ]
       },
@@ -571,14 +564,14 @@ window.SEED_TRIPS = [
         "id": "hk-d5",
         "date": "2027-03-09",
         "city": "札幌",
-        "title": "收尾半天，傍晚飞回上海",
+        "title": "北海道大学散步、买伴手礼，傍晚返程",
         "items": [
           {
             "id": "hk-d5-morning",
             "time": "09:30–12:00",
             "kind": "sight",
-            "name": "札幌站周边轻松逛 / 买伴手礼",
-            "address": "Sapporo Station",
+            "name": "北海道大学银杏白杨道与札幌站百货",
+            "address": "Sapporo Station / Hokkaido University",
             "lat": 43.0686,
             "lng": 141.3508,
             "reservation": "none",
@@ -586,77 +579,79 @@ window.SEED_TRIPS = [
             "bookingUrl": "",
             "cost": {
               "amount": 1500,
-              "note": "伴手礼按需；白巧克力饼干等，控制冲动消费。"
+              "note": "预留伴手礼预算约 ¥1,500。"
             },
-            "note": "中午前退房。行李可寄放酒店或站内储物柜。不安排远郊，保证下午去机场从容。"
+            "why": "离札幌站北口仅几步路的宁静雪地校园，逛完顺路在大丸百货把六花亭、北菓楼一次买齐。",
+            "note": "退房后先把行李寄存在酒店前台或札幌站储物柜，轻装去北大校园走一圈（注意安静，不进教学楼）。买点心在札幌站大丸百货 B1 或下午到新千岁机场国内航站楼 2 楼买都很全。"
           },
           {
             "id": "hk-d5-lunch",
-            "time": "12:00",
+            "time": "12:15",
             "kind": "food",
-            "name": "札幌站午饭",
-            "address": "Sapporo Station food court / ramen",
+            "name": "札幌站根室花丸回转寿司或十胜豚丼",
+            "address": "JR Tower Stellar Place 6F, Sapporo Station",
             "lat": 43.0683,
             "lng": 141.3505,
             "reservation": "none",
-            "reservationNote": "",
+            "reservationNote": "Stellar Place 6 楼两家名店都支持机器取号，拿完号可以在商场里边逛边等。",
             "bookingUrl": "",
             "cost": {
-              "amount": 1200,
-              "note": "约 ¥1,000–1,500。"
+              "amount": 1500,
+              "note": "人均约 ¥1,300–2,200。"
             },
-            "note": "吃完再去机场。机场也有拉面，但价格通常更高。"
+            "why": "离开札幌前吃顿现握北海道海鲜寿司，或炭火焦香的十胜烤猪肉饭收尾。",
+            "note": "都在札幌站楼上的 Stellar Place 6 楼（根室花丸寿司、十胜豚丼 いっぴん）。如果不想等位，新千岁机场国内航站楼 3 楼的「北海道拉面道场」和海鲜餐厅也非常好逛好吃。"
           },
           {
             "id": "hk-d5-to-airport",
-            "time": "15:00–16:00",
+            "time": "15:00–15:40",
             "kind": "transport",
-            "name": "JR 机场快线去新千岁",
+            "name": "JR 快速 Airport 前往新千岁机场",
             "address": "Sapporo Station → New Chitose Airport",
             "lat": 43.0686,
             "lng": 141.3508,
             "reservation": "none",
-            "reservationNote": "NH78 约 19:30 起飞，建议 16:00 前后到机场即可从容。",
+            "reservationNote": "19:30 起飞，16:00 左右到机场还能从容逛吃新千岁国内楼。",
             "bookingUrl": "",
             "cost": {
               "amount": 1200,
-              "note": "单程约 ¥1,070–1,200。"
+              "note": "单程约 ¥1,150。"
             },
-            "note": "不租车。预留误点缓冲；雪天列车可能慢一点。"
+            "note": "冬季偶尔遇到风雪减速，比平时多留半小时余量更踏实。新千岁国内航站楼被称作最好逛的机场，吃个 Kinotoya 牛奶冰淇淋再去值机。"
           },
           {
             "id": "hk-d5-flight1",
             "time": "19:30–21:10",
             "kind": "transport",
-            "name": "新千岁飞羽田 NH78",
+            "name": "札幌新千岁飞东京羽田 NH78",
             "address": "New Chitose Airport (CTS)",
             "lat": 42.7752,
             "lng": 141.6925,
             "reservation": "none",
-            "reservationNote": "机票已出。",
+            "reservationNote": "机票已出；新千岁柜台确认行李能否直挂上海浦东。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "已含在已订机票里。"
+              "note": "已含在往返机票里。"
             },
-            "note": "到羽田后转国际出发的 NH967（多为 T2 国际手续），按机场指示走，别在国内到达区耽搁太久。"
+            "note": "在全日空柜台办手续时让地勤把两段登机牌打出来，确认行李直挂。落地羽田后跟着「国際線乗継」指示走转机通道。"
           },
           {
             "id": "hk-d5-flight2",
             "time": "22:40–01:15+1",
             "kind": "transport",
-            "name": "羽田飞上海浦东 NH967",
+            "name": "东京羽田飞上海浦东 NH967",
             "address": "Tokyo Haneda (HND) → Shanghai Pudong (PVG)",
             "lat": 35.5494,
             "lng": 139.7798,
             "reservation": "none",
-            "reservationNote": "机票已出；到达为次日凌晨。",
+            "reservationNote": "次日凌晨 01:15 落地浦东。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "已含在已订机票里。"
+              "note": "已含在往返机票里。"
             },
-            "note": "浦东约 01:15 落地，提前想好回市区的地铁末班或打车方案。"
+            "note": "落地浦东已是凌晨一点多，地铁已停运，提前约好接机或出到达层去出租车/网约车上客点。"
           }
         ]
       }
@@ -757,115 +752,117 @@ window.SEED_TRIPS = [
         "id": "au-d1",
         "date": "2027-04-29",
         "city": "悉尼",
-        "title": "落地，沃森斯湾和歌剧院",
+        "title": "落地悉尼，海港渡轮与歌剧院日落",
         "items": [
           {
             "id": "au-d1-opal",
             "time": "落地后",
             "kind": "transport",
-            "name": "机场站坐火车到环形码头",
+            "name": "机场火车 T8 直达环形码头",
             "address": "Sydney Airport International Station",
             "lat": -33.9344,
             "lng": 151.1652,
             "reservation": "none",
-            "reservationNote": "不用订票。刷银行卡或 Opal 卡即可。",
+            "reservationNote": "不用提前买票，直接刷 Visa / Mastercard 信用卡或 Opal 卡进站。",
             "bookingUrl": "",
             "cost": {
               "amount": 22.94,
-              "note": "机场站通行费 A$18.61 加火车票。吉祥航班早上六点多到，北京航班下午三点到，出站都赶上高峰，A$22.94。"
+              "note": "含机场站通行费 A$18.61 + 进城车资，合计约 A$22.94。"
             },
-            "note": "国际航站楼和国内航站楼是两个火车站。坐 T8，方向进城，经过中央车站、市政厅、温亚德，到环形码头下。机场站另收一笔通行费，比普通地铁贵。行李多、很累就打车，大约三四十分钟到环形码头。"
+            "note": "国际航站楼和国内航站楼各有一个火车站。跟着 Train 指示牌下楼坐 T8 进城方向，在 Circular Quay（环形码头）下车即可。如果行李多或飞太累，也可以直接打车进城，车程约 30–40 分钟。"
           },
           {
             "id": "au-d1-stay",
             "time": "入住",
             "kind": "stay",
-            "name": "住环形码头或岩石区",
+            "name": "住环形码头或岩石区（连住 2 晚）",
             "address": "Circular Quay, Sydney",
             "lat": -33.8612,
             "lng": 151.2108,
             "reservation": "required",
-            "reservationNote": "港边酒店位置好的先满，两晚一起订。上午到的话问酒店能不能先寄存行李。",
+            "reservationNote": "海港边位置好的酒店抢手，建议提前连订两晚；上午落地可先把行李寄存在前台。",
             "bookingUrl": "https://www.booking.com/searchresults.html?ss=Circular+Quay%2C+Sydney&checkin=2027-04-29&checkout=2027-05-01",
             "cost": {
               "amount": 330,
-              "note": "港边四星大约每晚 A$300–350 一间。两晚按 A$660，两人分。"
+              "note": "四星酒店每晚约 A$300–350/间，两晚双人平摊每人约 A$330。"
             },
-            "note": "住这儿，歌剧院、岩石区和渡轮码头都能走路到。下午和第二天都从环形码头坐渡轮出发。5月1日早上去机场。"
+            "why": "下楼就能走到歌剧院、岩石区和渡轮码头，前两天坐船出门最省力。",
+            "note": "今明两天去沃森斯湾和曼利海滩都在环形码头上船，住这一片不用反复换乘。"
           },
           {
             "id": "au-d1-watsons",
             "time": "早到再去",
             "kind": "sight",
-            "name": "渡轮去沃森斯湾和 The Gap 悬崖",
+            "name": "渡轮去沃森斯湾与 The Gap 海崖",
             "address": "Gap Park, Watsons Bay",
             "lat": -33.8452,
             "lng": 151.287,
             "reservation": "none",
-            "reservationNote": "渡轮刷卡，悬崖公园免费。",
+            "reservationNote": "渡轮直接刷卡上船，海崖公园免费。",
             "bookingUrl": "",
             "cost": {
               "amount": 14.7,
-              "note": "来回渡轮各 A$7.35。"
+              "note": "往返渡轮单程各 A$7.35。"
             },
-            "why": "港湾这边是小渔村，翻过小坡就是外海悬崖。来回都是渡轮，不用走长路，适合落地第一天。",
+            "why": "内港一侧是安静小渔村，翻过草坡就是太平洋巨浪拍岸的断崖，来回坐船很轻松。",
             "photo": photo("au-d2-gap"),
-            "note": "放下行李后到环形码头 2 号码头，坐 F9 到 Watsons Bay，大约 25 分钟。下船穿过码头对面的草地，走上 Gap Park，看外海那一侧的悬崖，来回二十分钟。F9 有时一小时才一班，到码头先看回程时间，16:30 前往回坐。上海航班早上到，先在酒店寄存行李、吃早饭，再来这一站；北京航班下午三点到，直接去下面的歌剧院。"
+            "note": "如果搭早班机上午就到悉尼，放好行李去环形码头 2 号码头坐 F9 渡轮（约 25 分钟）。下船穿过草坪走上 Gap Park 看外海悬崖，往返步行只要 20 分钟；若下午才落地悉尼，就跳过这站直接去歌剧院散步。"
           },
           {
             "id": "au-d1-opera",
             "time": "傍晚",
             "kind": "sight",
-            "name": "悉尼歌剧院外面",
+            "name": "悉尼歌剧院与麦考利夫人石椅散步",
             "address": "Bennelong Point, Sydney NSW",
             "lat": -33.8568,
             "lng": 151.2153,
             "reservation": "none",
-            "reservationNote": "只在室外走，不用票。",
+            "reservationNote": "户外海滨步道全天免费。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "室外免费。"
+              "note": "免费。"
             },
-            "why": "坐了一夜飞机，这里走路就到，不用转车。外面看不要票。",
+            "why": "顺着海港栈道慢走到白帆脚下，再进皇家植物园拍歌剧院与海港大桥同框日落。",
             "photo": photo("au-d1-opera"),
-            "note": "从环形码头沿着海走过去。先看壳，再绕到海岬一侧。还有力气就继续往东走进皇家植物园，大约 20 分钟到麦考利夫人椅子，那里能把歌剧院和大桥拍在一起。"
+            "note": "从环形码头沿海边散步过去只要几分钟。看完美丽的贝壳屋顶，如果体力还行，继续往东穿过皇家植物园走 20 分钟到 Mrs Macquarie's Chair，傍晚光线最出片。"
           },
           {
             "id": "au-d1-tour",
             "time": "想进去再订",
             "kind": "sight",
-            "name": "歌剧院室内导览",
+            "name": "悉尼歌剧院中文/英文入内导览",
             "address": "Sydney Opera House Welcome Centre",
             "lat": -33.8568,
             "lng": 151.2153,
             "reservation": "recommended",
-            "reservationNote": "官网写明建议提前买。每场大约35人，迟到超过5分钟票作废。",
+            "reservationNote": "官网提前买比现场便宜 A$5；每场限约 35 人，迟到超 5 分钟无法入场。",
             "bookingUrl": "https://www.sydneyoperahouse.com/tours/sydney-opera-house-tour",
             "cost": {
               "amount": 52,
-              "note": "提前订每人 A$50，2027年4月起预计 A$52；当天买再贵 A$5。"
+              "note": "官网提前订每人约 A$52。"
             },
-            "why": "只有想看音乐厅内部才去。每场限人数，里面不挤。",
+            "why": "由讲解员带着走进风帆内部看木质音乐厅结构，团小安静。",
             "photo": photo("au-d1-tour"),
-            "note": "到了再决定。订的话选傍晚前的最后一场，提前15分钟到下层的 Welcome Centre。不订也不影响这天。"
+            "note": "想看内部建筑再订即可，选傍晚前最后一场，提前 15 分钟到下层 Welcome Centre 集合。"
           },
           {
             "id": "au-d1-bar",
             "time": "晚饭",
             "kind": "food",
-            "name": "Opera Bar",
+            "name": "Opera Bar 海景晚餐",
             "address": "Lower Concourse, Sydney Opera House",
             "lat": -33.8583,
             "lng": 151.2142,
             "reservation": "none",
-            "reservationNote": "歌剧院下层的酒吧餐厅，现场坐，不接受预订。",
+            "reservationNote": "现场找位置入座，不接受预订。",
             "bookingUrl": "",
             "cost": {
               "amount": 60,
-              "note": "一份主菜加一杯饮料，每人大约 A$50–70。"
+              "note": "一份主菜配一杯酒水人均约 A$50–70。"
             },
-            "note": "就在歌剧院脚下。要靠窗的位置就早点去。这天别再跑别的区。"
+            "why": "就在歌剧院正下方的露天水岸餐吧，正对海港大桥夜景。",
+            "note": "日落前后靠水边的桌子最抢手，逛完歌剧院直接下楼坐下吃顿简餐喝一杯，吃完溜达回酒店早点睡。"
           }
         ]
       },
@@ -873,96 +870,96 @@ window.SEED_TRIPS = [
         "id": "au-d3",
         "date": "2027-04-30",
         "city": "悉尼",
-        "title": "渡轮去曼利，往北角走",
+        "title": "渡轮去曼利海滩，徒步北角悬崖",
         "items": [
           {
             "id": "au-d3-ferry",
             "time": "10:00",
             "kind": "transport",
-            "name": "F1 渡轮到曼利",
+            "name": "F1 渡轮前往曼利码头",
             "address": "Circular Quay Wharf 3",
             "lat": -33.8612,
             "lng": 151.2108,
             "reservation": "none",
-            "reservationNote": "刷 Opal 或银行卡，不用提前买。",
+            "reservationNote": "直接刷信用卡或 Opal 卡进闸。",
             "bookingUrl": "",
             "cost": {
               "amount": 9.65,
-              "note": "周五全天交通封顶 A$9.65，渡轮来回加 161 路都在里面。"
+              "note": "周五全天公共交通封顶 A$9.65，往返渡轮与公交都含在内。"
             },
-            "note": "环形码头看牌子 F1 Manly，一般在 3 号码头。船大约 30 分钟。坐船头或上层的外侧，这段是最好看的海港风景。风大，外套带着。"
+            "note": "在环形码头 3 号码头坐 F1 Manly，航程约 30 分钟。挑上层甲板外侧坐，一路驶过歌剧院和海港大桥，海风大记得带件外套。"
           },
           {
             "id": "au-d3-manly",
             "time": "10:40",
             "kind": "sight",
-            "name": "曼利海滩到 Shelly Beach",
+            "name": "曼利海滩与 Shelly Beach 海滨步道",
             "address": "Shelly Beach, Manly",
             "lat": -33.8003,
             "lng": 151.2975,
             "reservation": "none",
-            "reservationNote": "不用票。",
-            "bookingUrl": "",
-            "cost": {
-              "amount": 0,
-              "note": "免费。午饭算在每天的餐费里。"
-            },
-            "why": "曼利主滩人多，不停留。Shelly Beach 是朝北的小湾，水平静。",
-            "photo": photo("au-d3-manly"),
-            "note": "下船穿过 The Corso 商业街，在这条街上买好午饭和水带走，北角上面没有店。到海滩右转，沿海边步道走大约 1 公里到 Shelly Beach。"
-          },
-          {
-            "id": "au-d3-northhead",
-            "time": "11:30",
-            "kind": "sight",
-            "name": "北角 Fairfax 观景台",
-            "address": "Fairfax Lookout, North Head Scenic Drive, Manly",
-            "lat": -33.8167,
-            "lng": 151.2963,
-            "reservation": "none",
-            "reservationNote": "国家公园，不用票。",
+            "reservationNote": "免费开放。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
               "note": "免费。"
             },
-            "why": "站在悬崖上看整个悉尼港口和外海，5月开始有机会看到鲸鱼。来的人比曼利海滩少得多。",
+            "why": "穿过冲浪海滩顺着礁石海边栈道往南走一公里，就是风平浪静的朝北小海湾。",
+            "photo": photo("au-d3-manly"),
+            "note": "下船穿过 The Corso 步行街时先买好三明治和饮用水带上（后面北角山上没有商店和餐厅），走到主海滩右转沿着海边步道慢走到 Shelly Beach。"
+          },
+          {
+            "id": "au-d3-northhead",
+            "time": "11:30",
+            "kind": "sight",
+            "name": "北角 Fairfax 悬崖观景台",
+            "address": "Fairfax Lookout, North Head Scenic Drive, Manly",
+            "lat": -33.8167,
+            "lng": 151.2963,
+            "reservation": "none",
+            "reservationNote": "国家公园免费进入。",
+            "bookingUrl": "",
+            "cost": {
+              "amount": 0,
+              "note": "免费。"
+            },
+            "why": "站在高耸海岬上回望整座悉尼港入口与城市天际线，5 月初还常能遇到迁徙的鲸鱼。",
             "photo": photo("au-d3-northhead"),
-            "note": "从 Shelly Beach 停车场后面的步道往上爬，大约 80 米高，这是唯一累的一段。上去以后看牌子 Fairfax Lookout，在观景台附近吃带上来的午饭。从曼利码头算起单程大约 5 公里，两到三小时。出发前看一眼国家公园网站有没有封路通知。南边没有厕所，在曼利海滩上厕所、装水。"
+            "note": "从 Shelly Beach 停车场后方的林间步道爬升约 80 米上山，跟着路牌走到 Fairfax Lookout 环形栈道，刚好在悬崖边野餐吃午饭。"
           },
           {
             "id": "au-d3-bus",
             "time": "14:30",
             "kind": "transport",
-            "name": "161 路回曼利码头",
+            "name": "161 路公交回曼利码头",
             "address": "North Fort, North Head Scenic Drive",
             "lat": -33.8133,
             "lng": 151.2925,
             "reservation": "none",
-            "reservationNote": "公交车，刷卡上车。",
+            "reservationNote": "上车刷卡。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "已含在当天封顶里。"
+              "note": "已含在周五封顶车资里。"
             },
-            "note": "North Fort 停车场坐 161 回曼利码头，工作日大约半小时一班，以 Transport NSW 的时刻为准。不想等车就原路走回去，下坡为主，大约 3 公里。"
+            "note": "在 North Fort 停车场坐 161 路下山回码头（约半小时一班）；如果不想等车，顺步道一路下坡走回去也只要 3 公里。"
           },
           {
             "id": "au-d3-back",
             "time": "15:30",
             "kind": "transport",
-            "name": "渡轮回环形码头",
+            "name": "渡轮返回环形码头",
             "address": "Manly Wharf",
             "lat": -33.8001,
             "lng": 151.284,
             "reservation": "none",
-            "reservationNote": "不用订。",
+            "reservationNote": "",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
               "note": "已含在当天封顶里。"
             },
-            "note": "原船回去。今天不再加景点，晚上收拾行李，明天早上飞。"
+            "note": "坐 F1 渡轮原路回城，傍晚早点吃饭收拾行李，明天一早飞圣灵群岛。"
           }
         ]
       },
@@ -970,77 +967,78 @@ window.SEED_TRIPS = [
         "id": "au-d4",
         "date": "2027-05-01",
         "city": "圣灵群岛",
-        "title": "飞艾尔利海滩",
+        "title": "飞抵艾尔利海滩，泻湖看海",
         "items": [
           {
             "id": "au-d4-flight",
             "time": "早上",
             "kind": "transport",
-            "name": "悉尼飞普罗瑟派恩",
+            "name": "悉尼直飞普罗瑟派恩（PPP）",
             "address": "Whitsunday Coast Airport PPP",
             "lat": -20.495,
             "lng": 148.552,
             "reservation": "required",
-            "reservationNote": "这天是昆士兰长周末的第一天，飞机会比平时满。目标是中午前后落地，不要订下午太晚的。",
+            "reservationNote": "正逢昆士兰劳动节长周末首日，早点锁中午前后落地的直飞航班。",
             "bookingUrl": "https://www.google.com/travel/flights?hl=zh-CN&q=One%20way%20flights%20from%20Sydney%20to%20Proserpine%20on%20May%201%202027",
             "cost": {
               "amount": 260,
-              "note": "捷星直飞，长周末大约 A$190–280，再加一件托运行李约 A$30。"
+              "note": "捷星直飞含一件托运行李约 A$220–290。"
             },
-            "note": "机场代码 PPP，也叫 Whitsunday Coast。飞行大约两个半小时。汉密尔顿岛机场（HTI）更靠近海岛，但怀特黑文的船大多从艾尔利海滩开，所以飞 PPP。悉尼国内航站楼出发。"
+            "note": "白天堂沙滩的一日游快艇大多从艾尔利海滩发船，所以飞大陆侧的 PPP（Whitsunday Coast）机场最顺，航程约 2.5 小时。"
           },
           {
             "id": "au-d4-shuttle",
             "time": "落地后",
             "kind": "transport",
-            "name": "机场班车到艾尔利海滩",
+            "name": "机场接驳巴士前往艾尔利海滩",
             "address": "Airlie Beach",
             "lat": -20.2676,
             "lng": 148.7166,
             "reservation": "recommended",
-            "reservationNote": "班车按航班接，提前订座位更稳。不订就在到达厅找柜台，可能要等下一班。",
+            "reservationNote": "巴士按航班时间发车，提前在网上订好座位最稳。",
             "bookingUrl": "https://www.whitsundaytransit.com.au/",
             "cost": {
               "amount": 22,
-              "note": "单程 A$22。按售出顺序浮动，A$14–25，早订便宜。"
+              "note": "单程约 A$22。"
             },
-            "note": "路程大约 35 到 40 分钟。告诉司机酒店名字。打车也可以，几个人一起分摊更合适。"
+            "note": "上车报酒店名字即可直接送到门口，车程约 35–40 分钟。"
           },
           {
             "id": "au-d4-stay",
             "time": "入住",
             "kind": "stay",
-            "name": "住艾尔利海滩主街或码头",
+            "name": "住艾尔利海滩主街或 Coral Sea 码头旁（连住 2 晚）",
             "address": "Airlie Beach QLD",
             "lat": -20.2682,
             "lng": 148.7172,
             "reservation": "required",
-            "reservationNote": "5月3日是昆士兰劳动节，这两晚正好是长周末，码头附近会先订满。",
+            "reservationNote": "昆士兰劳动节小长假期间海边房源紧俏，尽早预订。",
             "bookingUrl": "https://www.booking.com/searchresults.html?ss=Airlie+Beach&checkin=2027-05-01&checkout=2027-05-03",
             "cost": {
               "amount": 280,
-              "note": "长周末每晚大约 A$250–300 一间。两晚按 A$560，两人分。"
+              "note": "每晚约 A$250–300/间，两晚双人平摊每人约 A$280。"
             },
-            "note": "优先住 Coral Sea Marina 或主街，第二天早上走去码头。不要住到普罗瑟派恩镇上。"
+            "why": "出门就是海滨主街和游艇码头，第二天一早溜达着就能去登船出海。",
+            "note": "认准 Airlie Beach 镇中心或 Coral Sea Marina 周边，千万别订到内陆的 Proserpine 镇上。"
           },
           {
             "id": "au-d4-lagoon",
             "time": "下午",
             "kind": "sight",
-            "name": "艾尔利泻湖",
+            "name": "艾尔利海滨泻湖泳池（Airlie Beach Lagoon）",
             "address": "Airlie Beach Lagoon",
             "lat": -20.2692,
             "lng": 148.7188,
             "reservation": "none",
-            "reservationNote": "免费公共泻湖。",
+            "reservationNote": "免费公共设施。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
               "note": "免费。"
             },
-            "why": "5月还是水母季，这是镇上不用穿防刺服就能下水的地方。",
+            "why": "紧贴珊瑚海的露天无边泻湖，不用穿防刺服就能安全泡水晒太阳。",
             "photo": photo("au-d4-lagoon"),
-            "note": "主街走到海边就看见。泻湖有防护，可以直接游。外海游泳要穿防刺服。晚饭在主街吃，长周末热门的馆子早点去。"
+            "note": "5 月初外海仍有水母需穿防刺服，在镇中心的泻湖泳池可以直接下水游泳，旁边草坪躺着看海非常惬意。"
           }
         ]
       },
@@ -1048,81 +1046,83 @@ window.SEED_TRIPS = [
         "id": "au-d5",
         "date": "2027-05-02",
         "city": "圣灵群岛",
-        "title": "怀特黑文和希尔因莱特",
+        "title": "出海：白天堂沙滩与希尔湾观景台",
+        "altTitle": "备选船型：怕快艇颠簸可改订 Lady Enid 复古木帆船",
         "items": [
           {
             "id": "au-d5-raft",
-            "time": "早上集合",
+            "time": "08:45–15:30",
             "kind": "sight",
-            "name": "Ocean Rafting Northern Exposure",
+            "name": "Ocean Rafting 快艇一日游（Northern Exposure 线）",
             "address": "Coral Sea Marina, Airlie Beach",
             "lat": -20.267,
             "lng": 148.7135,
             "reservation": "required",
-            "reservationNote": "这是这趟最该先订的一项，而且这天是长周末的周日。只订「南端白沙滩半天」会看不到希尔因莱特观景台。",
+            "reservationNote": "整趟行程最抢手的一项，务必提前锁 Northern Exposure 线（只订半日游去不了希尔湾观景台）。",
             "bookingUrl": "https://www.oceanrafting.com.au/",
             "cost": {
               "amount": 249,
-              "note": "官网 15 岁以上 A$249，含午饭、防刺服和酒店接送。5月2日是周日，不是公共假日，不加钱。"
+              "note": "成人 A$249，含自助简餐、浮潜装备、防刺服和镇上接送。"
             },
-            "why": "小快艇，人少，跑得快。怀特黑文上午十点到下午两点是大船集中靠岸的时候，越早出发越清静。",
-            "note": "订 Northern Exposure：怀特黑文沙滩、希尔因莱特观景台，加浮潜。这条 8:45 出发、15:30 左右回来，比 10 点出发的 Southern Lights 早到怀特黑文。集合点以确认邮件为准，常见是 Coral Sea Marina，不要走到另一头的 Port of Airlie。提前半小时到。防刺服船上有。带泳衣、毛巾、一双能上岸的鞋。晕船药在开船前吃。大风他们会改期或换沙滩，看短信。这趟只留了这一天出海，取消了没有备用日，订之前看清退款规则。"
+            "why": "半敞篷快艇船小速度快，能赶在大批游船抵达前先登上观景台和白沙滩。",
+            "note": "认准 Coral Sea Marina 北码头集合（别跑去另一头的 Port of Airlie），提前 30 分钟签到。带好泳衣、浴巾、防晒霜和一双好走的凉鞋，容易晕船的话开船前半小时先吃晕船药。"
           },
           {
             "id": "au-d5-enid",
-            "time": "二选一",
+            "alt": true,
+            "time": "08:00–17:30",
             "kind": "sight",
-            "name": "Lady Enid 小帆船（备选）",
-            "address": "Airlie Beach",
+            "name": "Lady Enid 复古木帆船一日游",
+            "address": "Coral Sea Marina, Airlie Beach",
             "lat": -20.2682,
             "lng": 148.7172,
             "reservation": "recommended",
-            "reservationNote": "不坐快艇就订这条。最多24人，只收成人。",
+            "reservationNote": "与上面的快艇二选一即可；仅接待 18 岁以上成人，限载 24 人。",
             "bookingUrl": "https://www.australiancruisegroup.com.au/whitsundays/whitehaven-beach-cruises/10hr-lady-enid-whitehaven-beach-sail-snorkel-cruise",
             "cost": {
               "amount": 295,
-              "note": "每人 A$295，只收 18 岁以上。换成这条比快艇多 A$46。"
+              "note": "每人 A$295（含早午茶点与浮潜，比快艇贵 A$46）。"
             },
-            "why": "1962 年的老木帆船，最多 24 人，比快艇慢但安静，也去希尔因莱特和怀特黑文。",
-            "note": "早上 8 点从艾尔利出发，全天大约九个半小时，含吃的和浮潜。怕颠、想慢慢玩选这条；想早回来休息选上面的快艇。两个只订一个。"
+            "why": "1962 年的经典木帆船，航行平稳安静，同样包含希尔湾观景台和白天堂沙滩。",
+            "note": "全程约 9.5 小时，适合不想坐高速快艇颠簸、想在甲板上慢慢吹海风看海的节奏。"
           },
           {
             "id": "au-d5-hill",
-            "time": "船上",
+            "time": "上午",
             "kind": "sight",
-            "name": "希尔因莱特观景台",
+            "name": "希尔湾观景台（Hill Inlet Lookout）",
             "address": "Hill Inlet Lookout, Whitsunday Island",
             "lat": -20.2597,
             "lng": 149.0378,
             "reservation": "none",
-            "reservationNote": "含在船票里。确认你订的那条船会上这个观景台。",
+            "reservationNote": "已含在出海行程内。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
               "note": "含在船票里。"
             },
-            "why": "白沙和蓝水搅在一起的那张照片就是从这里拍的，只能从高处看。",
+            "why": "纯白沙洲与蒂芙尼蓝海水随潮汐交织成流沙漩涡，圣灵群岛最震撼的俯瞰机位。",
             "photo": photo("au-d5-hill"),
-            "note": "大多数船停在 Tongue Bay，上岸走一段林间路和台阶到观景台。花纹好不好看取决于潮水，订船时问一句他们当天几点上观景台。穿船方要求的鞋。"
+            "note": "快艇停靠 Tongue Bay 后，跟着向导走 15 分钟林间木栈道登上观景台。"
           },
           {
             "id": "au-d5-sand",
-            "time": "船上",
+            "time": "中午",
             "kind": "sight",
-            "name": "怀特黑文海滩",
+            "name": "白天堂沙滩（Whitehaven Beach）",
             "address": "Whitehaven Beach, Whitsunday Island",
             "lat": -20.282,
             "lng": 149.0375,
             "reservation": "none",
-            "reservationNote": "不能自己去，已经含在船票里。",
+            "reservationNote": "已含在出海行程内。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
               "note": "含在船票里。"
             },
-            "why": "7 公里长的白沙滩，大船都停在南端，往北走一段人就少了。",
+            "why": "绵延 7 公里的 98% 纯白硅砂海滩，赤脚踩上去细腻不烫脚。",
             "photo": photo("au-d5-sand"),
-            "note": "岛上没有路，也没有店。沙子细，会粘鞋。不要把沙子带走，公园在管。回程晚饭回艾尔利主街，晚上把行李收好，明天上午飞墨尔本。"
+            "note": "岛上属于国家公园保护区，没有任何商店，也不能带走沙子。下午回港后在艾尔利主街吃海鲜，早点把箱子收好准备明早飞墨尔本。"
           }
         ]
       },
@@ -1130,94 +1130,96 @@ window.SEED_TRIPS = [
         "id": "au-d7",
         "date": "2027-05-03",
         "city": "墨尔本",
-        "title": "劳动节飞墨尔本，傍晚走小巷",
+        "title": "飞抵墨尔本，穿梭涂鸦咖啡小巷",
         "items": [
           {
             "id": "au-d7-flight",
-            "time": "早上",
+            "time": "上午",
             "kind": "transport",
-            "name": "普罗瑟派恩飞墨尔本",
+            "name": "普罗瑟派恩直飞墨尔本 JQ833",
             "address": "Melbourne Airport",
             "lat": -37.669,
             "lng": 144.841,
             "reservation": "required",
-            "reservationNote": "只有捷星直飞，每天一班 JQ833，大约三小时，上午十一点左右起飞。这天是昆士兰长周末最后一天，往南飞的人多，卖完就只能转机，先订这班。",
+            "reservationNote": "每天仅一班捷星直飞（约 3 小时），小长假返程票紧，建议最先锁定。",
             "bookingUrl": "https://www.google.com/travel/flights?hl=zh-CN&q=One%20way%20flights%20from%20Proserpine%20to%20Melbourne%20on%20May%203%202027",
             "cost": {
               "amount": 322,
-              "note": "捷星直飞大约 A$250–350，含一件托运行李按 A$300 算；去机场的班车 A$22 也算在这里。"
+              "note": "直飞机票含托运约 A$300 + 去 PPP 机场的接驳巴士 A$22。"
             },
-            "note": "早上从艾尔利返回 PPP，班车大约 40 分钟，再加安检，按飞机起飞前两小时到机场倒推。劳动节班车照开，前一天订好座位。落地是墨尔本国内航站楼，维州这天不放假。"
+            "note": "提前一天约好从艾尔利海滩去机场的大巴（车程约 40 分钟），按起飞前 2 小时到机场预留。"
           },
           {
             "id": "au-d7-sky",
             "time": "落地后",
             "kind": "transport",
-            "name": "SkyBus 到南十字车站",
+            "name": "SkyBus 机场快线直达南十字星站",
             "address": "Southern Cross Station, Melbourne",
             "lat": -37.8184,
             "lng": 144.9525,
             "reservation": "none",
-            "reservationNote": "车上或官网都能买，不用提前锁位。",
+            "reservationNote": "随到随坐，现场扫码或刷卡买票。",
             "bookingUrl": "https://www.skybus.com.au/",
             "cost": {
               "amount": 43.4,
-              "note": "直接买往返 A$43.40，比两张单程便宜 A$8.40。回程那张也在里面。"
+              "note": "直接买往返套票 A$43.40（比买两次单程省 A$8.40，回程通用）。"
             },
-            "note": "墨尔本机场没有火车站。跟随 SkyBus 牌子，在航站楼外上车，终点南十字车站，大约 30 到 40 分钟，堵车会更久。市区交通刷 Myki 卡，机场大巴本身不是 Myki。"
+            "note": "走出航站楼就能看到红色 SkyBus 双层大巴，约 30–40 分钟直达市中心 Southern Cross 车站。"
           },
           {
             "id": "au-d7-stay",
             "time": "入住",
             "kind": "stay",
-            "name": "住弗林德斯街或南十字附近",
+            "name": "住弗林德斯街或南十字星站周边（连住 2 晚）",
             "address": "Flinders Street, Melbourne",
             "lat": -37.8183,
             "lng": 144.9671,
             "reservation": "required",
-            "reservationNote": "住 5月3日、4日两晚，城中心方便坐电车。",
+            "reservationNote": "连住 5 月 3–5 日两晚，选在免费电车区（Free Tram Zone）内最方便。",
             "bookingUrl": "https://www.booking.com/searchresults.html?ss=Flinders+Street+Melbourne&checkin=2027-05-03&checkout=2027-05-05",
             "cost": {
               "amount": 240,
-              "note": "城中心四星大约每晚 A$200–260 一间。两晚按 A$480，两人分。"
+              "note": "市中心四星每晚约 A$200–260/间，两晚双人平摊每人约 A$240。"
             },
-            "note": "住这儿，坐电车和火车都方便。5日早上退房，北京出发的把行李寄存在前台，下午回来拿；上海出发的凌晨就走，4日晚上把行李收好。"
+            "why": "出门在市中心坐电车全免费，去涂鸦巷和返程搭机场大巴都在步行圈内。",
+            "note": "若最后一天搭早班机回国，提前一晚把行李收拾妥当；若搭晚班机，退房后把箱子寄存在前台即可轻松再逛半天。"
           },
           {
             "id": "au-d7-lanes",
             "time": "傍晚",
             "kind": "sight",
-            "name": "Flinders Lane 一带的小巷",
+            "name": "Degraves St 与 Flinders Lane 咖啡涂鸦小巷",
             "address": "Centre Place, Melbourne",
             "lat": -37.816,
             "lng": 144.9653,
             "reservation": "none",
-            "reservationNote": "巷子免费。",
+            "reservationNote": "全天免费。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
               "note": "免费。"
             },
-            "why": "本地人说 Hosier Lane 这几年又挤又乱。旁边这几条巷子一样有涂鸦和小店，傍晚人少一些。",
+            "why": "比游客扎堆的 Hosier Lane 更有味道，窄巷两侧挤满露天咖啡座、独立小店与街头壁画。",
             "photo": photo("au-d7-lanes"),
-            "note": "从弗林德斯街车站对面开始，先走 Degraves Street 和 Centre Place，再沿 Flinders Lane 往东走到 AC/DC Lane。整段走路二十分钟，最后正好到下面的晚饭。"
+            "note": "从弗林德斯街车站对面钻进 Degraves Street 和 Centre Place，再顺着 Flinders Lane 一路往东慢走到 AC/DC Lane，20 分钟就能逛完精华段，终点刚好去吃晚饭。"
           },
           {
             "id": "au-d7-coda",
             "time": "晚饭",
             "kind": "food",
-            "name": "Coda",
+            "name": "Coda 晚餐",
             "address": "141 Flinders Lane, Melbourne VIC 3000",
             "lat": -37.8162,
             "lng": 144.9704,
             "reservation": "recommended",
-            "reservationNote": "弗林德斯巷的小馆子，晚餐建议订。",
+            "reservationNote": "墨尔本口碑很稳的巷弄餐厅，晚餐建议提前官网订位。",
             "bookingUrl": "https://www.opentable.com/r/coda-melbourne",
             "cost": {
               "amount": 100,
-              "note": "分着点几道菜加一杯酒，每人大约 A$90–110。"
+              "note": "点几道招牌小菜配杯葡萄酒，人均约 A$90–110。"
             },
-            "note": "亚洲口味、分着吃。订 19:00 左右，订之前在官网看一下周一是否营业。如果飞机晚点，取消预订，在巷子口随便吃。"
+            "why": "藏在弗林德斯巷半地下室的现代亚澳融合菜，烤鸭春卷和黄咖喱都很出彩。",
+            "note": "就在 AC/DC Lane 路口旁，订 19:00 左右最从容。"
           }
         ]
       },
@@ -1225,84 +1227,84 @@ window.SEED_TRIPS = [
         "id": "au-d8",
         "date": "2027-05-04",
         "city": "墨尔本",
-        "title": "Carlton、Fitzroy 和老修道院",
+        "title": "卡尔顿花园、Fitzroy 复古街区与老修道院",
         "items": [
           {
             "id": "au-d8-reb",
             "time": "10:30",
             "kind": "sight",
-            "name": "皇家展览馆和卡尔顿花园",
+            "name": "皇家展览馆与卡尔顿花园",
             "address": "9 Nicholson Street, Carlton VIC",
             "lat": -37.8047,
             "lng": 144.9717,
             "reservation": "none",
-            "reservationNote": "花园和建筑外面免费。旁边的墨尔本博物馆要票，想进再买。",
+            "reservationNote": "花园与展览馆外广场免费开放。",
             "bookingUrl": "",
             "cost": {
               "amount": 17.4,
-              "note": "电车、公交、火车全天封顶 A$11.40（维州半价优惠到 2027年1月1日结束）。第一次买 myki 卡另付 A$6。",
+              "note": "myki 交通卡工本费 A$6 + 全天交通封顶 A$11.40。",
               "cat": "transport"
             },
-            "why": "世界遗产建筑，周二上午人很少。从这里走路就进 Fitzroy。",
+            "why": "5 月初秋梧桐叶变黄，阳光穿过林荫道照在百年白色穹顶建筑上特别出片。",
             "photo": photo("au-d8-reb"),
-            "note": "走到 Bourke Street 坐 86 或 96 路电车往东，到 11 号站 Melbourne Museum 下，走五分钟。绕建筑和喷泉走一圈就够。"
+            "note": "在 Bourke Street 坐 86 或 96 路电车到 Melbourne Museum 站下车即到，绕着喷泉和花园走一圈，东门出去就接上 Fitzroy 街区。"
           },
           {
             "id": "au-d8-fitzroy",
             "time": "11:30",
             "kind": "sight",
-            "name": "Fitzroy 的 Gertrude Street 和后街",
+            "name": "Fitzroy 街区漫步（Gertrude St 与后街）",
             "address": "Gertrude Street, Fitzroy VIC",
             "lat": -37.806,
             "lng": 144.981,
             "reservation": "none",
-            "reservationNote": "街区，不用票。午饭在这条街上现场找。",
+            "reservationNote": "街区随逛随停，午饭直接在街边挑喜欢的馆子。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "免费。午饭算在每天的餐费里。"
+              "note": "逛街免费，午饭已含在每日餐费预算里。"
             },
-            "why": "本地人推荐的老街区。主街后面的 Rose Street、Kerr Street 一带是老排屋、小画廊和涂鸦，游客少。",
+            "why": "墨尔本最有生活气息的老街区，维多利亚式铸铁阳台排屋里藏着独立书店、买手店和烘焙坊。",
             "photo": photo("au-d8-fitzroy"),
-            "note": "从花园东边过 Nicholson Street 就是 Gertrude Street。顺着往东走，看到喜欢的就拐进北边的小街。午饭在 Gertrude Street 或 Smith Street 吃，不用订。"
+            "note": "沿着 Gertrude Street 往东逛，随时拐进北侧安静的 Rose Street、Kerr Street 看老排屋和画廊；中午在附近喝杯 Flat White、吃顿 Brunch（如 Lune 可颂或 Archie's All Day）。"
           },
           {
             "id": "au-d8-convent",
             "time": "14:00",
             "kind": "sight",
-            "name": "Abbotsford Convent 老修道院",
+            "name": "Abbotsford Convent 老修道院艺术园",
             "address": "1 St Heliers Street, Abbotsford VIC",
             "lat": -37.8025,
             "lng": 145.0036,
             "reservation": "none",
-            "reservationNote": "园区免费进。",
+            "reservationNote": "园区全天免费。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "免费。来回的公交和火车已含在当天封顶里。"
+              "note": "免费，往返公交与火车已含在当天 myki 封顶里。"
             },
-            "why": "旧修道院改成的艺术园区，有草地、咖啡馆和亚拉河边步道，几乎没有旅行团。",
+            "why": "亚拉河湾畔的百年修道院建筑群，大草坪、花园面包房与手工作坊安静得像世外桃源。",
             "photo": photo("au-d8-convent"),
-            "note": "从 Fitzroy 往北走到 Johnston Street，坐 200 或 207 路公交往东，Clarke Street 站下，走三到五分钟。不想等车就打车，十分钟左右。回城走 10 到 15 分钟到 Victoria Park 火车站，坐 Mernda 或 Hurstbridge 线进城。晚饭在城里随便吃。"
+            "note": "从 Fitzroy 走到 Johnston Street 坐 200 或 207 路公交到终点 Clarke Street 下车（打车也只要 10 分钟）。逛完走 12 分钟到 Victoria Park 站坐火车回市中心。"
           },
           {
             "id": "au-d8-ngv",
             "time": "下雨再去",
             "kind": "sight",
-            "name": "维多利亚国家美术馆",
+            "name": "维多利亚国家美术馆（NGV International）",
             "address": "180 St Kilda Road, Melbourne",
             "lat": -37.8226,
             "lng": 144.9689,
             "reservation": "none",
-            "reservationNote": "常设展免费，直接进。特展才要票。",
+            "reservationNote": "常设馆藏免费直接入场，仅大型特展需购票。",
             "bookingUrl": "https://www.ngv.vic.gov.au/whats-on/",
             "cost": {
               "amount": 0,
               "note": "常设展免费。"
             },
-            "why": "下雨的备选。周二白天人不多，常设展免费。",
+            "why": "澳洲馆藏最丰富的美术馆，入口水幕墙与彩绘玻璃穹顶大厅本身就值得一看。",
             "photo": photo("au-d8-ngv"),
-            "note": "下雨就把 Fitzroy 和修道院换成这里。从弗林德斯街沿圣基尔达路往南坐电车，有 Arts Precinct 或 NGV 字样的站下。"
+            "note": "如果这天碰上刮风下雨，就把户外老修道院换成这里。从弗林德斯街车站过桥往南走 8 分钟就到。"
           }
         ]
       },
@@ -1310,42 +1312,42 @@ window.SEED_TRIPS = [
         "id": "au-d9",
         "date": "2027-05-05",
         "city": "墨尔本",
-        "title": "回国",
+        "title": "皇家植物园晨间散步，返程回国",
         "items": [
           {
             "id": "au-d9-garden",
             "time": "北京出发才去",
             "kind": "sight",
-            "name": "皇家植物园和战争纪念馆",
+            "name": "皇家植物园与战争纪念馆露台",
             "address": "Shrine of Remembrance, Birdwood Avenue, Melbourne",
             "lat": -37.8305,
             "lng": 144.9734,
             "reservation": "none",
-            "reservationNote": "都免费。植物园 7:30 开门，纪念馆 10:00 开门。",
+            "reservationNote": "两处均免费开放（植物园 07:30 开园，纪念馆 10:00 开放）。",
             "bookingUrl": "",
             "cost": {
               "amount": 0,
-              "note": "免费，走路去。"
+              "note": "免费。"
             },
-            "why": "离酒店走路就到，不用坐车，中午前后回来拿行李不赶。纪念馆楼顶的阳台能看到城市天际线。",
-            "note": "从弗林德斯街车站过河，沿 St Kilda Road 往南走 15 分钟到纪念馆，先上楼顶阳台，再往东进植物园，绕湖走一圈。午饭在植物园里的咖啡馆或回城吃，下午三点前回酒店拿行李。"
+            "why": "登上纪念馆顶层露台正对市中心中轴天际线，隔壁就是黑天鹅游弋的皇家植物园湖畔。",
+            "note": "适合搭傍晚航班（如北京线 19:40 起飞）的半日慢逛：从酒店沿圣基尔达路散步过去，中午在园内湖边咖啡馆吃简餐，15:00 前回酒店取行李即可。"
           },
           {
             "id": "au-d8-air",
             "time": "回程",
             "kind": "transport",
-            "name": "南十字坐 SkyBus 去机场",
+            "name": "南十字星站乘 SkyBus 前往墨尔本机场",
             "address": "Southern Cross Station",
             "lat": -37.8184,
             "lng": 144.9525,
             "reservation": "none",
-            "reservationNote": "当天买票即可。",
+            "reservationNote": "直接刷去程买好的往返二维码上车。",
             "bookingUrl": "https://www.skybus.com.au/",
             "cost": {
               "amount": 0,
-              "note": "已含在往返票里。"
+              "note": "已含在往返套票里。"
             },
-            "note": "车站里跟着 SkyBus 牌子走。国际航班留三小时。大巴大约 30 到 40 分钟，傍晚可能堵。北京出发是 19:40 的国航，下午四点前上车，上午能逛上面的植物园。上海出发是 08:00 的吉祥，凌晨 4:30 前上车（SkyBus 24 小时都有车），植物园去不了，前一晚把行李收好。"
+            "note": "SkyBus 24 小时发车，车程约 35–45 分钟。国际航班建议至少提前 3 小时到机场办理退税和托运（北京 19:40 航班约 15:45 前上车；上海 08:00 早班机需凌晨 04:30 前上车）。"
           }
         ]
       }
